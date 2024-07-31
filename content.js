@@ -10,12 +10,12 @@
 
   // Create a function to check if the request can be processed??
 
-  function processCreateRequest(options) {
-    if ("credentials" in navigator) {
-      if (options && options.publicKey) {
-      }
-    }
-  }
+  // function processCreateRequest(options) {
+  //   if ("credentials" in navigator) {
+  //     if (options && options.publicKey) {
+  //     }
+  //   }
+  // }
 
   async function myCreateMethod(options) {
     // console.log("My credential create function called");
