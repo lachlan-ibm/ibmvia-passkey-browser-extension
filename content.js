@@ -65,6 +65,8 @@
   // Override navigator.credentials.create
   navigator.credentials.create = myCreateMethod;
 
+  // Create a new function to perform assertion (authentication flow)
+  // async function myGetMethod()
   // const btn = document.getElementById("nicknamediv");
 
   // try {
