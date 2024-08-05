@@ -60,5 +60,5 @@ fi
 # Bundle Shane's fido2 node client
 browserify -s fido fidoutils.js -o bundle.js
 
-# Copy the contents of bundle.js into content.js above the original code
-echo "$(cat bundle.js ../content.js)" > ../content.js
+# Concant the contents of bundle.js and content.js into new file main.js
+cat bundle.js ../content.js >> ../main.js
