@@ -85,9 +85,10 @@
         credOptions.response.signature = fido.base64toBA(
           fido.base64utobase64(credOptions.response.signature)
         );
-        credOptions.response.userHandle = fido.base64toBA(
-          fido.base64utobase64(credOptions.response.userHandle)
-        );
+        // credOptions.response.userHandle = credOptions.res
+
+        // credOptions.authenticatorData = credOptions.
+        // credOptions.authenticatorData = fido.base64toBA(fido.base64utobase64(credOptions.resp))
         // credOptions.response.clientDataJSON = "clientDataJSON manually set";
         // console.log(
         // 	"Attempting to get credentials with the following options:",
@@ -96,11 +97,11 @@
         console.log("myGetMethod result is", credOptions);
         console.log("Assertion flow successful!");
         return await credOptions;
-      } else {
-        return await myCredentials.get(options);
       }
     } catch (error) {
-      console.error("Error getting credential:", error);
+      console.log("Error getting credential:", error);
+      console.log("Falling back to original navigator.credentials.get() method");
+      return await myCredentials.get(options);
     }
   }
   navigator.credentials.get = myGetMethod;
