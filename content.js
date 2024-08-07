@@ -66,24 +66,26 @@
   // Override navigator.credentials.create
   navigator.credentials.create = myCreateMethod;
 
-  async function myGetMethod(options) {
+  async function myGetMethod(options, authRecords) {
     try {
       if ("credentials" in navigator) {
-        const result = await fido.processCredentialRequestOptions(options);
-        let credOptions = result;
-        credOptions["getClientExtensionResults"] = function () {
+        console.log("options", options);
+        // call canAuthenticateWithCredId
+        const result = await fido.processCredentialRequestOptions(options, authRecords);
+        let serverPublicKeyCredential = result;
+        serverPublicKeyCredential["getClientExtensionResults"] = function () {
           return {};
         }
         // credOptions.response[authenticatorData] = "authenticatorData manually set";
-        console.log("cred options authenticatorData is", credOptions.response.authenticatorData);
-        credOptions.response.authenticatorData = fido.base64toBA(
-          fido.base64utobase64(credOptions.response.authenticatorData)
+        console.log("cred options authenticatorData is", serverPublicKeyCredential.response.authenticatorData);
+        serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
+          fido.base64utobase64(serverPublicKeyCredential.response.authenticatorData)
         );
-        credOptions.response.clientDataJSON = fido.base64toBA(
-          fido.base64utobase64(credOptions.response.clientDataJSON)
+        serverPublicKeyCredential.response.clientDataJSON = fido.base64toBA(
+          fido.base64utobase64(serverPublicKeyCredential.response.clientDataJSON)
         );
-        credOptions.response.signature = fido.base64toBA(
-          fido.base64utobase64(credOptions.response.signature)
+        serverPublicKeyCredential.response.signature = fido.base64toBA(
+          fido.base64utobase64(serverPublicKeyCredential.response.signature)
         );
         // credOptions.response.userHandle = credOptions.res
 
@@ -94,9 +96,9 @@
         // 	"Attempting to get credentials with the following options:",
         // 	options
         // );
-        console.log("myGetMethod result is", credOptions);
+        console.log("myGetMethod result is", serverPublicKeyCredential);
         console.log("Assertion flow successful!");
-        return await credOptions;
+        return await serverPublicKeyCredential;
       }
     } catch (error) {
       console.log("Error getting credential:", error);
@@ -105,7 +107,6 @@
     }
   }
   navigator.credentials.get = myGetMethod;
-
 
   // const btn = document.getElementById("nicknamediv");
 
