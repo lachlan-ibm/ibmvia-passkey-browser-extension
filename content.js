@@ -11,10 +11,10 @@
   // Create a function to check if the request can be processed??
 
   // function processCreateRequest(options) {
-  // 	if ("credentials" in navigator) {
-  // 		if (options && options.publicKey) {
-  // 		}
-  // 	}
+  //  if ("credentials" in navigator) {
+  //      if (options && options.publicKey) {
+  //      }
+  //  }
   // }
 
   async function myCreateMethod(options) {
@@ -69,36 +69,29 @@
   async function myGetMethod(options, authRecords) {
     try {
       if ("credentials" in navigator) {
-        console.log("options", options);
-        // call canAuthenticateWithCredId
-        const result = await fido.processCredentialRequestOptions(options, authRecords);
-        let serverPublicKeyCredential = result;
-        serverPublicKeyCredential["getClientExtensionResults"] = function () {
-          return {};
+        if (fido.canAuthenticateWithCredId(options)) {
+          console.log("options", options);
+          const result = await fido.processCredentialRequestOptions(options, authRecords);
+          let serverPublicKeyCredential = result;
+          serverPublicKeyCredential["getClientExtensionResults"] = function () {
+            return {};
+          }
+          console.log("cred options authenticatorData is", serverPublicKeyCredential.response.authenticatorData);
+          serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
+            fido.base64utobase64(serverPublicKeyCredential.response.authenticatorData)
+          );
+          serverPublicKeyCredential.response.clientDataJSON = fido.base64toBA(
+            fido.base64utobase64(serverPublicKeyCredential.response.clientDataJSON)
+          );
+          serverPublicKeyCredential.response.signature = fido.base64toBA(
+            fido.base64utobase64(serverPublicKeyCredential.response.signature)
+          );
+          console.log("myGetMethod result is", serverPublicKeyCredential);
+          console.log("Assertion flow successful!");
+          return await serverPublicKeyCredential;
+        } else {
+          return await myCredentials.get(options);
         }
-        // credOptions.response[authenticatorData] = "authenticatorData manually set";
-        console.log("cred options authenticatorData is", serverPublicKeyCredential.response.authenticatorData);
-        serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
-          fido.base64utobase64(serverPublicKeyCredential.response.authenticatorData)
-        );
-        serverPublicKeyCredential.response.clientDataJSON = fido.base64toBA(
-          fido.base64utobase64(serverPublicKeyCredential.response.clientDataJSON)
-        );
-        serverPublicKeyCredential.response.signature = fido.base64toBA(
-          fido.base64utobase64(serverPublicKeyCredential.response.signature)
-        );
-        // credOptions.response.userHandle = credOptions.res
-
-        // credOptions.authenticatorData = credOptions.
-        // credOptions.authenticatorData = fido.base64toBA(fido.base64utobase64(credOptions.resp))
-        // credOptions.response.clientDataJSON = "clientDataJSON manually set";
-        // console.log(
-        // 	"Attempting to get credentials with the following options:",
-        // 	options
-        // );
-        console.log("myGetMethod result is", serverPublicKeyCredential);
-        console.log("Assertion flow successful!");
-        return await serverPublicKeyCredential;
       }
     } catch (error) {
       console.log("Error getting credential:", error);
