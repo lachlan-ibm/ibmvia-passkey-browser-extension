@@ -11,20 +11,30 @@
 
 	"permissions": [
 		"activeTab",
-		"storage"
+		"storage",
+		"scripting",
+		"tabs",
+		"contextMenus"
 	],
+	"host_permissions": ["https://*"],
 
 	"action": {
 		"default_icon": "icons/icon_fido_36.png",
-		"default_title": "FIDO2"
+		"default_title": "FIDO2",
+		"default_popup": "popup.html"
 	},
-
+	"background": {
+		"service_worker": "background.js"
+	},
 	"content_scripts": [
 		{
 			"matches": ["https://fidointerop.securitypoc.com/*"],
 			"js": ["main.js"],
 			"world": "MAIN"
 		}
-	]
+	],
+	"externally_connectable": {
+  "matches": ["https://fidointerop.securitypoc.com/*"]
+}
 }
 
