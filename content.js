@@ -1,5 +1,5 @@
 (function () {
-  alert("Script working");
+  alert("Script working, this is main.js now");
   // Create a wrapper for navigator.credentials. The myCredentials object holds reference to the original WebAuthn methods.
   let myCredentials = {
     create: navigator.credentials.create.bind(navigator.credentials),
@@ -10,12 +10,12 @@
 
   // Create a function to check if the request can be processed??
 
-  function processCreateRequest(options) {
-    if ("credentials" in navigator) {
-      if (options && options.publicKey) {
-      }
-    }
-  }
+  // function processCreateRequest(options) {
+  //  if ("credentials" in navigator) {
+  //      if (options && options.publicKey) {
+  //      }
+  //  }
+  // }
 
   async function myCreateMethod(options) {
     // console.log("My credential create function called");
@@ -36,7 +36,7 @@
           return {};
         };
         publicCred["toJSON"] = function () {
-          return result.spkc;
+          return result;
         };
 
         // publicCred.id = fido.base64toBA(publicCred.id);
@@ -51,10 +51,11 @@
         );
 
         console.log("Public Cred:", publicCred);
+        console.log("Result", result);
         return await publicCred;
         // return credentialCreationOptions;
       } else {
-        await myCredentials.create(options);
+        return await myCredentials.create(options);
       }
     } catch (error) {
       console.error("Error creating credential:", error);
@@ -64,6 +65,41 @@
   }
   // Override navigator.credentials.create
   navigator.credentials.create = myCreateMethod;
+
+  async function myGetMethod(options, authRecords) {
+    try {
+      if ("credentials" in navigator) {
+        if (fido.canAuthenticateWithCredId(options)) {
+          console.log("options", options);
+          const result = await fido.processCredentialRequestOptions(options, authRecords);
+          let serverPublicKeyCredential = result;
+          serverPublicKeyCredential["getClientExtensionResults"] = function () {
+            return {};
+          }
+          console.log("cred options authenticatorData is", serverPublicKeyCredential.response.authenticatorData);
+          serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
+            fido.base64utobase64(serverPublicKeyCredential.response.authenticatorData)
+          );
+          serverPublicKeyCredential.response.clientDataJSON = fido.base64toBA(
+            fido.base64utobase64(serverPublicKeyCredential.response.clientDataJSON)
+          );
+          serverPublicKeyCredential.response.signature = fido.base64toBA(
+            fido.base64utobase64(serverPublicKeyCredential.response.signature)
+          );
+          console.log("myGetMethod result is", serverPublicKeyCredential);
+          console.log("Assertion flow successful!");
+          return await serverPublicKeyCredential;
+        } else {
+          return await myCredentials.get(options);
+        }
+      }
+    } catch (error) {
+      console.log("Error getting credential:", error);
+      console.log("Falling back to original navigator.credentials.get() method");
+      return await myCredentials.get(options);
+    }
+  }
+  navigator.credentials.get = myGetMethod;
 
   // const btn = document.getElementById("nicknamediv");
 
@@ -80,4 +116,3 @@
   //   console.log("error");
   // }
 })();
-

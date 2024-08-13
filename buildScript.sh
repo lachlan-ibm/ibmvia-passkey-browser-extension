@@ -1,6 +1,6 @@
 #!/bin/bash
 # Turn on debug
-# set -x
+set -x
 # instructs bash to immediately exit if any command [1] has a non-zero 
 # exit status
 set -e
@@ -59,3 +59,6 @@ else
 fi
 # Bundle Shane's fido2 node client
 browserify -s fido fidoutils.js -o bundle.js
+
+# Concant the contents of bundle.js and content.js into new file main.js
+cat bundle.js ../content.js >> ../main.js

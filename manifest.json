@@ -9,7 +9,10 @@
 		"48": "icons/icon_fido_48.png"
 	},
 
-	"permissions": ["activeTab"],
+	"permissions": [
+		"activeTab",
+		"storage"
+	],
 
 	"action": {
 		"default_icon": "icons/icon_fido_36.png",
@@ -19,7 +22,7 @@
 	"content_scripts": [
 		{
 			"matches": ["https://fidointerop.securitypoc.com/*"],
-			"js": ["content.js"],
+			"js": ["main.js"],
 			"world": "MAIN"
 		}
 	]
