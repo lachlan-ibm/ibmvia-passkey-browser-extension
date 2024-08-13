@@ -11,12 +11,8 @@
 
 	"permissions": [
 		"activeTab",
-		"storage",
-		"scripting",
-		"tabs",
-		"contextMenus"
+		"storage"
 	],
-	"host_permissions": ["https://*"],
 
 	"action": {
 		"default_icon": "icons/icon_fido_36.png",
@@ -26,6 +22,7 @@
 	"background": {
 		"service_worker": "background.js"
 	},
+	
 	"content_scripts": [
 		{
 			"matches": ["https://fidointerop.securitypoc.com/*"],
@@ -34,7 +31,6 @@
 		}
 	],
 	"externally_connectable": {
-  "matches": ["https://fidointerop.securitypoc.com/*"]
+ 		 "matches": ["https://fidointerop.securitypoc.com/*"]
+	}
 }
-}
-
