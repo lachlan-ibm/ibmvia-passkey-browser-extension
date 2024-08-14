@@ -1,9 +1,10 @@
 console.log("I am background script");
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    if (request.greeting === "hello") {
-        console.log("This is the middle script messaging background script");
-        console.log("request", request);
+    if (request.message === "callCustomCreateMethod") {
+        console.log(request.message);
+        console.log("This is the background script, call custom create method");
+        // Process the custom create credentials method in main.js
         sendResponse({ responded: true });
     }
 })

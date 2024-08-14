@@ -1,15 +1,11 @@
 
 
 // Receive message from content script (main.js) and send message to background script
-document.addEventListener("tester", function (e) {
+document.addEventListener("messageToMiddleScript", function (e) {
     let data = e.detail;
     console.log("e", e);
-    console.log("content script (main.js) message received:", data.message);
-
-
-    messageBackgroundScriptAndReturnResponseToContentScript();
-
-
+    console.log("Message received from content script (main.js):", data.message);
+    messageBackgroundScriptAndDispatchMessageToContentScript();
     // dispatchMessageResponseToContentScript({
     //     title: "Response",
     //     messsage: "Thanks for the message main.js, my name is middle.js, nice to meet ya!"
@@ -23,15 +19,16 @@ document.addEventListener("tester", function (e) {
 // }
 
 // function to send message to background script
-async function messageBackgroundScriptAndReturnResponseToContentScript() {
-    const response = await chrome.runtime.sendMessage({ greeting: "hello" });
+async function messageBackgroundScriptAndDispatchMessageToContentScript() {
+    const response = await chrome.runtime.sendMessage({ message: "callCustomCreateMethod" });
     // console.log("response", response);
     // console.log("response", response.responded);
     if (response.responded === true) {
-        document.dispatchEvent(new CustomEvent("response", {
+        document.dispatchEvent(new CustomEvent("responseToContentScriptFromMiddleScript", {
             detail: {
                 title: "Response",
-                message: "Thanks for the message main.js, my name is middle.js, nice to meet ya!"
+                message: "Why hello there, content script",
+                status: "verified"
             }
         }));
     }
