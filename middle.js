@@ -20,7 +20,7 @@ document.addEventListener("messageToMiddleScript", function (e) {
 
 // function to send message to background script
 async function messageBackgroundScriptAndDispatchMessageToContentScript() {
-    const response = await chrome.runtime.sendMessage({ message: "callCustomCreateMethod" });
+    const response = await chrome.runtime.sendMessage({ message: "Hello background script" });
     // console.log("response", response);
     // console.log("response", response.responded);
     if (response.responded === true) {
