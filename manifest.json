@@ -28,7 +28,7 @@
 			"matches": ["https://fidointerop.securitypoc.com/*"],
 			"js": ["main.js"],
 			"world": "MAIN",
-			"run_at": "document_end"
+			"run_at": "document_start"
 		},
 		{
 			"matches": ["https://fidointerop.securitypoc.com/*"],

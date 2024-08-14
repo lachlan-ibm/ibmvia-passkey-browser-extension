@@ -62,3 +62,12 @@ browserify -s fido fidoutils.js -o bundle.js
 
 # Concant the contents of bundle.js and content.js into new file main.js
 cat bundle.js ../content.js >> ../main.js
+
+# Bundle Shane's node implementation to generate attestation artefacts
+cd certs
+sed -i '14 s/^///' generate_attestation_certs.js
+# sed -i '283 s/^/#/' generate_attestation_certs.js
+# browserify -s fido generate_attestation_certs.js -o bundle.js
+
+# Concant the contents of bundle.js and content.js into new file main.js
+# cat bundle.js .../background.js >> ../background_script.js
