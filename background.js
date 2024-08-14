@@ -1,3 +1,5 @@
+// Background script starts here
+
 console.log("I am background script");
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -40,3 +42,5 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 //         target: { tabId: tab.id },
 //         files: ['main.js']
 //     });
+
+// Background script ends here
