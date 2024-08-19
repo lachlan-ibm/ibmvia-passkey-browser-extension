@@ -66,7 +66,10 @@ browserify -s fido fidoutils.js -o bundle.js
 # Concant the contents of bundle.js and content.js into new file main.js
 cat bundle.js ../content.js >> ../main.js
 
-mv ../copy_generate_attestation_certs.js certs/
+# Create a copy in the certs directory of the copied version of generate_attestation_certs.js
+cp ../copy_generate_attestation_certs.js certs/
+
+# mv ../copy_generate_attestation_certs.js certs/
 
 # Bundle Shane's node implementation to generate attestation artefacts
 cd certs
