@@ -42,5 +42,4 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 //         target: { tabId: tab.id },
 //         files: ['main.js']
 //     });
-
 // Background script ends here

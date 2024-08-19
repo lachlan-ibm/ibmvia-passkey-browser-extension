@@ -64,17 +64,17 @@ browserify -s fido fidoutils.js -o bundle.js
 cat bundle.js ../content.js >> ../main.js
 
 # Bundle Shane's node implementation to generate attestation artefacts
-cd certs
+# cd certs
 
 # comment out the lines that require the node js crypto package which causes an error when using browserify
-sed -i '' "13 s/^/\/\//" generate_attestation_certs.js
-sed -i '' "282 s/^/\/\//" generate_attestation_certs.js
-sed -i '' "291 s/^/\/\//" generate_attestation_certs.js
+# sed -i '' "13 s/^/\/\//" generate_attestation_certs.js
+# sed -i '' "282 s/^/\/\//" generate_attestation_certs.js
+# sed -i '' "291 s/^/\/\//" generate_attestation_certs.js
 
 # bundle the generate_attestation_certs.js file
-browserify -s fido generate_attestation_certs.js -o bundle.js
-cd ..
-cd ..
+# browserify -s fido generate_attestation_certs.js -o bundle.js
+# cd ..
+# cd ..
 
 # Concant the contents of bundle.js and background.js into new file background_script.js
 cat $REPO_DIR/certs/bundle.js background.js >> background_script.js
