@@ -29,6 +29,9 @@ fi
 
 # This script automates the build process for the fido2 browser extension
 echo "Hello, time to automate the build process!"
+echo "Installing node modules for browser extension!"
+# Install required packages such as uuid
+npm install
 # Store exit status in variable
 status=$?
 # Shane's fido2 client git repository url
