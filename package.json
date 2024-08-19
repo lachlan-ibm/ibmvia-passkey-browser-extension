@@ -106,6 +106,7 @@
     "unicorn-magic": "^0.1.0",
     "update-browserslist-db": "^1.1.0",
     "uri-js": "^4.4.1",
+    "uuid": "^10.0.0",
     "watchpack": "^2.4.1",
     "webpack-sources": "^3.2.3",
     "which": "^2.0.2",
