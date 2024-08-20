@@ -69,7 +69,8 @@ cat bundle.js ../content.js >> ../main.js
 
 # sed -i -e '' "/let fidoutilsConfig =.*/,+5d =$FIDO_UTILS_CONFIG/" ../main.js
 
-sed -i '' "11,14d" ../main.js
+
+sed -i '' "6145,6148d" ../main.js
 
 # Create a copy in the certs directory of the copied version of generate_attestation_certs.js
 cp ../copy_generate_attestation_certs.js certs/
