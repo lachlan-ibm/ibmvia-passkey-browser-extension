@@ -128,6 +128,134 @@ async function displayFidoUtilsConfigObject(o) {
   if (displayPackedSelfAaguid) {
     displayPackedSelfAaguid.innerHTML = `<h4> Packed-self aaguid: </h4> ${o["packed-self"].aaguid}`;
   }
-
-
 }
+async function displayFidoUtilsConfigObject(o) {
+  // Populate the encryption passphrase
+  let encryptionPassphraseInput = document.getElementById("encryption");
+  if (encryptionPassphraseInput) {
+    encryptionPassphraseInput.value = o["encryptionPassphrase"];
+  }
+
+  // Populate the FIDO-U2F data
+  let certInput = document.getElementById("cert");
+  if (certInput) {
+    certInput.value = o["fido-u2f"].cert;
+  }
+
+  let privateKeyHexInput = document.getElementById("privateKeyHex");
+  if (privateKeyHexInput) {
+    privateKeyHexInput.value = o["fido-u2f"].privateKeyHex;
+  }
+
+  let publicKeyHexInput = document.getElementById("publicKeyHex");
+  if (publicKeyHexInput) {
+    publicKeyHexInput.value = o["fido-u2f"].publicKeyHex;
+  }
+
+  // Populate the packed data
+  let packedAaguidInput = document.getElementById("packed-aaguid");
+  if (packedAaguidInput) {
+    packedAaguidInput.value = o["packed"].aaguid;
+  }
+
+  let packedCertInput = document.getElementById("packed-cert");
+  if (packedCertInput) {
+    packedCertInput.value = o["packed"].cert;
+  }
+
+  let packedPrivateKeyHexInput = document.getElementById("packed-privateKeyHex");
+  if (packedPrivateKeyHexInput) {
+    packedPrivateKeyHexInput.value = o["packed"].privateKeyHex;
+  }
+
+  let packedPublicKeyHexInput = document.getElementById("packed-publicKeyHex");
+  if (packedPublicKeyHexInput) {
+    packedPublicKeyHexInput.value = o["packed"].publicKeyHex;
+  }
+
+  let packedSelfAaguidInput = document.getElementById("packed-self-aaguid");
+  if (packedSelfAaguidInput) {
+    packedSelfAaguidInput.value = o["packed-self"].aaguid;
+  }
+}
+// async function displayFidoUtilsConfigObject(o) {
+//   // Populate the encryption passphrase
+//   let encryptionPassphraseInput = document.getElementById("encryption");
+//   if (encryptionPassphraseInput) {
+//     encryptionPassphraseInput.value = o["encryptionPassphrase"];
+//   }
+
+//   // Populate the FIDO-U2F data
+//   let certInput = document.getElementById("cert");
+//   if (certInput) {
+//     certInput.value = o["fido-u2f"].cert;
+//   }
+
+//   let privateKeyHexInput = document.getElementById("privateKeyHex");
+//   if (privateKeyHexInput) {
+//     privateKeyHexInput.value = o["fido-u2f"].privateKeyHex;
+//   }
+
+//   let publicKeyHexInput = document.getElementById("publicKeyHex");
+//   if (publicKeyHexInput) {
+//     publicKeyHexInput.value = o["fido-u2f"].publicKeyHex;
+//   }
+
+//   // Populate the packed data
+//   let packedAaguidInput = document.getElementById("packed-aaguid");
+//   if (packedAaguidInput) {
+//     packedAaguidInput.value = o["packed"].aaguid;
+//   }
+
+//   let packedCertInput = document.getElementById("packed-cert");
+//   if (packedCertInput) {
+//     packedCertInput.value = o["packed"].cert;
+//   }
+
+//   let packedPrivateKeyHexInput = document.getElementById("packed-privateKeyHex");
+//   if (packedPrivateKeyHexInput) {
+//     packedPrivateKeyHexInput.value = o["packed"].privateKeyHex;
+//   }
+
+//   let packedPublicKeyHexInput = document.getElementById("packed-publicKeyHex");
+//   if (packedPublicKeyHexInput) {
+//     packedPublicKeyHexInput.value = o["packed"].publicKeyHex;
+//   }
+
+//   let packedSelfAaguidInput = document.getElementById("packed-self-aaguid");
+//   if (packedSelfAaguidInput) {
+//     packedSelfAaguidInput.value = o["packed-self"].aaguid;
+//   }
+// }
+
+document.getElementById("fidoutilsForm").addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const updatedFidoUtilsConfig = {
+    encryptionPassphrase: document.getElementById("encryption").value,
+    "fido-u2f": {
+      cert: document.getElementById("cert").value,
+      privateKeyHex: document.getElementById("privateKeyHex").value,
+      publicKeyHex: document.getElementById("publicKeyHex").value,
+    },
+    "packed": {
+      aaguid: document.getElementById("packed-aaguid").value,
+      cert: document.getElementById("packed-cert").value,
+      privateKeyHex: document.getElementById("packed-privateKeyHex").value,
+      publicKeyHex: document.getElementById("packed-publicKeyHex").value,
+    },
+    "packed-self": {
+      aaguid: document.getElementById("packed-self-aaguid").value,
+    },
+  };
+
+  console.log("Updated FIDO Utils Config:", updatedFidoUtilsConfig);
+
+  // I'm trying to send the updated fidoutils object to the background script
+  const response = await chrome.runtime.sendMessage({
+    message: "Update fidoutilsConfig variable",
+    config: updatedFidoUtilsConfig,
+  });
+
+  console.log("Response from background script:", response);
+});

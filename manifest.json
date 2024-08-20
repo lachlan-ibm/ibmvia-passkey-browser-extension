@@ -9,13 +9,9 @@
 		"48": "icons/icon_fido_48.png"
 	},
 
-	"permissions": [
-		"activeTab",
-		"storage",
-		"sidePanel"
-	],
+	"permissions": ["activeTab", "storage", "sidePanel"],
 	"side_panel": {
-		"default_path" : "side_panel.html"
+		"default_path": "side_panel.html"
 	},
 
 	"action": {
@@ -26,7 +22,7 @@
 	"background": {
 		"service_worker": "background_script.js"
 	},
-	
+
 	"content_scripts": [
 		{
 			"matches": ["https://fidointerop.securitypoc.com/*"],
@@ -41,6 +37,6 @@
 		}
 	],
 	"externally_connectable": {
- 		 "matches": ["https://fidointerop.securitypoc.com/*"]
+		"matches": ["https://fidointerop.securitypoc.com/*"]
 	}
 }

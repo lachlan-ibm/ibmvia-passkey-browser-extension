@@ -101,3 +101,35 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 //         files: ['main.js']
 //     });
 // Background script ends here
+
+// console.log("I am the background script");
+// console.log("find me");
+
+let fidoutilsConfig = {};
+
+// Function to retrieve the current FIDO utils config
+function getFidoUtilsConfig() {
+  fidoutilsConfig = fido.getFidoUtilsConfig();
+  console.log("Retrieved FIDO utils config:", fidoutilsConfig);
+  return fidoutilsConfig;
+}
+
+// Function to update the FIDO utils config
+function updateFidoUtilsConfig(newConfig) {
+  fidoutilsConfig = newConfig;
+  console.log("Updated FIDO utils config:", fidoutilsConfig);
+}
+
+// Chrome runtime listener for incoming messages
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.message === "Retrieve fidoutilsConfig variable") {
+    console.log("Received request for the fidoutilsConfig object");
+    const config = getFidoUtilsConfig();
+    sendResponse({ result: config });
+  } else if (request.message === "Update fidoutilsConfig variable") {
+    console.log("Received request to update the fidoutilsConfig object");
+    updateFidoUtilsConfig(request.config);
+    sendResponse({ status: "success", message: "Config updated successfully" });
+  }
+  return true;
+});

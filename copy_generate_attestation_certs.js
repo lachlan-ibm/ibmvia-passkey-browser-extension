@@ -73,7 +73,6 @@ function generateRandomSerialNumberHex() {
     console.log("uuid: ", uuid);
     return uuid;
 }
-
 //
 // The main code entry point is here
 //
