@@ -4,20 +4,20 @@ console.log("I am background script");
 console.log("find me");
 // console.log("fido util config object = ");
 
-function setFidoUtilsConfig(fidoUtils) {
-  let newFidoUtilsConfigObject = {};
-  const fidoUtilsObject = fido.getFidoUtilsConfig();
-  //   console.log("This is the set method", fidoUtilsObject);
-  //   console.log(
-  //     "This is the set method encryptionPassphrase",
-  //     fidoUtilsObject["encryptionPassphrase"]
-  //   );
-  //   newFidoUtilsConfigObject["encryptionPassphrase"] =
-  //     fidoUtilsObject["encryptionPassphrase"];
-  //   newFidoUtilsConfigObject[""]
-  //   console.log("the newly created fidoutils ", newFidoUtilsConfigObject);
-  return fidoUtilsObject;
-}
+// function setFidoUtilsConfig(fidoUtils) {
+//   let newFidoUtilsConfigObject = {};
+//   const fidoUtilsObject = fido.getFidoUtilsConfig();
+//   //   console.log("This is the set method", fidoUtilsObject);
+//   //   console.log(
+//   //     "This is the set method encryptionPassphrase",
+//   //     fidoUtilsObject["encryptionPassphrase"]
+//   //   );
+//   //   newFidoUtilsConfigObject["encryptionPassphrase"] =
+//   //     fidoUtilsObject["encryptionPassphrase"];
+//   //   newFidoUtilsConfigObject[""]
+//   //   console.log("the newly created fidoutils ", newFidoUtilsConfigObject);
+//   return fidoUtilsObject;
+// }
 
 // setFidoUtilsConfig();
 
@@ -25,7 +25,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === "Retrieve fidoutilsConfig variable") {
     console.log("Received request for the fidoUtilsConfig object");
     // console.log(setFidoUtilsConfig);
-    const obj = setFidoUtilsConfig();
+    const obj = fido.getFido2ClientConfigJSON();
     console.log("fidoutils obj in background script", obj);
     sendResponse({ result: obj });
   }
