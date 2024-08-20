@@ -8,6 +8,30 @@ let myCredentials = {
   get: navigator.credentials.get.bind(navigator.credentials),
 };
 
+// function to dispatch a request to the middle script for the fidoutilsConfig
+// function requestFidoUtilsConfig() {
+//   return new Promise((resolve, reject) => {
+//     // Listen for the response from the middle script
+//     function handleConfigResponse(e) {
+//       if (e.detail && e.detail.obj) {
+//         resolve(e.detail.obj);
+//       } else {
+//         reject("Failed to retrieve fidoutilsConfig");
+//       }
+//       // Remove the event listener after handling the response
+//       document.removeEventListener("setFidoUtilsConfig", handleConfigResponse);
+//     }
+//     document.addEventListener("setFidoUtilsConfig", handleConfigResponse);
+
+//     // Dispatch event to request fidoutilsConfig from middle script
+//     document.dispatchEvent(
+//       new CustomEvent("requestFidoUtilsConfig", {
+//         detail: { title: "getFidoUtils", message: "Retrieve fidoutilsConfig variable" },
+//       })
+//     );
+//   });
+// }
+
 async function myCreateMethod(options) {
   // Send message to middle script
   //   async function dispatchMessageToMiddleScriptEvent(data) {
@@ -51,6 +75,11 @@ async function myCreateMethod(options) {
   // })
 
   try {
+    // const fidoutilsConfig = await requestFidoUtilsConfig();
+    // console.log("Received fidoutilsConfig from middle script:", fidoutilsConfig);
+    // Set the origin in the config
+    fidoutilsConfig["origin"] = window.location.origin;
+    fido.setFidoUtilsConfig(fidoutilsConfig);
     if ("publicKey" in options) {
       const result = await fido.processCredentialCreationOptions(options);
       // console.log("options", options);
