@@ -62,7 +62,7 @@ async function myCreateMethod(options) {
       "Response received from middle script (middle.js):",
       data.message
     );
-    let fidoUtils = fido.getFidoUtilsConfigfromNodeClient();
+    let fidoUtils = fido.getFidoUtilsConfig();
     console.log("old fido utils config", fidoUtils);
     fidoUtils = data.obj;
     fidoUtils["origin"] = window.location.origin;
@@ -78,8 +78,8 @@ async function myCreateMethod(options) {
     // const fidoutilsConfig = await requestFidoUtilsConfig();
     // console.log("Received fidoutilsConfig from middle script:", fidoutilsConfig);
     // Set the origin in the config
-    fidoutilsConfig["origin"] = window.location.origin;
-    fido.setFidoUtilsConfig(fidoutilsConfig);
+    // fidoutilsConfig["origin"] = window.location.origin;
+    // fido.setFidoUtilsConfig(fidoutilsConfig);
     if ("publicKey" in options) {
       const result = await fido.processCredentialCreationOptions(options);
       // console.log("options", options);

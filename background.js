@@ -35,9 +35,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
 
 // Set side panel to specific site only
-// chrome.sidePanel
-//   .setPanelBehavior({ openPanelOnActionClick: true })
-//   .catch((error) => console.error(error));
+chrome.sidePanel
+  .setPanelBehavior({ openPanelOnActionClick: true })
+  .catch((error) => console.error(error));
 
 // const ORIGIN = "https://fidointerop.securitypoc.com/*";
 
