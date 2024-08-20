@@ -45,10 +45,6 @@ cd $REPO_DIR
 # Install the node modules
 npm install
 
-# Find the fidoutilsConfig variable and replace with hardcoded object
-HARDCODED_OBJECT='"The replace method worked with sed";'
-
-sed -i '' "s/fidoutilsConfig =.*/fidoutilsConfig =$HARDCODED_OBJECT/" fidoutils.js
 
 # Check if user has browerify, if not install the package
 if command -v browserify $> /dev/null; then
@@ -65,6 +61,15 @@ browserify -s fido fidoutils.js -o bundle.js
 
 # Concant the contents of bundle.js and content.js into new file main.js
 cat bundle.js ../content.js >> ../main.js
+
+# Find the fidoutilsConfig variable and replace with hardcoded object
+# FIDO_UTILS_CONFIG='let fidoutilsConfig = null;'
+
+# sed -i -e '/let fidoutilsConfig =.*/,+5d' main.js
+
+# sed -i -e '' "/let fidoutilsConfig =.*/,+5d =$FIDO_UTILS_CONFIG/" ../main.js
+
+sed -i '' "11,14d" ../main.js
 
 # Create a copy in the certs directory of the copied version of generate_attestation_certs.js
 cp ../copy_generate_attestation_certs.js certs/
