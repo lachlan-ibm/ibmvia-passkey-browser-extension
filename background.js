@@ -31,6 +31,33 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
 });
 
+// Interact with side panel
+
+
+// Set side panel to specific site only
+// chrome.sidePanel
+//   .setPanelBehavior({ openPanelOnActionClick: true })
+//   .catch((error) => console.error(error));
+
+// const ORIGIN = "https://fidointerop.securitypoc.com/*";
+
+// chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
+//   if (!tab.url) return;
+//   const url = new this.URL(tab.url);
+//   if (url.origin === ORIGIN) {
+//     await chrome.sidePanel.setOptions({
+//       tabId,
+//       path: "side_panel.html",
+//       enabled: true
+//     });
+//   } else {
+//     await chrome.sidePanel.setOptions({
+//       tabId,
+//       enabled: false
+//     });
+//   }
+// })
+
 // chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 //   if (request.message === "Hello background script") {
 //     console.log(
