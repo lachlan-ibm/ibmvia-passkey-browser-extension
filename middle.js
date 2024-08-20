@@ -84,6 +84,10 @@ async function displayFidoUtilsConfigObject(o) {
   if (displayencryptionPassphrase) {
     displayencryptionPassphrase.innerHTML = `<h4> Encryption Passphrase: </h4> ${o["encryptionPassphrase"]} `;
   }
+  let encryptionPassphraseInput = document.getElementById("encryption");
+  if (encryptionPassphraseInput) {
+    encryptionPassphraseInput.value = o["encryptionPassphrase"];
+  }
   // Display the fido-u2f data
   let displayfidou2f = document.getElementById("cert");
   if (displayfidou2f) {
@@ -127,11 +131,3 @@ async function displayFidoUtilsConfigObject(o) {
 
 
 }
-
-
-
-
-
-
-
-
