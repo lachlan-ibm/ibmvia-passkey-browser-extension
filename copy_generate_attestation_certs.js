@@ -380,6 +380,7 @@ let fido2ClientConfigJSON = {
         "aaguid": selfAttestationAAGUID
     }
 };
+
 console.log("FIDO2_CLIENT_CONFIG=" + JSON.stringify(fido2ClientConfigJSON));
 
 console.log("Root CA Certificate:\n", rootCAPEM);
@@ -387,4 +388,8 @@ console.log("U2F Attestation Certificate:\n", u2fAttestationCertificatePEM);
 console.log("Packed Attestation Certificate:\n", packedAttestationCertificatePEM);
 console.log("store object is:", store);
 
-module.exports = fido2ClientConfigJSON;
+function getFido2ClientConfigJSON() {
+    return fido2ClientConfigJSON;
+}
+
+module.exports = { getFido2ClientConfigJSON: getFido2ClientConfigJSON };
