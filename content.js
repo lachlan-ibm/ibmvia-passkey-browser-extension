@@ -8,17 +8,42 @@ let myCredentials = {
   get: navigator.credentials.get.bind(navigator.credentials),
 };
 
-
 async function myCreateMethod(options) {
-
   // Send message to middle script
-  async function dispatchMessageToMiddleScriptEvent(data) {
-    document.dispatchEvent(new CustomEvent("messageToMiddleScript", { detail: data }));
-  }
+  //   async function dispatchMessageToMiddleScriptEvent(data) {
+  //     document.dispatchEvent(
+  //       new CustomEvent("messageToMiddleScript", { detail: data })
+  //     );
+  //   }
 
-  await dispatchMessageToMiddleScriptEvent({
-    title: "Messaging system",
-    message: "Hello there middle script!"
+  async function dispatchGetFidoUtilsConfig(data) {
+    document.dispatchEvent(
+      new CustomEvent("requestFidoUtilsConfig", { detail: data })
+    );
+  }
+  await dispatchGetFidoUtilsConfig({
+    title: "getFidoUtils",
+    message: "Retrieve fidoutilsConfig variable",
+  });
+
+  //   await dispatchMessageToMiddleScriptEvent({
+  //     title: "Messaging system",
+  //     message: "Hello there middle script!",
+  //   });
+  document.addEventListener("setFidoUtilsConfig", function (e) {
+    // console.log("find me");
+    console.log("e", e);
+    let data = e.detail;
+    console.log(
+      "Response received from middle script (middle.js):",
+      data.message
+    );
+    let fidoUtils = fido.getFidoUtilsConfigfromNodeClient();
+    console.log("old fido utils config", fidoUtils);
+    fidoUtils = data.obj;
+    fidoUtils["origin"] = window.location.origin;
+    fido.setFidoUtilsConfig(fidoUtils);
+    // console.log("e", e);
   });
 
   // document.addEventListener("middle script messaging", function (e) {
@@ -58,15 +83,21 @@ async function myCreateMethod(options) {
   }
 }
 // receive message from middle script
-document.addEventListener("responseToContentScriptFromMiddleScript", function (e) {
-  // console.log("find me");
-  let data = e.detail;
-  if (data.status === "verified") {
-    console.log("data", data.status);
-    console.log("Message received from middle script (middle.js):", data.message);
-  }
-  // console.log("e", e);
-})
+// document.addEventListener(
+//   "responseToContentScriptFromMiddleScript",
+//   function (e) {
+//     // console.log("find me");
+//     let data = e.detail;
+//     if (data.status === "verified") {
+//       console.log("data", data.status);
+//       console.log(
+//         "Message received from middle script (middle.js):",
+//         data.message
+//       );
+//     }
+//     // console.log("e", e);
+//   }
+// );
 // Override navigator.credentials.create
 navigator.credentials.create = myCreateMethod;
 
@@ -75,17 +106,27 @@ async function myGetMethod(options, authRecords) {
     if ("credentials" in navigator) {
       if (fido.canAuthenticateWithCredId(options)) {
         console.log("options", options);
-        const result = await fido.processCredentialRequestOptions(options, authRecords);
+        const result = await fido.processCredentialRequestOptions(
+          options,
+          authRecords
+        );
         let serverPublicKeyCredential = result;
         serverPublicKeyCredential["getClientExtensionResults"] = function () {
           return {};
-        }
-        console.log("cred options authenticatorData is", serverPublicKeyCredential.response.authenticatorData);
+        };
+        console.log(
+          "cred options authenticatorData is",
+          serverPublicKeyCredential.response.authenticatorData
+        );
         serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
-          fido.base64utobase64(serverPublicKeyCredential.response.authenticatorData)
+          fido.base64utobase64(
+            serverPublicKeyCredential.response.authenticatorData
+          )
         );
         serverPublicKeyCredential.response.clientDataJSON = fido.base64toBA(
-          fido.base64utobase64(serverPublicKeyCredential.response.clientDataJSON)
+          fido.base64utobase64(
+            serverPublicKeyCredential.response.clientDataJSON
+          )
         );
         serverPublicKeyCredential.response.signature = fido.base64toBA(
           fido.base64utobase64(serverPublicKeyCredential.response.signature)
