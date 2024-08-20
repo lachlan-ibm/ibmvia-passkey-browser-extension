@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side panel</title>
+    <link rel="stylesheet" href="side_panel.css">
+</head>
+<body>
+    <h1>FIDO2 Extension side panel</h1>
+    <p>This side panel is enabled on fidointerop.com</p>
+    <button id="triggerBtn">Show fidoutilsConfig</button>
+    <div id="fidoUtilsDiv">
+        <!-- Display the encryption passphrase -->
+        <div id="encryptionPassphrase" class="fidoUtilsData"></div>
+        <!-- Display the fido-u2f data -->
+        <div id="cert" class="fidoUtilsData"></div>
+        <div id="privateKeyHex" class="fidoUtilsData"></div>
+        <div id="publicKeyHex" class="fidoUtilsData"></div>
+        <!-- Display the packed data -->
+        <div id="packed-aaguid" class="fidoUtilsData"></div>
+        <div id="packed-cert" class="fidoUtilsData"></div>
+        <div id="packed-privateKeyHex" class="fidoUtilsData"></div>
+        <div id="packed-publicKeyHex" class="fidoUtilsData"></div>
+        <!-- Display the packed-self data -->
+        <div id="packed-self-aaguid" class="fidoUtilsData"></div>
+        <!-- <div id="test" class="fidoUtilsData">
+            <h4>
+                MIIB1jCCAX2gAwIBAgIQY3kCVR9fSfW88c1XOncARzAKBggqhkjOPQQDAjAuMQswCQYDVQQGEwJVUzEMMAoGA1UECgwDSUJNMREwDwYDVQQDDAhGSURPVEVTVDAiGA8yMDI0MDgyMDAzNDA0MloYDzIwNTIwMTA1MDM0MDQyWjBXMQswCQYDVQQGEwJVUzEMMAoGA1UECgwDSUJNMSIwIAYDVQQLDBlBdXRoZW50aWNhdG9yIEF0dGVzdGF0aW9uMRYwFAYDVQQDDA1QQUNLRUQtU0lHTkVSMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWgaiETiB9Na0Cp8xQmBzwVMgFypBklOr7Kgmqy8Nr+bpnDKwedAosIKl0gKVzbpTZEICmqD71RXuxG1RHs9sWaNQME4wHQYDVR0OBBYEFDdiKfi6HeAJMz3YZo7rJ5pVjWEwMB8GA1UdIwQYMBaAFBjRJQvvlhcADqe9B/PZpsWm1JswMAwGA1UdEwEB/wQCMAAwCgYIKoZIzj0EAwIDRwAwRAIgD8xVx8JA85JyNcxiwgv3oVsNRLsJFNSi3NrIJuCGmOcCICZoV9sDBM7Ig4UGgbngyFlrGTi5+0vkWRMiuYvebTkF
+            </h4>
+        </div> -->
+    </div>
+</body>
+<script src="middle.js"></script>
+</html>

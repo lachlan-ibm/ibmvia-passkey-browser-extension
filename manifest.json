@@ -11,8 +11,12 @@
 
 	"permissions": [
 		"activeTab",
-		"storage"
+		"storage",
+		"sidePanel"
 	],
+	"side_panel": {
+		"default_path" : "side_panel.html"
+	},
 
 	"action": {
 		"default_icon": "icons/icon_fido_36.png",

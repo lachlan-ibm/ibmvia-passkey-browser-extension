@@ -1,0 +1,15 @@
+/* * {
+    outline: 1px solid red;
+
+  } */
+#fidoUtilsDiv {
+    width:80%;
+}
+.fidoUtilsData {
+    width:80%;
+    word-wrap: break-word;
+}
+
+#test {
+    word-wrap: break-word;
+}
