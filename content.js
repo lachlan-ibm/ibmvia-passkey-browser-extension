@@ -21,7 +21,6 @@ function requestFidoUtilsConfig() {
       }
       // remove the event listener after handling the response
       document.removeEventListener("setFidoUtilsConfig", handleConfigResponse);
-      console.log("find me!!!!");
     }
     document.addEventListener("setFidoUtilsConfig", handleConfigResponse);
     // dispatch event to request fidoutilsConfig from middle script
@@ -32,6 +31,7 @@ function requestFidoUtilsConfig() {
     );
   });
 }
+
 document.addEventListener("setFidoUtilsConfig", function (e) {
   // console.log("find me");
   // console.log("e", e);
@@ -102,11 +102,13 @@ async function myCreateMethod(options) {
 
   try {
     const fidoutilsConfig = await requestFidoUtilsConfig();
+    // const updatedFidoUtilsConfigidoutilsConfig = await requestUpdatedFidoUtilsConfig();
     console.log("Received fidoutilsConfig from middle script:", fidoutilsConfig);
+    // console.log("Received fidoutilsConfig from middle script:", updatedFidoUtilsConfigidoutilsConfig);
 
     // Set the origin in the config
-    // fidoutilsConfig["origin"] = window.location.origin;
-    // fido.setFidoUtilsConfig(fidoutilsConfig);
+    fidoutilsConfig["origin"] = window.location.origin;
+    fido.setFidoUtilsConfig(fidoutilsConfig);
     if ("publicKey" in options) {
       const result = await fido.processCredentialCreationOptions(options);
       console.log("options", options);

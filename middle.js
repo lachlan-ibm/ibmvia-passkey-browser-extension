@@ -41,6 +41,28 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
 }
 
 // async function retrieveUpdatedFidoUtilsConfigFromBackgroundScript() {
+//   console.log("This is the update functionality find me")
+//   const response = await chrome.runtime.sendMessage({
+//     message: "Update fidoutilsConfig variable",
+//   });
+//   //   console.log("response", response.result);
+//   // document.dispatchEvent(new CustomEvent(""))
+//   document.dispatchEvent(
+//     new CustomEvent("setUpdatedFidoUtilsConfig", {
+//       detail: {
+//         title: "Response",
+//         message: "Sending updated fidoutilsConfig to main.js",
+//         obj: response.result,
+//       },
+//     })
+//   );
+//   const backgroundResult = response.result;
+//   console.log("middle script updated fidoutils is", backgroundResult);
+//   return await backgroundResult;
+// }
+
+
+// async function retrieveUpdatedFidoUtilsConfigFromBackgroundScript() {
 //   const response = await chrome.runtime.sendMessage({
 //     message: "Retrieve updated fidoutilsConfig variable",
 //   });
@@ -95,6 +117,16 @@ if (button) {
     await displayFidoUtilsConfigObject(data);
   });
 }
+
+// let saveButton = document.getElementById("saveBtn");
+// console.log("find me Save button listener")
+// if (saveButton) {
+//   saveButton.addEventListener("click", async function () {
+//     console.log("Clicked save button");
+//     let data = await retrieveUpdatedFidoUtilsConfigFromBackgroundScript();
+//     await displayFidoUtilsConfigObject(data);
+//   });
+// }
 
 // async function displayFidoUtilsConfigObject(o) {
 //   // console.log("this is the displayFidoUtilsConfigObject function", o);
@@ -279,15 +311,15 @@ if (fidoUtilsForm) {
       message: "Update fidoutilsConfig variable",
       config: updatedFidoUtilsConfig,
     });
-    document.dispatchEvent(
-      new CustomEvent("setUpdatedFidoUtilsConfig", {
-        detail: {
-          title: "Response",
-          message: "Sending updatedfidoutilsConfig to main.js",
-          obj: response.result,
-        },
-      })
-    );
+    // document.dispatchEvent(
+    //   new CustomEvent("setUpdatedFidoUtilsConfig", {
+    //     detail: {
+    //       title: "Response",
+    //       message: "Sending updatedfidoutilsConfig to main.js",
+    //       obj: response.result,
+    //     },
+    //   })
+    // );
     console.log("find me sdsa;kdjsaldjsa", response);
     console.log("Response from background script:", response);
   });

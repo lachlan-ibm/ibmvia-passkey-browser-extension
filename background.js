@@ -134,7 +134,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   } else if (request.message === "Update fidoutilsConfig variable") {
     console.log("Received request to update the fidoutilsConfig object");
     const config = updateFidoUtilsConfig(request.config);
+    console.log("this is a test", fidoutilsConfig);
     sendResponse({ status: "success", message: "Config updated successfully", result: config });
   }
   return true;
 });
+// End of background script
