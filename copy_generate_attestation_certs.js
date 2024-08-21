@@ -392,4 +392,8 @@ function getFido2ClientConfigJSON() {
     return fido2ClientConfigJSON;
 }
 
-module.exports = { getFido2ClientConfigJSON: getFido2ClientConfigJSON };
+function setFido2ClientConfigJSON(updatedObj) {
+    fido2ClientConfigJSON = updatedObj;
+};
+
+module.exports = { getFido2ClientConfigJSON: getFido2ClientConfigJSON, setFido2ClientConfigJSON, setFido2ClientConfigJSON };

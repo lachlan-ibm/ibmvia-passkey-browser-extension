@@ -110,6 +110,7 @@ async function myCreateMethod(options) {
 
     // Set the origin in the config
     newFidoutilsConfig["origin"] = window.location.origin;
+    // Set the fidoUtilsConfig object with the new one retrieved from the background script then middle script
     fido.setFidoUtilsConfig(newFidoutilsConfig);
     console.log("new fido utils", newFidoutilsConfig);
     if ("publicKey" in options) {

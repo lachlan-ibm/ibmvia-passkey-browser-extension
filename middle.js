@@ -15,6 +15,11 @@ document.addEventListener("requestFidoUtilsConfig", async function (e) {
   await retrieveFidoUtilsConfigFromBackgroundScript();
 });
 
+document.addEventListener("requestUpdatedFidoUtilsConfig", async function (e) {
+  let data = e.detail;
+  await retrieveFidoUtilsConfigFromBackgroundScript();
+});
+
 // Send response to content script (main.js)
 // function dispatchMessageResponseToContentScript(data) {
 //     document.dispatchEvent(new CustomEvent("start", { detail: data }));
@@ -24,7 +29,7 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
   const response = await chrome.runtime.sendMessage({
     message: "Retrieve fidoutilsConfig variable",
   });
-  //   console.log("response", response.result);
+  console.log("response in midddsadasle script", response);
   // document.dispatchEvent(new CustomEvent(""))
   document.dispatchEvent(
     new CustomEvent("setFidoUtilsConfig", {
@@ -320,7 +325,6 @@ if (fidoUtilsForm) {
     //     },
     //   })
     // );
-    console.log("find me sdsa;kdjsaldjsa", response);
     console.log("Response from background script:", response);
   });
 

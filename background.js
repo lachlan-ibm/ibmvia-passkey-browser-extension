@@ -123,7 +123,7 @@ function getFidoUtilsConfig() {
 function updateFidoUtilsConfig(newConfig) {
   fidoutilsConfig = newConfig;
   console.log("Updated FIDO utils config:", fidoutilsConfig);
-  return fidoutilsConfig;
+  fido.setFido2ClientConfigJSON(newConfig);
 }
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
@@ -139,4 +139,5 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
   return true;
 });
+
 // End of background script
