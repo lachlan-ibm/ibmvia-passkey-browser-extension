@@ -2,6 +2,7 @@
 
 console.log("I am background script");
 console.log("find me");
+
 // console.log("fido util config object = ");
 
 // function setFidoUtilsConfig(fidoUtils) {
@@ -21,15 +22,15 @@ console.log("find me");
 
 // setFidoUtilsConfig();
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-  if (request.message === "Retrieve fidoutilsConfig variable") {
-    console.log("Received request for the fidoUtilsConfig object");
-    // console.log(setFidoUtilsConfig);
-    const obj = fido.getFido2ClientConfigJSON();
-    console.log("fidoutils obj in background script", obj);
-    sendResponse({ result: obj });
-  }
-});
+// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+// 	if (request.message === "Retrieve fidoutilsConfig variable") {
+// 		console.log("Received request for the fidoUtilsConfig object");
+// 		// console.log(setFidoUtilsConfig);
+// 		const obj = fido.getFido2ClientConfigJSON();
+// 		console.log("fidoutils obj in background script", obj);
+// 		sendResponse({ result: obj });
+// 	}
+// });
 
 // Interact with side panel
 
@@ -109,18 +110,22 @@ let fidoutilsConfig = {};
 
 // Function to retrieve the current FIDO utils config
 function getFidoUtilsConfig() {
-  fidoutilsConfig = fido.getFidoUtilsConfig();
+  fidoutilsConfig = fido.getFido2ClientConfigJSON();
   console.log("Retrieved FIDO utils config:", fidoutilsConfig);
   return fidoutilsConfig;
 }
+
+// function setFidoUtilsConfig(newConfig) {
+// 	fidoutilsConfig = newConfig;
+// }
 
 // Function to update the FIDO utils config
 function updateFidoUtilsConfig(newConfig) {
   fidoutilsConfig = newConfig;
   console.log("Updated FIDO utils config:", fidoutilsConfig);
+  // return fidoutilsConfig;
 }
 
-// Chrome runtime listener for incoming messages
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === "Retrieve fidoutilsConfig variable") {
     console.log("Received request for the fidoutilsConfig object");
@@ -128,8 +133,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     sendResponse({ result: config });
   } else if (request.message === "Update fidoutilsConfig variable") {
     console.log("Received request to update the fidoutilsConfig object");
-    updateFidoUtilsConfig(request.config);
-    sendResponse({ status: "success", message: "Config updated successfully" });
+    const updatedConfig = updateFidoUtilsConfig(request.config);
+    sendResponse({ status: "success", message: "Config updated successfully", result: updatedConfig });
   }
   return true;
 });
