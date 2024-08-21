@@ -15,7 +15,7 @@ function requestFidoUtilsConfig() {
     function handleConfigResponse(e) {
       if (e.detail && e.detail.obj) {
         resolve(e.detail.obj);
-        // console.log("resolved find me");
+        console.log("resolved find me");
       } else {
         reject("Failed to retrieve fidoutilsConfig");
       }
@@ -32,23 +32,23 @@ function requestFidoUtilsConfig() {
   });
 }
 
-document.addEventListener("setFidoUtilsConfig", function (e) {
-  // console.log("find me");
-  // console.log("e", e);
-  let data = e.detail;
-  console.log(
-    "Response received from middle script (middle.js):",
-    data.message
-  );
-  let fidoUtils = fido.getFidoUtilsConfig();
-  console.log("old fido utils config", fidoUtils);
-  // console.log("potential fido utils config", data.obj);
-  fidoUtils = data.obj;
-  fidoUtils["origin"] = window.location.origin;
-  fido.setFidoUtilsConfig(fidoUtils);
-  console.log("new fido utils config", fidoUtils);
-  // console.log("e", e);
-});
+// document.addEventListener("setFidoUtilsConfig", function (e) {
+// 	// console.log("find me");
+// 	// console.log("e", e);
+// 	let data = e.detail;
+// 	console.log(
+// 		"Response received from middle script (middle.js):",
+// 		data.message
+// 	);
+// 	let fidoUtils = fido.getFidoUtilsConfig();
+// 	console.log("old fido utils config", fidoUtils);
+// 	// console.log("potential fido utils config", data.obj);
+// 	fidoUtils = data.obj;
+// 	fidoUtils["origin"] = window.location.origin;
+// 	fido.setFidoUtilsConfig(fidoUtils);
+// 	console.log("new fido utils config", fidoUtils);
+// 	// console.log("e", e);
+// });
 
 // function to dispatch a request to the middle script for the updated fidoutilsConfig
 
@@ -101,14 +101,17 @@ async function myCreateMethod(options) {
   // })
 
   try {
-    const fidoutilsConfig = await requestFidoUtilsConfig();
+    let oldFidoUtilsConfig = fido.getFidoUtilsConfig();
+    console.log("old fido utils", oldFidoUtilsConfig);
+    let newFidoutilsConfig = await requestFidoUtilsConfig();
     // const updatedFidoUtilsConfigidoutilsConfig = await requestUpdatedFidoUtilsConfig();
-    console.log("Received fidoutilsConfig from middle script:", fidoutilsConfig);
+    // console.log("Received fidoutilsConfig from middle script:", fidoutilsConfig);
     // console.log("Received fidoutilsConfig from middle script:", updatedFidoUtilsConfigidoutilsConfig);
 
     // Set the origin in the config
-    fidoutilsConfig["origin"] = window.location.origin;
-    fido.setFidoUtilsConfig(fidoutilsConfig);
+    newFidoutilsConfig["origin"] = window.location.origin;
+    fido.setFidoUtilsConfig(newFidoutilsConfig);
+    console.log("new fido utils", newFidoutilsConfig);
     if ("publicKey" in options) {
       const result = await fido.processCredentialCreationOptions(options);
       console.log("options", options);
