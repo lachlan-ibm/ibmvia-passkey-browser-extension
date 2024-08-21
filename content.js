@@ -49,6 +49,9 @@ document.addEventListener("setFidoUtilsConfig", function (e) {
   console.log("new fido utils config", fidoUtils);
   // console.log("e", e);
 });
+
+// function to dispatch a request to the middle script for the updated fidoutilsConfig
+
 // document.addEventListener("setUpdatedFidoUtilsConfig", function (e) {
 // 	// console.log("find me");
 // 	// console.log("e", e);
@@ -100,6 +103,7 @@ async function myCreateMethod(options) {
   try {
     const fidoutilsConfig = await requestFidoUtilsConfig();
     console.log("Received fidoutilsConfig from middle script:", fidoutilsConfig);
+
     // Set the origin in the config
     // fidoutilsConfig["origin"] = window.location.origin;
     // fido.setFidoUtilsConfig(fidoutilsConfig);

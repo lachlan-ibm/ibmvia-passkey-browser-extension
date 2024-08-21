@@ -40,25 +40,25 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
   return await backgroundResult;
 }
 
-async function retrieveUpdatedFidoUtilsConfigFromBackgroundScript() {
-  const response = await chrome.runtime.sendMessage({
-    message: "Retrieve updated fidoutilsConfig variable",
-  });
-  //   console.log("response", response.result);
-  // document.dispatchEvent(new CustomEvent(""))
-  document.dispatchEvent(
-    new CustomEvent("setFidoUtilsConfig", {
-      detail: {
-        title: "Response",
-        message: "Sending fidoutilsConfig to main.js",
-        obj: response.result,
-      },
-    })
-  );
-  const backgroundResult = response.result;
-  console.log("middle script fidoutils is", backgroundResult);
-  return await backgroundResult;
-}
+// async function retrieveUpdatedFidoUtilsConfigFromBackgroundScript() {
+//   const response = await chrome.runtime.sendMessage({
+//     message: "Retrieve updated fidoutilsConfig variable",
+//   });
+//   //   console.log("response", response.result);
+//   // document.dispatchEvent(new CustomEvent(""))
+//   document.dispatchEvent(
+//     new CustomEvent("setFidoUtilsConfig", {
+//       detail: {
+//         title: "Response",
+//         message: "Sending fidoutilsConfig to main.js",
+//         obj: response.result,
+//       },
+//     })
+//   );
+//   const backgroundResult = response.result;
+//   console.log("middle script fidoutils is", backgroundResult);
+//   return await backgroundResult;
+// }
 
 // function to send message to background script
 // async function messageBackgroundScriptAndDispatchMessageToContentScript() {
@@ -253,7 +253,7 @@ const fidoUtilsForm = document.getElementById("fidoutilsForm");
 if (fidoUtilsForm) {
   fidoUtilsForm.addEventListener("submit", async function (event) {
     event.preventDefault();
-    console.log("find me!")
+    // console.log("find me!")
     const updatedFidoUtilsConfig = {
       encryptionPassphrase: document.getElementById("encryption").value,
       "fido-u2f": {
@@ -279,16 +279,16 @@ if (fidoUtilsForm) {
       message: "Update fidoutilsConfig variable",
       config: updatedFidoUtilsConfig,
     });
-    // document.dispatchEvent(
-    //   new CustomEvent("setUpdatedFidoUtilsConfig", {
-    //     detail: {
-    //       title: "Response",
-    //       message: "Sending updatedfidoutilsConfig to main.js",
-    //       obj: response.result,
-    //     },
-    //   })
-    // );
-
+    document.dispatchEvent(
+      new CustomEvent("setUpdatedFidoUtilsConfig", {
+        detail: {
+          title: "Response",
+          message: "Sending updatedfidoutilsConfig to main.js",
+          obj: response.result,
+        },
+      })
+    );
+    console.log("find me sdsa;kdjsaldjsa", response);
     console.log("Response from background script:", response);
   });
 
