@@ -36,35 +36,53 @@
 			</form>
 		</div> -->
 		<form id="fidoutilsForm">
-			<label for="encryption">Encryption Passphrase:</label>
-			<input type="text" id="encryption" name="encryptionPassphrase" />
+			<div class="form-group">
+				<label for="encryption">Encryption Passphrase:</label>
+				<input type="text" id="encryption" name="encryptionPassphrase" />
+			</div>
+			<div class="form-group">
+				<label for="cert">FIDO-U2F Cert:</label>
+				<textarea id="cert" name="cert"></textarea>
+			</div>
 
-			<label for="cert">FIDO-U2F Cert:</label>
-			<textarea id="cert" name="cert"></textarea>
+			<div class="form-group">
+				<label for="privateKeyHex">Private Key Hex:</label>
+				<textarea id="privateKeyHex" name="privateKeyHex"></textarea>
+			</div>
 
-			<label for="privateKeyHex">Private Key Hex:</label>
-			<textarea id="privateKeyHex" name="privateKeyHex"></textarea>
+			<div class="form-group">
+				<label for="publicKeyHex">Public Key Hex:</label>
+				<textarea id="publicKeyHex" name="publicKeyHex"></textarea>
+			</div>
 
-			<label for="publicKeyHex">Public Key Hex:</label>
-			<textarea id="publicKeyHex" name="publicKeyHex"></textarea>
+			<div class="form-group">
+				<label for="packed-aaguid">Packed AAGUID:</label>
+				<textarea id="packed-aaguid" name="aaguid"></textarea>
+			</div>
 
-			<label for="packed-aaguid">Packed AAGUID:</label>
-			<textarea id="packed-aaguid" name="aaguid"></textarea>
+			<div class="form-group">
+				<label for="packed-cert">Packed Cert:</label>
+				<textarea id="packed-cert" name="cert"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="packed-privateKeyHex">Packed Private Key Hex:</label>
+				<textarea id="packed-privateKeyHex" name="privateKeyHex"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="packed-publicKeyHex">Packed Public Key Hex:</label>
+				<textarea id="packed-publicKeyHex" name="publicKeyHex"></textarea>
+			</div>
 
-			<label for="packed-cert">Packed Cert:</label>
-			<textarea id="packed-cert" name="cert"></textarea>
-
-			<label for="packed-privateKeyHex">Packed Private Key Hex:</label>
-			<textarea id="packed-privateKeyHex" name="privateKeyHex"></textarea>
-
-			<label for="packed-publicKeyHex">Packed Public Key Hex:</label>
-			<textarea id="packed-publicKeyHex" name="publicKeyHex"></textarea>
-
-			<label for="packed-self-aaguid">Packed-self AAGUID:</label>
-			<textarea id="packed-self-aaguid" name="aaguid"></textarea>
+			<div class="form-group">
+				<label for="packed-self-aaguid">Packed-self AAGUID:</label>
+				<textarea id="packed-self-aaguid" name="aaguid"></textarea>
+			</div>
 
 			<button id="saveBtn" type="submit">Save Changes</button>
 		</form>
+		<div id="successMessage" style="display: none; color: green">
+			fidoutilsConfig updated successfully
+		</div>
 	</body>
 	<script src="middle.js"></script>
 </html>

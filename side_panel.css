@@ -1,18 +1,71 @@
-/* * {
-    outline: 1px solid red;
-
-  } */
-#fidoUtilsDiv {
-    width:80%;
-}
-.fidoUtilsData {
-    width:80%;
-    word-wrap: break-word;
+/* General styling */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 10px;
+	width: 350px; /* Slightly smaller than the panel width for padding */
 }
 
-#test {
-    word-wrap: break-word;
+h1 {
+	font-size: 18px;
+	margin-bottom: 10px;
 }
-/* #fidoutilsForm {
-    display: flex;
-} */
+
+p {
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+/* Form styling */
+#fidoutilsForm {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	font-size: 14px;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.form-group input,
+.form-group textarea {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+textarea {
+	resize: vertical;
+	height: 80px; /* Default height for textareas */
+}
+
+#saveBtn {
+	background-color: #28a745;
+}
+
+#saveBtn:hover {
+	background-color: #218838;
+}

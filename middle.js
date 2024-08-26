@@ -123,15 +123,7 @@ if (button) {
   });
 }
 
-// let saveButton = document.getElementById("saveBtn");
-// console.log("find me Save button listener")
-// if (saveButton) {
-//   saveButton.addEventListener("click", async function () {
-//     console.log("Clicked save button");
-//     let data = await retrieveUpdatedFidoUtilsConfigFromBackgroundScript();
-//     await displayFidoUtilsConfigObject(data);
-//   });
-// }
+
 
 // async function displayFidoUtilsConfigObject(o) {
 //   // console.log("this is the displayFidoUtilsConfigObject function", o);
@@ -286,6 +278,18 @@ async function displayFidoUtilsConfigObject(o) {
 }
 
 const fidoUtilsForm = document.getElementById("fidoutilsForm");
+const successMessage = document.getElementById("successMessage");
+
+// const saveButton = document.getElementById("saveBtn");
+
+// console.log("find me Save button listener")
+// if (saveButton) {
+//   saveButton.addEventListener("click", async function () {
+//     console.log("Clicked save button");
+//     let data = await retrieveUpdatedFidoUtilsConfigFromBackgroundScript();
+//     await displayFidoUtilsConfigObject(data);
+//   });
+// }
 
 if (fidoUtilsForm) {
   fidoUtilsForm.addEventListener("submit", async function (event) {
@@ -316,6 +320,19 @@ if (fidoUtilsForm) {
       message: "Update fidoutilsConfig variable",
       config: updatedFidoUtilsConfig,
     });
+
+    if (response.status) {
+      if (successMessage) {
+        successMessage.style.display = "block";
+      }
+      setTimeout(() => {
+        if (successMessage) {
+          successMessage.style.display = "none";
+        }
+      }, 3000)
+    } else {
+      console.error("Failed to update fidoutilsConfig");
+    }
     // document.dispatchEvent(
     //   new CustomEvent("setUpdatedFidoUtilsConfig", {
     //     detail: {
@@ -325,7 +342,7 @@ if (fidoUtilsForm) {
     //     },
     //   })
     // );
-    console.log("Response from background script:", response);
+    // console.log("Response from background script:", response);)
   });
 
 }
