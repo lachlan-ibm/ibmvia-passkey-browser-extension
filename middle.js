@@ -113,15 +113,23 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
 // function listenForRegisterButtonClick() {
 
 // }
-let button = document.getElementById("triggerBtn");
-console.log("find me button listener")
-if (button) {
-  button.addEventListener("click", async function () {
-    console.log("Clicked button");
-    let data = await retrieveFidoUtilsConfigFromBackgroundScript();
-    await displayFidoUtilsConfigObject(data);
-  });
-}
+document.addEventListener("DOMContentLoaded", function () {
+  let button = document.getElementById("triggerBtn");
+  let form = document.getElementById("fidoutilsForm");
+
+  if (button) {
+    button.addEventListener("click", async function () {
+      console.log("Clicked button");
+
+      // Show the form
+      form.style.display = "block";
+
+      // Fetch and display FIDO utils config data
+      let data = await retrieveFidoUtilsConfigFromBackgroundScript();
+      await displayFidoUtilsConfigObject(data);
+    });
+  }
+});
 
 
 
