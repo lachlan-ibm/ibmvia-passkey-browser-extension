@@ -191,6 +191,8 @@ async function myCreateMethod(options) {
       publicCred["toJSON"] = function () {
         return result;
       };
+      // publicCred["raw_id"] = publicCred.id;
+      // console.log("rawId", publicCred["raw_id"]);
       publicCred.response.attestationObject = fido.base64toBA(
         fido.base64utobase64(publicCred.response.attestationObject)
       );
@@ -198,8 +200,8 @@ async function myCreateMethod(options) {
         fido.base64utobase64(publicCred.response.clientDataJSON)
       );
 
-      // console.log("Public Cred:", publicCred);
-      // console.log("Result", result);
+      console.log("Public Cred:", publicCred);
+      //   console.log("Result", result);
       showSuccessModal("Custom create method successful. Creating new credential.");
       await new Promise(resolve => setTimeout(resolve, 3000));
       return await publicCred;
@@ -317,6 +319,12 @@ function showFailModal(message) {
 async function myGetMethod(options, authRecords) {
   try {
     if ("credentials" in navigator) {
+
+      // Set the fidoutilsconfig variable by requesting value from background script
+      let fidoutilsConfig = await requestFidoUtilsConfig();
+      fidoutilsConfig["origin"] = window.location.origin;
+      fido.setFidoUtilsConfig(fidoutilsConfig);
+
       if (fido.canAuthenticateWithCredId(options)) {
         console.log("options", options);
         const result = await fido.processCredentialRequestOptions(
@@ -327,6 +335,7 @@ async function myGetMethod(options, authRecords) {
         serverPublicKeyCredential["getClientExtensionResults"] = function () {
           return {};
         };
+
         console.log(
           "cred options authenticatorData is",
           serverPublicKeyCredential.response.authenticatorData
@@ -345,7 +354,6 @@ async function myGetMethod(options, authRecords) {
           fido.base64utobase64(serverPublicKeyCredential.response.signature)
         );
         console.log("myGetMethod result is", serverPublicKeyCredential);
-        console.log("Assertion flow successful!");
         showSuccessModal("Custom get method called. Authenticating credential.");
         await new Promise(resolve => setTimeout(resolve, 3000));
         return await serverPublicKeyCredential;
