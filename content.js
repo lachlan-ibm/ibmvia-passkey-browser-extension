@@ -137,21 +137,6 @@ function showSuccessModal(message) {
   }, 3000);
 }
 
-function setNicknameValue(newValue) {
-  // Get the input element by its id
-  const nicknameInput = document.getElementById("nickname");
-
-  // Check if the element exists
-  if (nicknameInput) {
-    // Set the value of the input field
-    nicknameInput.value = newValue;
-    console.log(`Nickname set to: ${newValue}`);
-  } else {
-    console.error("Input with id 'nickname' not found.");
-  }
-}
-
-
 async function myCreateMethod(options) {
   // Send message to middle script
   //   async function dispatchMessageToMiddleScriptEvent(data) {
@@ -198,7 +183,6 @@ async function myCreateMethod(options) {
       const result = await fido.processCredentialCreationOptions(options);
       console.log("options", options);
       console.log("Credentials created:", result);
-      setNicknameValue("FIDO2 Extension");
       let publicCred = result.spkc;
 
       publicCred["getClientExtensionResults"] = function () {
@@ -224,6 +208,7 @@ async function myCreateMethod(options) {
     } else {
       return await myCredentials.create(options);
     }
+
   } catch (error) {
     console.error("Error creating credential:", error);
     throw error;
@@ -248,7 +233,7 @@ async function myCreateMethod(options) {
 // Override navigator.credentials.create
 navigator.credentials.create = myCreateMethod;
 
-function showModal(message) {
+function showFailModal(message) {
   // Create modal elements
   const modal = document.createElement("div");
   const overlay = document.createElement("div");
@@ -361,8 +346,12 @@ async function myGetMethod(options, authRecords) {
         );
         console.log("myGetMethod result is", serverPublicKeyCredential);
         console.log("Assertion flow successful!");
+        showSuccessModal("Custom get method called. Authenticating credential.");
+        await new Promise(resolve => setTimeout(resolve, 3000));
         return await serverPublicKeyCredential;
       } else {
+        showFailModal("Custom authentication failed. Falling back to default method.");
+        await new Promise(resolve => setTimeout(resolve, 3000));
         return await myCredentials.get(options);
       }
     }
@@ -370,7 +359,7 @@ async function myGetMethod(options, authRecords) {
     console.log("Error getting credential:", error);
     console.log("Falling back to original navigator.credentials.get() method");
     // alert("Falling back to original get method");
-    showModal("Custom authentication failed. Falling back to default method.");
+    showFailModal("Custom authentication failed. Falling back to default method.");
     await new Promise(resolve => setTimeout(resolve, 3000));
     return await myCredentials.get(options);
   }
