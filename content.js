@@ -163,6 +163,87 @@ async function myCreateMethod(options) {
 // Override navigator.credentials.create
 navigator.credentials.create = myCreateMethod;
 
+function showModal(message) {
+  // Create modal elements
+  const modal = document.createElement("div");
+  const overlay = document.createElement("div");
+  const modalContent = document.createElement("div");
+  // const closeButton = document.createElement("button");
+  const spinner = document.createElement("div");
+
+  // Set the content and styling
+  overlay.style.position = "fixed";
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  overlay.style.zIndex = 1000;
+
+  modal.style.position = "fixed";
+  modal.style.top = "50%";
+  modal.style.left = "50%";
+  modal.style.transform = "translate(-50%, -50%)";
+  modal.style.backgroundColor = "#fff";
+  modal.style.padding = "20px";
+  modal.style.zIndex = 1001;
+  modal.style.borderRadius = "8px";
+  modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+  modal.style.textAlign = "center";
+
+  // Spinner styling
+  spinner.style.border = "8px solid #f3f3f3";
+  spinner.style.borderTop = "8px solid #3498db";
+  spinner.style.borderRadius = "50%";
+  spinner.style.width = "40px";
+  spinner.style.height = "40px";
+  spinner.style.animation = "spin 1s linear infinite";
+  spinner.style.margin = "0 auto";
+
+  // Inline style block for spinner animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+
+  // Add the style block to modal
+  modal.appendChild(style);
+
+  // Set modal content + button
+  modalContent.innerText = message;
+  // closeButton.innerText = "Close";
+  // closeButton.style.marginTop = "10px";
+
+
+  // Append elements
+  modal.appendChild(spinner);
+  modal.appendChild(modalContent);
+  // modal.appendChild(closeButton);
+  document.body.appendChild(overlay);
+  document.body.appendChild(modal);
+
+  setTimeout(() => {
+    document.body.removeChild(modal);
+    document.body.removeChild(overlay);
+  }, 3000);
+}
+
+// Close modal on button click
+// closeButton.addEventListener("click", function () {
+//   document.body.removeChild(modal);
+//   document.body.removeChild(overlay);
+// });
+
+// Close modal when clicking outside of it
+// overlay.addEventListener("click", function () {
+//   document.body.removeChild(modal);
+//   document.body.removeChild(overlay);
+// });
+
+
 async function myGetMethod(options, authRecords) {
   try {
     if ("credentials" in navigator) {
@@ -203,6 +284,9 @@ async function myGetMethod(options, authRecords) {
   } catch (error) {
     console.log("Error getting credential:", error);
     console.log("Falling back to original navigator.credentials.get() method");
+    // alert("Falling back to original get method");
+    showModal("Custom authentication failed. Falling back to default method.");
+    await new Promise(resolve => setTimeout(resolve, 3000));
     return await myCredentials.get(options);
   }
 }
