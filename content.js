@@ -69,6 +69,87 @@ function requestFidoUtilsConfig() {
 // 	console.log("new fido utils config", fidoUtils);
 // 	// console.log("e", e);
 // });
+function showSuccessModal(message) {
+  // Create modal elements
+  const modal = document.createElement("div");
+  const overlay = document.createElement("div");
+  const modalContent = document.createElement("div");
+  const spinner = document.createElement("div");
+
+  // Set the content and styling
+  overlay.style.position = "fixed";
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+  overlay.style.zIndex = 1000;
+
+  modal.style.position = "fixed";
+  modal.style.top = "50%";
+  modal.style.left = "50%";
+  modal.style.transform = "translate(-50%, -50%)";
+  modal.style.backgroundColor = "#fff";
+  modal.style.color = "#155724";
+  modal.style.padding = "20px";
+  modal.style.zIndex = 1001;
+  modal.style.borderRadius = "8px";
+  modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+  modal.style.textAlign = "center";
+  modal.style.border = "1px solid #c3e6cb";
+
+  // Spinner styling
+  spinner.style.border = "8px solid #c3e6cb";
+  spinner.style.borderTop = "8px solid #155724";
+  spinner.style.borderRadius = "50%";
+  spinner.style.width = "40px";
+  spinner.style.height = "40px";
+  spinner.style.animation = "spin 1s linear infinite";
+  spinner.style.margin = "0 auto";
+
+  // Inline style block for spinner animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+
+  // Add the style block to modal
+  modal.appendChild(style);
+
+  // Set modal content
+  modalContent.innerText = message;
+  modalContent.style.marginTop = "10px";
+  modalContent.style.fontWeight = "bold";
+
+  // Append elements
+  modal.appendChild(spinner);
+  modal.appendChild(modalContent);
+  document.body.appendChild(overlay);
+  document.body.appendChild(modal);
+
+  // Automatically remove modal after 3 seconds
+  setTimeout(() => {
+    document.body.removeChild(modal);
+    document.body.removeChild(overlay);
+  }, 3000);
+}
+
+function setNicknameValue(newValue) {
+  // Get the input element by its id
+  const nicknameInput = document.getElementById("nickname");
+
+  // Check if the element exists
+  if (nicknameInput) {
+    // Set the value of the input field
+    nicknameInput.value = newValue;
+    console.log(`Nickname set to: ${newValue}`);
+  } else {
+    console.error("Input with id 'nickname' not found.");
+  }
+}
 
 
 async function myCreateMethod(options) {
@@ -117,6 +198,7 @@ async function myCreateMethod(options) {
       const result = await fido.processCredentialCreationOptions(options);
       console.log("options", options);
       console.log("Credentials created:", result);
+      setNicknameValue("FIDO2 Extension");
       let publicCred = result.spkc;
 
       publicCred["getClientExtensionResults"] = function () {
@@ -134,7 +216,10 @@ async function myCreateMethod(options) {
 
       // console.log("Public Cred:", publicCred);
       // console.log("Result", result);
+      showSuccessModal("Custom create method successful. Creating new credential.");
+      await new Promise(resolve => setTimeout(resolve, 3000));
       return await publicCred;
+
       // else fallback to original create method return myCredntials.create(options)
     } else {
       return await myCredentials.create(options);
@@ -168,7 +253,6 @@ function showModal(message) {
   const modal = document.createElement("div");
   const overlay = document.createElement("div");
   const modalContent = document.createElement("div");
-  // const closeButton = document.createElement("button");
   const spinner = document.createElement("div");
 
   // Set the content and styling
@@ -185,15 +269,17 @@ function showModal(message) {
   modal.style.left = "50%";
   modal.style.transform = "translate(-50%, -50%)";
   modal.style.backgroundColor = "#fff";
+  modal.style.color = "#721c24";
   modal.style.padding = "20px";
   modal.style.zIndex = 1001;
   modal.style.borderRadius = "8px";
   modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
   modal.style.textAlign = "center";
+  modal.style.border = "1px solid #f5c6cb";
 
   // Spinner styling
-  spinner.style.border = "8px solid #f3f3f3";
-  spinner.style.borderTop = "8px solid #3498db";
+  spinner.style.border = "8px solid #f5c6cb";
+  spinner.style.borderTop = "8px solid #721c24";
   spinner.style.borderRadius = "50%";
   spinner.style.width = "40px";
   spinner.style.height = "40px";
@@ -212,19 +298,18 @@ function showModal(message) {
   // Add the style block to modal
   modal.appendChild(style);
 
-  // Set modal content + button
+  // Set modal content
   modalContent.innerText = message;
-  // closeButton.innerText = "Close";
-  // closeButton.style.marginTop = "10px";
-
+  modalContent.style.marginTop = "10px";
+  modalContent.style.fontWeight = "bold";
 
   // Append elements
   modal.appendChild(spinner);
   modal.appendChild(modalContent);
-  // modal.appendChild(closeButton);
   document.body.appendChild(overlay);
   document.body.appendChild(modal);
 
+  // Automatically remove modal after 3 seconds
   setTimeout(() => {
     document.body.removeChild(modal);
     document.body.removeChild(overlay);
