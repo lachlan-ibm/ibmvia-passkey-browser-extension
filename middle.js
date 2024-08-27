@@ -392,6 +392,10 @@ if (window.FileList && window.File && window.FileReader) {
           config: fidoUtilsConfigFromFile,
         });
         await displayFidoUtilsConfigObject(fidoUtilsConfigFromFile);
+        let form = document.getElementById("fidoutilsForm");
+        if (form) {
+          form.style.display = "block";
+        }
 
       });
       reader.readAsText(file);
