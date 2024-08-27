@@ -25,18 +25,18 @@
 
 	"content_scripts": [
 		{
-			"matches": ["http://*/*", "https://*/*"],
+			"matches": ["https://fidointerop.securitypoc.com/*"],
 			"js": ["main.js"],
 			"world": "MAIN",
 			"run_at": "document_start"
 		},
 		{
-			"matches": ["http://*/*", "https://*/*"],
+			"matches": ["https://fidointerop.securitypoc.com/*"],
 			"js": ["middle.js"],
 			"run_at": "document_start"
 		}
 	],
 	"externally_connectable": {
-		"matches": ["http://*/*", "https://*/*"]
+		"matches": ["https://fidointerop.securitypoc.com/*"]
 	}
 }

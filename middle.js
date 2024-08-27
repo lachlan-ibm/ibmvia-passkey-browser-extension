@@ -355,3 +355,72 @@ if (fidoUtilsForm) {
 
 }
 
+// File system
+
+if (window.FileList && window.File && window.FileReader) {
+  const status = document.getElementById("status");
+  const output = document.getElementById("output");
+  const fileSelector = document.getElementById("file-selector");
+
+  if (fileSelector) {
+
+    fileSelector.addEventListener("change", event => {
+      if (status) {
+        status.textContent = "";
+      }
+      if (output) {
+        output.textContent = "";
+      }
+      const file = event.target.files[0];
+      // if (!file.type) {
+      //   status.textContent = "Error. The file.type is not supported by the browser";
+      //   return;
+      // }
+      const reader = new FileReader();
+      reader.addEventListener("load", async event => {
+        // output.textContent = event.target.result;
+        const data = event.target.result;
+        const fidoUtilsConfigFromFile = JSON.parse(data);
+
+        // dispatch event/message to the background script to update the fido utils config using the file data
+        // alert(fido);
+        // fidoUtilsConfigFromFile = event.target.result;
+        // JSON.parse(fidoUtilsConfigFromFile);
+        console.log("fidoUtilsConfigFromFile: ", fidoUtilsConfigFromFile);
+        const response = await chrome.runtime.sendMessage({
+          message: "Update fidoutilsConfig variable",
+          config: fidoUtilsConfigFromFile,
+        });
+        await displayFidoUtilsConfigObject(fidoUtilsConfigFromFile);
+
+      });
+      reader.readAsText(file);
+    })
+
+  }
+}
+
+const fileSaver = document.getElementById("file-saver");
+
+if (fileSaver) {
+  fileSaver.addEventListener("click", async function saveFile() {
+    try {
+      // create a new handle
+      const newHandle = await window.showSaveFilePicker();
+
+      // create a FileSystemWritableFileStream to write to
+      const writableStream = await newHandle.createWritable();
+
+      // write our file
+      await writableStream.write("This is my file content");
+
+      // close the file and write the contents to disk.
+      await writableStream.close();
+    } catch (err) {
+      console.error(err.name, err.message);
+    }
+  });
+}
+
+
+

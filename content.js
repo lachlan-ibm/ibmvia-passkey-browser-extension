@@ -319,11 +319,15 @@ function showFailModal(message) {
 async function myGetMethod(options, authRecords) {
   try {
     if ("credentials" in navigator) {
-
-      // Set the fidoutilsconfig variable by requesting value from background script
+      // let fidoUtilsConfig = fido.getFidoUtilsConfig();
+      // let fidoutilsConfig = fido.getFidoUtilsConfig();
+      // console.log("find me", fidoutilsConfig);
       let fidoutilsConfig = await requestFidoUtilsConfig();
+      console.log("finnnnnnd me", fidoutilsConfig);
       fidoutilsConfig["origin"] = window.location.origin;
       fido.setFidoUtilsConfig(fidoutilsConfig);
+      // fidoutilsConfig["origin"] = window.location.origin;
+      // fido.setFidoUtilsConfig(fidoutilsConfig);
 
       if (fido.canAuthenticateWithCredId(options)) {
         console.log("options", options);
