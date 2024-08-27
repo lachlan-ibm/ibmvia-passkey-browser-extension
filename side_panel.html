@@ -10,7 +10,7 @@
 		<h1>FIDO2 Extension side panel</h1>
 		<div>
 			<p>This side panel is enabled on fidointerop.com</p>
-			<button id="triggerBtn">Show fidoutilsConfig</button>
+			<button id="triggerBtn">Generate fidoutilsConfig</button>
 		</div>
 		<div id="fidoUtilsDiv">
 			<!-- Display the encryption passphrase -->
@@ -83,13 +83,14 @@
 			<button id="saveBtn" type="submit">Save Changes</button>
 			<label for="file-selector" id="test">Import</label>
 			<input type="file" id="file-selector">
+			<button id="file-saver">Export</button>
 			<!-- <button id="downloadBtn" ></button> -->
 			 <!-- <p id="status"></p>
 			 <div><p id="output"></p></div> -->
 		</form>
 		<!-- <button id="file-selector">Import</button> -->
 
-		<button id="file-saver">Export</button>
+		
 		<div id="successMessage" style="display: none; color: green">
 			fidoutilsConfig updated successfully
 		</div>

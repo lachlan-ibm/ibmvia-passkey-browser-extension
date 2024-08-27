@@ -400,6 +400,8 @@ if (window.FileList && window.File && window.FileReader) {
   }
 }
 
+
+// Export fidoutils
 const fileSaver = document.getElementById("file-saver");
 
 if (fileSaver) {
@@ -411,8 +413,10 @@ if (fileSaver) {
       // create a FileSystemWritableFileStream to write to
       const writableStream = await newHandle.createWritable();
 
+      const fidoUtilsConfigToWriteToFile = await retrieveFidoUtilsConfigFromBackgroundScript();
+
       // write our file
-      await writableStream.write("This is my file content");
+      await writableStream.write(JSON.stringify(fidoUtilsConfigToWriteToFile));
 
       // close the file and write the contents to disk.
       await writableStream.close();
