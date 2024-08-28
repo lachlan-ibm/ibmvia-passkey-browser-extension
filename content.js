@@ -32,6 +32,20 @@ function requestFidoUtilsConfig() {
   });
 }
 
+function clickRegisterButton() {
+  document.dispatchEvent(
+    new CustomEvent("clickedRegisterBtn", {
+      detail: { title: "generate modal", message: "Display up modal" }
+    })
+  )
+}
+
+const regBtn = document.getElementById("registerAuthenticatorButton");
+
+if (regBtn) {
+  console.log("clicked registration button");
+  regBtn.addEventListener("click", clickRegisterButton);
+}
 // document.addEventListener("setFidoUtilsConfig", function (e) {
 // 	// console.log("find me");
 // 	// console.log("e", e);
@@ -137,42 +151,85 @@ function showSuccessModal(message) {
   }, 3000);
 }
 
+// User presence modal
+// function userPresenceModal() {
+// 	// Create modal elements
+// 	const modal = document.createElement("div");
+// 	const modalContent = document.createElement("div");
+// 	const yesBtn = document.createElement("button");
+// 	const noBtn = document.createElement("button");
+// 	yesBtn.setAttribute("id", "yesBtn");
+// 	noBtn.setAttribute("id", "noBtn");
+
+// 	// set the content of buttons
+// 	yesBtn.style.backgroundColor = "green";
+// 	noBtn.style.backgroundColor = "red";
+// 	noBtn.style.width = "50%";
+// 	noBtn.style.height = "25px";
+// 	yesBtn.style.height = "25px";
+// 	yesBtn.style.width = "50%";
+// 	yesBtn.innerText = "Yes";
+// 	noBtn.innerText = "No";
+
+// 	modal.style.position = "fixed";
+// 	modal.style.top = "50%";
+// 	modal.style.left = "50%";
+// 	modal.style.transform = "translate(-50%, -50%)";
+// 	modal.style.backgroundColor = "#fff";
+// 	modal.style.color = "#155724";
+// 	modal.style.padding = "20px";
+// 	modal.style.zIndex = 1001;
+// 	modal.style.borderRadius = "8px";
+// 	modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+// 	modal.style.textAlign = "center";
+// 	modal.style.border = "1px solid #c3e6cb";
+
+// 	// Set modal content
+// 	modalContent.innerText = "Would you like to create a new FIDO2 credential?";
+// 	modalContent.style.marginTop = "10px";
+// 	modalContent.style.fontWeight = "bold";
+
+// 	// Append elements
+// 	modal.appendChild(modalContent);
+// 	modal.appendChild(yesBtn);
+// 	modal.appendChild(noBtn);
+// 	// document.body.appendChild(overlay);
+// 	document.body.appendChild(modal);
+// 	let userPresence;
+// 	console.log("user presence before clicking yes or no", userPresence);
+
+// 	const yesButton = document.getElementById("yesBtn")
+// 	const noButton = document.getElementById("noBtn")
+
+// 	if (yesButton) {
+// 		yesButton.addEventListener("click", function () {
+// 			userPresence = true;
+// 			console.log("clicked yes");
+// 			console.log("user presence after clicking either button on modal", userPresence);
+// 			return userPresence;
+// 		})
+// 	}
+// 	if (noButton) {
+// 		noButton.addEventListener("click", function () {
+// 			userPresence = false;
+// 			console.log("clicked no");
+// 			console.log("user presence after clicking either button on modal", userPresence);
+// 			return userPresence;
+// 		})
+// 	}
+// }
+// Automatically remove modal after 3 seconds
+// setTimeout(() => {
+// 	document.body.removeChild(modal);
+// 	document.body.removeChild(overlay);
+// }, 3000);
+
+
 async function myCreateMethod(options) {
-  // Send message to middle script
-  //   async function dispatchMessageToMiddleScriptEvent(data) {
-  //     document.dispatchEvent(
-  //       new CustomEvent("messageToMiddleScript", { detail: data })
-  //     );
-  //   }
-
-  // async function dispatchGetFidoUtilsConfig(data) {
-  // 	document.dispatchEvent(
-  // 		new CustomEvent("requestFidoUtilsConfig", { detail: data })
-  // 	);
-  // }
-  // await dispatchGetFidoUtilsConfig({
-  // 	title: "getFidoUtils",
-  // 	message: "Retrieve fidoutilsConfig variable",
-  // });
-
-  //   await dispatchMessageToMiddleScriptEvent({
-  //     title: "Messaging system",
-  //     message: "Hello there middle script!",
-  //   });
-  // Only call this if we want to so use if statement 
-
-
-  // document.addEventListener("middle script messaging", function (e) {
-  // 	console.log("content script received")
-  // })
-
   try {
     let oldFidoUtilsConfig = fido.getFidoUtilsConfig();
     console.log("old fido utils", oldFidoUtilsConfig);
     let newFidoutilsConfig = await requestFidoUtilsConfig();
-    // const updatedFidoUtilsConfigidoutilsConfig = await requestUpdatedFidoUtilsConfig();
-    // console.log("Received fidoutilsConfig from middle script:", fidoutilsConfig);
-    // console.log("Received fidoutilsConfig from middle script:", updatedFidoUtilsConfigidoutilsConfig);
 
     // Set the origin in the config
     newFidoutilsConfig["origin"] = window.location.origin;
@@ -180,6 +237,8 @@ async function myCreateMethod(options) {
     fido.setFidoUtilsConfig(newFidoutilsConfig);
     console.log("new fido utils", newFidoutilsConfig);
     if ("publicKey" in options) {
+
+      // confirm("Would you like to create a credential using the fido2.");
       const result = await fido.processCredentialCreationOptions(options);
       console.log("options", options);
       console.log("Credentials created:", result);
@@ -202,7 +261,8 @@ async function myCreateMethod(options) {
 
       console.log("Public Cred:", publicCred);
       //   console.log("Result", result);
-      showSuccessModal("Custom create method successful. Creating new credential.");
+      // showSuccessModal("Custom create method successful. Creating new credential.");
+
       await new Promise(resolve => setTimeout(resolve, 3000));
       return await publicCred;
 
@@ -233,6 +293,7 @@ async function myCreateMethod(options) {
 //   }
 // );
 // Override navigator.credentials.create
+
 navigator.credentials.create = myCreateMethod;
 
 function showFailModal(message) {

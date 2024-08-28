@@ -10,10 +10,23 @@
 //   // });
 // });
 
+
+
+
 document.addEventListener("requestFidoUtilsConfig", async function (e) {
   let data = e.detail;
   await retrieveFidoUtilsConfigFromBackgroundScript();
 });
+
+document.addEventListener("clickedRegisterBtn", async function (e) {
+  console.log(e);
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+  const userPresenceModal = document.getElementById("user-presence");
+  if (userPresenceModal) {
+    userPresenceModal.style.display = "block";
+  }
+})
 
 document.addEventListener("requestUpdatedFidoUtilsConfig", async function (e) {
   let data = e.detail;
@@ -44,6 +57,7 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
   console.log("middle script fidoutils is", backgroundResult);
   return await backgroundResult;
 }
+
 
 // async function retrieveUpdatedFidoUtilsConfigFromBackgroundScript() {
 //   console.log("This is the update functionality find me")
@@ -113,9 +127,55 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
 // function listenForRegisterButtonClick() {
 
 // }
+
+// communication with popup
+
+
 document.addEventListener("DOMContentLoaded", function () {
+
+  const registerButton = document.getElementById("registerAuthenticatorButton");
+  // const userPresenceModal = document.getElementById("user-presence");
+
   let button = document.getElementById("triggerBtn");
   let form = document.getElementById("fidoutilsForm");
+
+  if (registerButton) {
+    registerButton.addEventListener("click", async () => {
+      console.log("Trying to display userPresenceModal find me");
+      console.log(registerButton)
+      // await loadUserPresenceModal();
+      // if (userPresenceModal) {
+      //   userPresenceModal.style.display = "block"
+      // }
+      // alert("clicked register button!");
+      // chrome.runtime.sendMessage({ action: 'open_side_panel' });
+    })
+  }
+
+
+
+  // if (yesBtn) {
+  //   yesBtn.addEventListener("click", function () {
+  //     console.log("Clicked the yes button!")
+  //   })
+  // }
+
+  // async function loadUserPresenceModal() {
+  //   if (userPresenceModal) {
+  //     console.log("Trying to display userPresenceModal");
+  //     userPresenceModal.style.display = "block";
+  //   }
+  // }
+
+  // if (registerButton) {
+  //   registerButton.addEventListener("click", function () {
+  //           if (userPresenceModal) {
+  //       userPresenceModal.style.display = "block"
+  //     }
+  //   })
+  // }
+
+
 
   if (button) {
     button.addEventListener("click", async function () {
@@ -130,7 +190,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
-
 
 
 // async function displayFidoUtilsConfigObject(o) {

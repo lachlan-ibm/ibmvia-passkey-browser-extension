@@ -9,7 +9,7 @@
 		"48": "icons/icon_fido_48.png"
 	},
 
-	"permissions": ["activeTab", "storage", "sidePanel"],
+	"permissions": ["activeTab", "storage", "sidePanel", "notifications"],
 	"side_panel": {
 		"default_path": "side_panel.html"
 	},

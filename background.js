@@ -40,6 +40,25 @@ chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })
   .catch((error) => console.error(error));
 
+
+
+
+let windowId;
+chrome.tabs.onActivated.addListener(function (activeInfo) {
+  windowId = activeInfo.windowId;
+});
+
+
+
+chrome.runtime.onMessage.addListener((message, sender) => {
+  (async () => {
+    if (message.action === 'open_side_panel') {
+      chrome.sidePanel.open({ windowId: windowId });
+    }
+  })();
+});
+
+
 // const ORIGIN = "https://fidointerop.securitypoc.com/*";
 
 // chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {

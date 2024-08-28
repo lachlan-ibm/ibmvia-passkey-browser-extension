@@ -7,94 +7,76 @@
 		<link rel="stylesheet" href="side_panel.css" />
 	</head>
 	<body>
-		<h1>FIDO2 Extension side panel</h1>
-		<div>
-			<p>This side panel is enabled on fidointerop.com</p>
-			<button id="triggerBtn">Generate fidoutilsConfig</button>
-			<label for="file-selector" id="test">Import</label>
-			<input type="file" id="file-selector">
+		<div id="user-presence" style="display: none;">
+			<div id="user-presence-modal">
+				<h1>FIDO2 Browser Extension</h1>
+				<p>Would you like to create a credential with the FIDO2 browser extension?</p>
+				<div class="user-presence-buttons">
+					<button id="yesBtn">Yes</button>
+					<button id="noBtn">No</button>
+				</div>
+			</div>
 		</div>
-		<div id="fidoUtilsDiv">
-			<!-- Display the encryption passphrase -->
-			<!-- <div id="encryptionPassphrase" class="fidoUtilsData"></div> -->
-			<!-- Display the fido-u2f data -->
-			<!-- <div id="cert" class="fidoUtilsData"></div>
-			<div id="privateKeyHex" class="fidoUtilsData"></div>
-			<div id="publicKeyHex" class="fidoUtilsData"></div> -->
-			<!-- Display the packed data -->
-			<!-- <div id="packed-aaguid" class="fidoUtilsData"></div>
-			<div id="packed-cert" class="fidoUtilsData"></div>
-			<div id="packed-privateKeyHex" class="fidoUtilsData"></div>
-			<div id="packed-publicKeyHex" class="fidoUtilsData"></div> -->
-			<!-- Display the packed-self data -->
-			<!-- <div id="packed-self-aaguid" class="fidoUtilsData"></div> -->
-			<!-- <div id="test" class="fidoUtilsData">
-            <h4>
-                MIIB1jCCAX2gAwIBAgIQY3kCVR9fSfW88c1XOncARzAKBggqhkjOPQQDAjAuMQswCQYDVQQGEwJVUzEMMAoGA1UECgwDSUJNMREwDwYDVQQDDAhGSURPVEVTVDAiGA8yMDI0MDgyMDAzNDA0MloYDzIwNTIwMTA1MDM0MDQyWjBXMQswCQYDVQQGEwJVUzEMMAoGA1UECgwDSUJNMSIwIAYDVQQLDBlBdXRoZW50aWNhdG9yIEF0dGVzdGF0aW9uMRYwFAYDVQQDDA1QQUNLRUQtU0lHTkVSMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEWgaiETiB9Na0Cp8xQmBzwVMgFypBklOr7Kgmqy8Nr+bpnDKwedAosIKl0gKVzbpTZEICmqD71RXuxG1RHs9sWaNQME4wHQYDVR0OBBYEFDdiKfi6HeAJMz3YZo7rJ5pVjWEwMB8GA1UdIwQYMBaAFBjRJQvvlhcADqe9B/PZpsWm1JswMAwGA1UdEwEB/wQCMAAwCgYIKoZIzj0EAwIDRwAwRAIgD8xVx8JA85JyNcxiwgv3oVsNRLsJFNSi3NrIJuCGmOcCICZoV9sDBM7Ig4UGgbngyFlrGTi5+0vkWRMiuYvebTkF
-            </h4>
-        </div> -->
-		</div>
-		<!-- <div id="formData">
-			<form action="">
-				<input type="text" id="encryption" />
+		<div id="main-content" style="display: none;">
+			<div id="header">
+				<h1>FIDO2 Extension side panel</h1>
+				<p>This side panel is enabled on fidointerop.com</p>
+				<button id="triggerBtn">Generate fidoutilsConfig</button>
+				<label for="file-selector" id="test">Import</label>
+				<input type="file" id="file-selector">
+			</div>
+			<!-- Form to display properties of fidoUtilsConfig -->
+			<form id="fidoutilsForm" style="display: none">
+				<div class="form-group">
+					<label for="encryption">Encryption Passphrase:</label>
+					<input type="text" id="encryption" name="encryptionPassphrase" />
+				</div>
+				<div class="form-group">
+					<label for="cert">FIDO-U2F Cert:</label>
+					<textarea id="cert" name="cert"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="privateKeyHex">Private Key Hex:</label>
+					<textarea id="privateKeyHex" name="privateKeyHex"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="publicKeyHex">Public Key Hex:</label>
+					<textarea id="publicKeyHex" name="publicKeyHex"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="packed-aaguid">Packed AAGUID:</label>
+					<textarea id="packed-aaguid" name="aaguid"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="packed-cert">Packed Cert:</label>
+					<textarea id="packed-cert" name="cert"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="packed-privateKeyHex">Packed Private Key Hex:</label>
+					<textarea id="packed-privateKeyHex" name="privateKeyHex"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="packed-publicKeyHex">Packed Public Key Hex:</label>
+					<textarea id="packed-publicKeyHex" name="publicKeyHex"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="packed-self-aaguid">Packed-self AAGUID:</label>
+					<textarea id="packed-self-aaguid" name="aaguid"></textarea>
+				</div>
+				<button id="saveBtn" type="submit">Update fidoutilsConfig</button>
+				<button id="file-saver">Export</button>
+				<!-- <button id="downloadBtn" ></button> -->
+				 <!-- <p id="status"></p>
+				 <div><p id="output"></p></div> -->
 			</form>
-		</div> -->
-		<form id="fidoutilsForm" style="display: none">
-			<div class="form-group">
-				<label for="encryption">Encryption Passphrase:</label>
-				<input type="text" id="encryption" name="encryptionPassphrase" />
+			<!-- <button id="file-selector">Import</button> -->
+			
+			<div id="successMessage" style="display: none; color: green">
+				fidoutilsConfig updated successfully
 			</div>
-			<div class="form-group">
-				<label for="cert">FIDO-U2F Cert:</label>
-				<textarea id="cert" name="cert"></textarea>
-			</div>
-
-			<div class="form-group">
-				<label for="privateKeyHex">Private Key Hex:</label>
-				<textarea id="privateKeyHex" name="privateKeyHex"></textarea>
-			</div>
-
-			<div class="form-group">
-				<label for="publicKeyHex">Public Key Hex:</label>
-				<textarea id="publicKeyHex" name="publicKeyHex"></textarea>
-			</div>
-
-			<div class="form-group">
-				<label for="packed-aaguid">Packed AAGUID:</label>
-				<textarea id="packed-aaguid" name="aaguid"></textarea>
-			</div>
-
-			<div class="form-group">
-				<label for="packed-cert">Packed Cert:</label>
-				<textarea id="packed-cert" name="cert"></textarea>
-			</div>
-			<div class="form-group">
-				<label for="packed-privateKeyHex">Packed Private Key Hex:</label>
-				<textarea id="packed-privateKeyHex" name="privateKeyHex"></textarea>
-			</div>
-			<div class="form-group">
-				<label for="packed-publicKeyHex">Packed Public Key Hex:</label>
-				<textarea id="packed-publicKeyHex" name="publicKeyHex"></textarea>
-			</div>
-
-			<div class="form-group">
-				<label for="packed-self-aaguid">Packed-self AAGUID:</label>
-				<textarea id="packed-self-aaguid" name="aaguid"></textarea>
-			</div>
-
-			<button id="saveBtn" type="submit">Update fidoutilsConfig</button>
-
-			<button id="file-saver">Export</button>
-			<!-- <button id="downloadBtn" ></button> -->
-			 <!-- <p id="status"></p>
-			 <div><p id="output"></p></div> -->
-		</form>
-		<!-- <button id="file-selector">Import</button> -->
-
-		
-		<div id="successMessage" style="display: none; color: green">
-			fidoutilsConfig updated successfully
 		</div>
+
+
 	</body>
 	<script src="middle.js"></script>
 </html>
