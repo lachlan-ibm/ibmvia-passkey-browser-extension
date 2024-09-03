@@ -40,20 +40,32 @@ chrome.sidePanel
   .setPanelBehavior({ openPanelOnActionClick: true })
   .catch((error) => console.error(error));
 
+// let windowId;
 
-
-
-let windowId;
 chrome.tabs.onActivated.addListener(function (activeInfo) {
   windowId = activeInfo.windowId;
 });
 
+// const [tab] = chrome.tabs.query({
+// 	active: true,
+// 	lastFocusedWindow: true
+// });
+// const tabId = tab.id;
 
+
+// chrome.runtime.onMessage.addListener((message, sender) => {
+// 	if (message.action === 'registerClicked') {
+// 		console.log("find mee!!")
+// 		chrome.runtime.sendMessage({ action: "showUserPresenceModal" });
+// 	}
+// });
 
 chrome.runtime.onMessage.addListener((message, sender) => {
+  // The callback for runtime.onMessage must return falsy if we're not sending a response
   (async () => {
-    if (message.action === 'open_side_panel') {
-      chrome.sidePanel.open({ windowId: windowId });
+    if (message.action === 'registerClicked') {
+      // This will open a tab-specific side panel only on the current tab.
+      chrome.sidePanel.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
     }
   })();
 });

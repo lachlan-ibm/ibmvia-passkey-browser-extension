@@ -10,12 +10,14 @@
 //   // });
 // });
 
-
-
-
 document.addEventListener("requestFidoUtilsConfig", async function (e) {
   let data = e.detail;
   await retrieveFidoUtilsConfigFromBackgroundScript();
+});
+
+document.addEventListener("requestUserPresence", async function (e) {
+  let data = e.detail;
+  await retrieveUserPresence();
 });
 
 document.addEventListener("clickedRegisterBtn", async function (e) {
@@ -33,10 +35,18 @@ document.addEventListener("requestUpdatedFidoUtilsConfig", async function (e) {
   await retrieveFidoUtilsConfigFromBackgroundScript();
 });
 
-// Send response to content script (main.js)
-// function dispatchMessageResponseToContentScript(data) {
-//     document.dispatchEvent(new CustomEvent("start", { detail: data }));
-// }
+
+async function retrieveUserPresence() {
+  document.dispatchEvent(
+    new CustomEvent("setUserPresence", {
+      detail: {
+        title: "Response",
+        message: "Sending user presence to main.js",
+        userPresence: true,
+      },
+    })
+  );
+}
 
 async function retrieveFidoUtilsConfigFromBackgroundScript() {
   const response = await chrome.runtime.sendMessage({
@@ -59,123 +69,10 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
 }
 
 
-// async function retrieveUpdatedFidoUtilsConfigFromBackgroundScript() {
-//   console.log("This is the update functionality find me")
-//   const response = await chrome.runtime.sendMessage({
-//     message: "Update fidoutilsConfig variable",
-//   });
-//   //   console.log("response", response.result);
-//   // document.dispatchEvent(new CustomEvent(""))
-//   document.dispatchEvent(
-//     new CustomEvent("setUpdatedFidoUtilsConfig", {
-//       detail: {
-//         title: "Response",
-//         message: "Sending updated fidoutilsConfig to main.js",
-//         obj: response.result,
-//       },
-//     })
-//   );
-//   const backgroundResult = response.result;
-//   console.log("middle script updated fidoutils is", backgroundResult);
-//   return await backgroundResult;
-// }
-
-
-// async function retrieveUpdatedFidoUtilsConfigFromBackgroundScript() {
-//   const response = await chrome.runtime.sendMessage({
-//     message: "Retrieve updated fidoutilsConfig variable",
-//   });
-//   //   console.log("response", response.result);
-//   // document.dispatchEvent(new CustomEvent(""))
-//   document.dispatchEvent(
-//     new CustomEvent("setFidoUtilsConfig", {
-//       detail: {
-//         title: "Response",
-//         message: "Sending fidoutilsConfig to main.js",
-//         obj: response.result,
-//       },
-//     })
-//   );
-//   const backgroundResult = response.result;
-//   console.log("middle script fidoutils is", backgroundResult);
-//   return await backgroundResult;
-// }
-
-// function to send message to background script
-// async function messageBackgroundScriptAndDispatchMessageToContentScript() {
-//   const response = await chrome.runtime.sendMessage({
-//     message: "Hello background script",
-//   });
-//   // console.log("response", response);
-//   // console.log("response", response.responded);
-//   if (response.responded === true) {
-//     document.dispatchEvent(
-//       new CustomEvent("responseToContentScriptFromMiddleScript", {
-//         detail: {
-//           title: "Response",
-//           message: "Why hello there, content script",
-//           status: "verified",
-//         },
-//       })
-//     );
-//   }
-//   return await response;
-// }
-
-// Interaction with side panel
-
-// function listenForRegisterButtonClick() {
-
-// }
-
-// communication with popup
-
-
 document.addEventListener("DOMContentLoaded", function () {
-
-  const registerButton = document.getElementById("registerAuthenticatorButton");
-  // const userPresenceModal = document.getElementById("user-presence");
 
   let button = document.getElementById("triggerBtn");
   let form = document.getElementById("fidoutilsForm");
-
-  if (registerButton) {
-    registerButton.addEventListener("click", async () => {
-      console.log("Trying to display userPresenceModal find me");
-      console.log(registerButton)
-      // await loadUserPresenceModal();
-      // if (userPresenceModal) {
-      //   userPresenceModal.style.display = "block"
-      // }
-      // alert("clicked register button!");
-      // chrome.runtime.sendMessage({ action: 'open_side_panel' });
-    })
-  }
-
-
-
-  // if (yesBtn) {
-  //   yesBtn.addEventListener("click", function () {
-  //     console.log("Clicked the yes button!")
-  //   })
-  // }
-
-  // async function loadUserPresenceModal() {
-  //   if (userPresenceModal) {
-  //     console.log("Trying to display userPresenceModal");
-  //     userPresenceModal.style.display = "block";
-  //   }
-  // }
-
-  // if (registerButton) {
-  //   registerButton.addEventListener("click", function () {
-  //           if (userPresenceModal) {
-  //       userPresenceModal.style.display = "block"
-  //     }
-  //   })
-  // }
-
-
 
   if (button) {
     button.addEventListener("click", async function () {
@@ -189,9 +86,70 @@ document.addEventListener("DOMContentLoaded", function () {
       await displayFidoUtilsConfigObject(data);
     });
   }
+
+  const registerBtn = document.getElementById("registerAuthenticatorButton");
+  if (registerBtn) {
+    registerBtn.addEventListener("click", function () {
+      chrome.runtime.sendMessage({ action: "registerClicked" })
+    })
+  }
 });
+// let userPresence;
+
+// chrome.runtime.onMessage.addListener(async (message, sender, sendResponce) => {
+//   if (message.action === "showUserPresenceModal") {
+//     const result = await showUserPresenceModal();
+//     let userPresence = result;
+//     console.log("user presence result is ", userPresence);
+
+//     // document.dispatchEvent(
+//     //   new CustomEvent("setUserPresence", {
+//     //     detail: {
+//     //       title: "Response",
+//     //       message: "Sending user presence to main.js",
+//     //       userPresence: true,
+//     //     },
+//     //   })
+//     // );
+//   }
+// })
 
 
+async function showUserPresenceModal() {
+  return new Promise((resolve, reject) => {
+    const userPresenceModal = document.getElementById("user-presence");
+    const mainContent = document.getElementById("main-content");
+    if (!userPresenceModal) {
+      return reject("User presence modal not found");
+    }
+    userPresenceModal.style.display = "block";
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const handleClick = (result) => {
+      userPresenceModal.style.display = "none";
+      if (mainContent) {
+        mainContent.style.display = "block";
+      }
+      resolve(result);
+      console.log("Yesss clicked")
+      document.dispatchEvent(
+        new CustomEvent("setUserPresence", {
+          detail: {
+            title: "Response",
+            message: "Sending user presence to main.js",
+            userPresence: true,
+          },
+        })
+      );
+    };
+    if (yesBtn) {
+      yesBtn.onclick = () => handleClick(true);
+    }
+    if (noBtn) {
+      noBtn.onclick = () => handleClick(false);
+    }
+  });
+}
 // async function displayFidoUtilsConfigObject(o) {
 //   // console.log("this is the displayFidoUtilsConfigObject function", o);
 

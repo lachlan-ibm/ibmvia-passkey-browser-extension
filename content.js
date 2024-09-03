@@ -32,20 +32,30 @@ function requestFidoUtilsConfig() {
   });
 }
 
-function clickRegisterButton() {
-  document.dispatchEvent(
-    new CustomEvent("clickedRegisterBtn", {
-      detail: { title: "generate modal", message: "Display up modal" }
-    })
-  )
-}
+// let test = null;
 
-const regBtn = document.getElementById("registerAuthenticatorButton");
+// async function requestUserPresence() {
+// 	console.log("entering requestUserPresence")
 
-if (regBtn) {
-  console.log("clicked registration button");
-  regBtn.addEventListener("click", clickRegisterButton);
-}
+
+
+// 	// document.addEventListener("setUserPresence", function (e) {
+// 	// 	test = true;
+// 	// 	console.log("receieved user presence from middle script",)
+// 	// });
+
+// 	// while (test == null) {
+// 	// 	// setTimeout(() => {
+// 	// 	// 	console.log("no response yet")
+// 	// 	// }, 1000)
+// 	// 	await new Promise(resolve => setTimeout(resolve, 1000));
+// 	// 	console.log("find meee")
+// 	// }
+// }
+// document.addEventListener("setUserPresence", function (e) {
+// 	console.log("FIND ME")
+// })
+
 // document.addEventListener("setFidoUtilsConfig", function (e) {
 // 	// console.log("find me");
 // 	// console.log("e", e);
@@ -152,72 +162,83 @@ function showSuccessModal(message) {
 }
 
 // User presence modal
-// function userPresenceModal() {
-// 	// Create modal elements
-// 	const modal = document.createElement("div");
-// 	const modalContent = document.createElement("div");
-// 	const yesBtn = document.createElement("button");
-// 	const noBtn = document.createElement("button");
-// 	yesBtn.setAttribute("id", "yesBtn");
-// 	noBtn.setAttribute("id", "noBtn");
+function userPresenceModal() {
+  return new Promise((resolve, reject) => {
+    // Create modal elements
+    const modal = document.createElement("div");
+    const modalContent = document.createElement("div");
+    const yesBtn = document.createElement("button");
+    const noBtn = document.createElement("button");
+    yesBtn.setAttribute("id", "yesBtn");
+    noBtn.setAttribute("id", "noBtn");
 
-// 	// set the content of buttons
-// 	yesBtn.style.backgroundColor = "green";
-// 	noBtn.style.backgroundColor = "red";
-// 	noBtn.style.width = "50%";
-// 	noBtn.style.height = "25px";
-// 	yesBtn.style.height = "25px";
-// 	yesBtn.style.width = "50%";
-// 	yesBtn.innerText = "Yes";
-// 	noBtn.innerText = "No";
+    // set the content of buttons
+    yesBtn.style.backgroundColor = "green";
+    noBtn.style.backgroundColor = "red";
+    noBtn.style.width = "50%";
+    noBtn.style.height = "25px";
+    yesBtn.style.height = "25px";
+    yesBtn.style.width = "50%";
+    yesBtn.innerText = "Yes";
+    noBtn.innerText = "No";
 
-// 	modal.style.position = "fixed";
-// 	modal.style.top = "50%";
-// 	modal.style.left = "50%";
-// 	modal.style.transform = "translate(-50%, -50%)";
-// 	modal.style.backgroundColor = "#fff";
-// 	modal.style.color = "#155724";
-// 	modal.style.padding = "20px";
-// 	modal.style.zIndex = 1001;
-// 	modal.style.borderRadius = "8px";
-// 	modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
-// 	modal.style.textAlign = "center";
-// 	modal.style.border = "1px solid #c3e6cb";
+    modal.style.position = "fixed";
+    modal.style.top = "50%";
+    modal.style.left = "50%";
+    modal.style.transform = "translate(-50%, -50%)";
+    modal.style.backgroundColor = "#fff";
+    modal.style.color = "#155724";
+    modal.style.padding = "20px";
+    modal.style.zIndex = 1001;
+    modal.style.borderRadius = "8px";
+    modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+    modal.style.textAlign = "center";
+    modal.style.border = "1px solid #c3e6cb";
 
-// 	// Set modal content
-// 	modalContent.innerText = "Would you like to create a new FIDO2 credential?";
-// 	modalContent.style.marginTop = "10px";
-// 	modalContent.style.fontWeight = "bold";
+    // Set modal content
+    modalContent.innerText = "Would you like to create a new FIDO2 credential?";
+    modalContent.style.marginTop = "10px";
+    modalContent.style.fontWeight = "bold";
 
-// 	// Append elements
-// 	modal.appendChild(modalContent);
-// 	modal.appendChild(yesBtn);
-// 	modal.appendChild(noBtn);
-// 	// document.body.appendChild(overlay);
-// 	document.body.appendChild(modal);
-// 	let userPresence;
-// 	console.log("user presence before clicking yes or no", userPresence);
+    // Append elements
+    modal.appendChild(modalContent);
+    modal.appendChild(yesBtn);
+    modal.appendChild(noBtn);
+    // document.body.appendChild(overlay);
+    document.body.appendChild(modal);
 
-// 	const yesButton = document.getElementById("yesBtn")
-// 	const noButton = document.getElementById("noBtn")
+    const handleClick = (result) => {
+      resolve(result);
+      document.body.removeChild(modal);
+    }
 
-// 	if (yesButton) {
-// 		yesButton.addEventListener("click", function () {
-// 			userPresence = true;
-// 			console.log("clicked yes");
-// 			console.log("user presence after clicking either button on modal", userPresence);
-// 			return userPresence;
-// 		})
-// 	}
-// 	if (noButton) {
-// 		noButton.addEventListener("click", function () {
-// 			userPresence = false;
-// 			console.log("clicked no");
-// 			console.log("user presence after clicking either button on modal", userPresence);
-// 			return userPresence;
-// 		})
-// 	}
-// }
+    if (yesBtn) {
+      yesBtn.onclick = () => handleClick(true);
+    }
+    if (noBtn) {
+      noBtn.onclick = () => handleClick(false);
+    }
+
+    // if (yesButton) {
+    // 	yesButton.addEventListener("click", function () {
+    // 		userPresence = true;
+    // 		console.log("clicked yes");
+    // 		console.log("user presence after clicking either button on modal", userPresence);
+    // 		// return userPresence;
+    // 	})
+    // }
+    // if (noButton) {
+    // 	noButton.addEventListener("click", function () {
+    // 		userPresence = false;
+    // 		console.log("clicked no");
+    // 		console.log("user presence after clicking either button on modal", userPresence);
+    // 		// return userPresence;
+    // 	})
+    // }
+
+  })
+
+}
 // Automatically remove modal after 3 seconds
 // setTimeout(() => {
 // 	document.body.removeChild(modal);
@@ -226,7 +247,12 @@ function showSuccessModal(message) {
 
 
 async function myCreateMethod(options) {
+
   try {
+    const userPresence = await userPresenceModal();
+    console.log(userPresence);
+    // let userPresence = await requestUserPresence();
+    // console.log("main script user presence is", userPresence);
     let oldFidoUtilsConfig = fido.getFidoUtilsConfig();
     console.log("old fido utils", oldFidoUtilsConfig);
     let newFidoutilsConfig = await requestFidoUtilsConfig();
@@ -237,34 +263,38 @@ async function myCreateMethod(options) {
     fido.setFidoUtilsConfig(newFidoutilsConfig);
     console.log("new fido utils", newFidoutilsConfig);
     if ("publicKey" in options) {
+      if (userPresence) {
+        // confirm("Would you like to create a credential using the fido2.");
+        const result = await fido.processCredentialCreationOptions(options);
+        console.log("options", options);
+        console.log("Credentials created:", result);
+        let publicCred = result.spkc;
 
-      // confirm("Would you like to create a credential using the fido2.");
-      const result = await fido.processCredentialCreationOptions(options);
-      console.log("options", options);
-      console.log("Credentials created:", result);
-      let publicCred = result.spkc;
+        publicCred["getClientExtensionResults"] = function () {
+          return {};
+        };
+        publicCred["toJSON"] = function () {
+          return result;
+        };
+        // publicCred["raw_id"] = publicCred.id;
+        // console.log("rawId", publicCred["raw_id"]);
+        publicCred.response.attestationObject = fido.base64toBA(
+          fido.base64utobase64(publicCred.response.attestationObject)
+        );
+        publicCred.response.clientDataJSON = fido.base64toBA(
+          fido.base64utobase64(publicCred.response.clientDataJSON)
+        );
 
-      publicCred["getClientExtensionResults"] = function () {
-        return {};
-      };
-      publicCred["toJSON"] = function () {
-        return result;
-      };
-      // publicCred["raw_id"] = publicCred.id;
-      // console.log("rawId", publicCred["raw_id"]);
-      publicCred.response.attestationObject = fido.base64toBA(
-        fido.base64utobase64(publicCred.response.attestationObject)
-      );
-      publicCred.response.clientDataJSON = fido.base64toBA(
-        fido.base64utobase64(publicCred.response.clientDataJSON)
-      );
+        console.log("Public Cred:", publicCred);
+        //   console.log("Result", result);
+        // showSuccessModal("Custom create method successful. Creating new credential.");
 
-      console.log("Public Cred:", publicCred);
-      //   console.log("Result", result);
-      // showSuccessModal("Custom create method successful. Creating new credential.");
+        await new Promise(resolve => setTimeout(resolve, 3000));
+        return await publicCred;
 
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      return await publicCred;
+      } else {
+        return await myCredentials.create(options);
+      }
 
       // else fallback to original create method return myCredntials.create(options)
     } else {
