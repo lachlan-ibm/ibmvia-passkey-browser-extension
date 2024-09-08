@@ -1,7 +1,8 @@
 // Background script starts here
 
 console.log("I am background script");
-console.log("find me");
+console.log("find me", fido.BrowserApi);
+console.log("browser", fido.BrowserApi.runtime);
 
 // console.log("fido util config object = ");
 
@@ -42,9 +43,9 @@ chrome.sidePanel
 
 // let windowId;
 
-chrome.tabs.onActivated.addListener(function (activeInfo) {
-  windowId = activeInfo.windowId;
-});
+// chrome.tabs.onActivated.addListener(function (activeInfo) {
+//   windowId = activeInfo.windowId;
+// });
 
 // const [tab] = chrome.tabs.query({
 // 	active: true,
@@ -60,15 +61,39 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
 // 	}
 // });
 
-chrome.runtime.onMessage.addListener((message, sender) => {
-  // The callback for runtime.onMessage must return falsy if we're not sending a response
+// fido.BrowserApi.runtime.onMessage.addListener((message, sender) => {
+//   // The callback for runtime.onMessage must return falsy if we're not sending a response
+//   (async () => {
+//     if (message.action === 'registerClicked') {
+//       console.log("new browser api used")
+//       // This will open a tab-specific side panel only on the current tab.
+//       chrome.sidePanel.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
+//     }
+//   })();
+// });
+
+
+fido.BrowserApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
   (async () => {
     if (message.action === 'registerClicked') {
-      // This will open a tab-specific side panel only on the current tab.
-      chrome.sidePanel.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
+      const sidePanelApi = fido.BrowserApi.sidePanel;
+      if (sidePanelApi) {
+        try {
+          if (fido.BrowserApi.isChromeApi) {
+            await sidePanelApi.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
+          } else if (fido.BrowserApi.isFirefoxApi) {
+            await sidePanelApi.open();
+          }
+        } catch (error) {
+          console.error("Error opening side panel:", error);
+        }
+      } else {
+        console.error("Side panel API not supported in this browser.");
+      }
     }
   })();
 });
+
 
 
 // const ORIGIN = "https://fidointerop.securitypoc.com/*";
@@ -157,7 +182,7 @@ function updateFidoUtilsConfig(newConfig) {
   fido.setFido2ClientConfigJSON(newConfig);
 }
 
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+fido.BrowserApi.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.message === "Retrieve fidoutilsConfig variable") {
     console.log("Received request for the fidoutilsConfig object");
     const config = getFidoUtilsConfig();
@@ -170,5 +195,4 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   }
   return true;
 });
-
-// End of background script
+// End of background Script
