@@ -163,48 +163,71 @@ function showSuccessModal(message) {
 
 // User presence modal
 function userPresenceModal() {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     // Create modal elements
     const modal = document.createElement("div");
     const modalContent = document.createElement("div");
+    const buttonContainer = document.createElement("div");
     const yesBtn = document.createElement("button");
     const noBtn = document.createElement("button");
-    yesBtn.setAttribute("id", "yesBtn");
-    noBtn.setAttribute("id", "noBtn");
 
-    // set the content of buttons
-    yesBtn.style.backgroundColor = "green";
-    noBtn.style.backgroundColor = "red";
-    noBtn.style.width = "50%";
-    noBtn.style.height = "25px";
-    yesBtn.style.height = "25px";
-    yesBtn.style.width = "50%";
-    yesBtn.innerText = "Yes";
-    noBtn.innerText = "No";
-
+    // Set modal styles
     modal.style.position = "fixed";
     modal.style.top = "50%";
     modal.style.left = "50%";
     modal.style.transform = "translate(-50%, -50%)";
     modal.style.backgroundColor = "#fff";
-    modal.style.color = "#155724";
+    modal.style.color = "#333";
     modal.style.padding = "20px";
     modal.style.zIndex = 1001;
-    modal.style.borderRadius = "8px";
-    modal.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.5)";
+    modal.style.borderRadius = "12px";
+    modal.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.2)";
     modal.style.textAlign = "center";
-    modal.style.border = "1px solid #c3e6cb";
+    modal.style.width = "300px";
+    modal.style.fontFamily = "Arial, sans-serif";
+    modal.style.border = "1px solid #ddd";
 
-    // Set modal content
+    // Set modal content styles
     modalContent.innerText = "Would you like to create a new FIDO2 credential?";
-    modalContent.style.marginTop = "10px";
+    modalContent.style.marginBottom = "20px";
     modalContent.style.fontWeight = "bold";
+    modalContent.style.fontSize = "16px";
+    modalContent.style.lineHeight = "1.4";
+
+    // Set button container styles
+    buttonContainer.style.display = "flex";
+    buttonContainer.style.justifyContent = "space-between";
+
+    // Set yes button styles
+    yesBtn.setAttribute("id", "yesBtn");
+    yesBtn.style.backgroundColor = "#28a745";
+    yesBtn.style.color = "#fff";
+    yesBtn.style.border = "none";
+    yesBtn.style.padding = "10px 20px";
+    yesBtn.style.borderRadius = "5px";
+    yesBtn.style.cursor = "pointer";
+    yesBtn.style.flex = "1";
+    yesBtn.style.marginRight = "10px";
+    yesBtn.style.fontSize = "14px";
+    yesBtn.innerText = "Yes";
+
+    // Set no button styles
+    noBtn.setAttribute("id", "noBtn");
+    noBtn.style.backgroundColor = "#dc3545";
+    noBtn.style.color = "#fff";
+    noBtn.style.border = "none";
+    noBtn.style.padding = "10px 20px";
+    noBtn.style.borderRadius = "5px";
+    noBtn.style.cursor = "pointer";
+    noBtn.style.flex = "1";
+    noBtn.style.fontSize = "14px";
+    noBtn.innerText = "No";
 
     // Append elements
+    buttonContainer.appendChild(yesBtn);
+    buttonContainer.appendChild(noBtn);
     modal.appendChild(modalContent);
-    modal.appendChild(yesBtn);
-    modal.appendChild(noBtn);
-    // document.body.appendChild(overlay);
+    modal.appendChild(buttonContainer);
     document.body.appendChild(modal);
 
     const handleClick = (result) => {
@@ -212,33 +235,11 @@ function userPresenceModal() {
       document.body.removeChild(modal);
     }
 
-    if (yesBtn) {
-      yesBtn.onclick = () => handleClick(true);
-    }
-    if (noBtn) {
-      noBtn.onclick = () => handleClick(false);
-    }
-
-    // if (yesButton) {
-    // 	yesButton.addEventListener("click", function () {
-    // 		userPresence = true;
-    // 		console.log("clicked yes");
-    // 		console.log("user presence after clicking either button on modal", userPresence);
-    // 		// return userPresence;
-    // 	})
-    // }
-    // if (noButton) {
-    // 	noButton.addEventListener("click", function () {
-    // 		userPresence = false;
-    // 		console.log("clicked no");
-    // 		console.log("user presence after clicking either button on modal", userPresence);
-    // 		// return userPresence;
-    // 	})
-    // }
-
-  })
-
+    yesBtn.onclick = () => handleClick(true);
+    noBtn.onclick = () => handleClick(false);
+  });
 }
+
 // Automatically remove modal after 3 seconds
 // setTimeout(() => {
 // 	document.body.removeChild(modal);
