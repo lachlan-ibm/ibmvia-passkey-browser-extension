@@ -93,3 +93,4 @@ cd ..
 
 # Concant the contents of bundle.js and background.js into new file background_script.js
 cat $REPO_DIR/certs/bundle.js background.js >> background_script.js
+cat $REPO_DIR/certs/bundle.js middleScript.js >> middle.js

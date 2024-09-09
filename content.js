@@ -13,6 +13,7 @@ function requestFidoUtilsConfig() {
   return new Promise((resolve, reject) => {
     // Listen for the response from the middle script
     function handleConfigResponse(e) {
+      console.log("eee", e)
       if (e.detail && e.detail.obj) {
         resolve(e.detail.obj);
         console.log("resolved find me");

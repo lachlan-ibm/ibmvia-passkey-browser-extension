@@ -1,0 +1,42 @@
+{
+	"manifest_version": 3,
+	"name": "FIDO2 Authenticator",
+	"version": "1.0",
+
+	"description": "Performs FIDO2 registration and authentication ceremonies",
+	"homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
+	"icons": {
+		"48": "icons/icon_fido_48.png"
+	},
+
+	"permissions": ["activeTab", "storage", "sidePanel", "notifications"],
+	"side_panel": {
+		"default_path": "side_panel.html"
+	},
+
+	"action": {
+		"default_icon": "icons/icon_fido_36.png",
+		"default_title": "FIDO2",
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"service_worker": "background_script.js"
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["https://fidointerop.securitypoc.com/*"],
+			"js": ["main.js"],
+			"world": "MAIN",
+			"run_at": "document_start"
+		},
+		{
+			"matches": ["https://fidointerop.securitypoc.com/*"],
+			"js": ["middle.js"],
+			"run_at": "document_start"
+		}
+	],
+	"externally_connectable": {
+		"matches": ["https://fidointerop.securitypoc.com/*"]
+	}
+}

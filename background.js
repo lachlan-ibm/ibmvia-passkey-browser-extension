@@ -2,87 +2,50 @@
 
 console.log("I am background script");
 console.log("find me", fido.BrowserApi);
-console.log("browser", fido.BrowserApi.runtime);
+console.log("gsdgdsgsd")
+fido.BrowserApi.runtime.onInstalled.addListener(() => {
+  console.log("Extension installed");
+});
 
-// console.log("fido util config object = ");
-
-// function setFidoUtilsConfig(fidoUtils) {
-//   let newFidoUtilsConfigObject = {};
-//   const fidoUtilsObject = fido.getFidoUtilsConfig();
-//   //   console.log("This is the set method", fidoUtilsObject);
-//   //   console.log(
-//   //     "This is the set method encryptionPassphrase",
-//   //     fidoUtilsObject["encryptionPassphrase"]
-//   //   );
-//   //   newFidoUtilsConfigObject["encryptionPassphrase"] =
-//   //     fidoUtilsObject["encryptionPassphrase"];
-//   //   newFidoUtilsConfigObject[""]
-//   //   console.log("the newly created fidoutils ", newFidoUtilsConfigObject);
-//   return fidoUtilsObject;
-// }
-
-// setFidoUtilsConfig();
-
-// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-// 	if (request.message === "Retrieve fidoutilsConfig variable") {
-// 		console.log("Received request for the fidoUtilsConfig object");
-// 		// console.log(setFidoUtilsConfig);
-// 		const obj = fido.getFido2ClientConfigJSON();
-// 		console.log("fidoutils obj in background script", obj);
-// 		sendResponse({ result: obj });
-// 	}
+// fido.BrowserApi.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+//   console.log("Received message:", request);
+//   if (request.message === 'injectScript') {
+//     try {
+//       await chrome.scripting.executeScript({
+//         target: { tabId: sender.tab.id },
+//         func: () => {
+//           const script = document.createElement('script');
+//           script.src = browser.runtime.getURL('main.js');
+//           script.onload = function () {
+//             this.remove();
+//           };
+//           (document.head || document.documentElement).appendChild(script);
+//         }
+//       });
+//       console.log("Script injected successfully.");
+//     } catch (error) {
+//       console.error("Error injecting script:", error);
+//     }
+//   }
 // });
-
-// Interact with side panel
-
 
 // Set side panel to specific site only
-chrome.sidePanel
-  .setPanelBehavior({ openPanelOnActionClick: true })
-  .catch((error) => console.error(error));
-
-// let windowId;
-
-// chrome.tabs.onActivated.addListener(function (activeInfo) {
-//   windowId = activeInfo.windowId;
-// });
-
-// const [tab] = chrome.tabs.query({
-// 	active: true,
-// 	lastFocusedWindow: true
-// });
-// const tabId = tab.id;
-
-
-// chrome.runtime.onMessage.addListener((message, sender) => {
-// 	if (message.action === 'registerClicked') {
-// 		console.log("find mee!!")
-// 		chrome.runtime.sendMessage({ action: "showUserPresenceModal" });
-// 	}
-// });
-
-// fido.BrowserApi.runtime.onMessage.addListener((message, sender) => {
-//   // The callback for runtime.onMessage must return falsy if we're not sending a response
-//   (async () => {
-//     if (message.action === 'registerClicked') {
-//       console.log("new browser api used")
-//       // This will open a tab-specific side panel only on the current tab.
-//       chrome.sidePanel.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
-//     }
-//   })();
-// });
+if (fido.BrowserApi.isChromeApi) {
+  chrome.sidePanel
+    .setPanelBehavior({ openPanelOnActionClick: true })
+    .catch((error) => console.error(error));
+}
 
 
 fido.BrowserApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
   (async () => {
+    console.log("hello")
     if (message.action === 'registerClicked') {
       const sidePanelApi = fido.BrowserApi.sidePanel;
       if (sidePanelApi) {
         try {
           if (fido.BrowserApi.isChromeApi) {
             await sidePanelApi.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
-          } else if (fido.BrowserApi.isFirefoxApi) {
-            await sidePanelApi.open();
           }
         } catch (error) {
           console.error("Error opening side panel:", error);
@@ -93,74 +56,6 @@ fido.BrowserApi.runtime.onMessage.addListener((message, sender, sendResponse) =>
     }
   })();
 });
-
-
-
-// const ORIGIN = "https://fidointerop.securitypoc.com/*";
-
-// chrome.tabs.onUpdated.addListener(async (tabId, info, tab) => {
-//   if (!tab.url) return;
-//   const url = new this.URL(tab.url);
-//   if (url.origin === ORIGIN) {
-//     await chrome.sidePanel.setOptions({
-//       tabId,
-//       path: "side_panel.html",
-//       enabled: true
-//     });
-//   } else {
-//     await chrome.sidePanel.setOptions({
-//       tabId,
-//       enabled: false
-//     });
-//   }
-// })
-
-// chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-//   if (request.message === "Hello background script") {
-//     console.log(
-//       "Message received from middle script (middle.js):",
-//       request.message
-//     );
-//     console.log("This is the background script, call custom create method");
-//     // Process the custom create credentials method in main.js
-//     sendResponse({ responded: true });
-//   }
-// });
-
-// communcation with popup.js
-// chrome.runtime.onConnect.addListener(function (port) {
-//     console.assert(port.name === "knockknock");
-//     port.onMessage.addListener(function (msg) {
-//         if (msg.joke === "Knock knock")
-//             port.postMessage({ question: "Who's there?" });
-//         else if (msg.answer === "Madame")
-//             port.postMessage({ question: "Madame who?" });
-//         else if (msg.answer === "Madame... Bovary")
-//             port.postMessage({ question: "I don't get it." });
-//     });
-// });
-// chrome.tabs.onCreated.addListener(function (tab) {
-//     console.log(tab);
-// })
-// chrome.tabs.onActivated.addListener(function (tab) {
-//     console.log(tab);
-// })
-
-// listen to message from content script
-// chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-//     console.log(message);
-//     sendResponse({ message: "Response from background script" });
-// })
-// Inject a content script into the tab's main world when the browser action button is clicked.
-// chrome.action.onClicked.addListener((tab) => {
-//     chrome.scripting.executeScript({
-//         target: { tabId: tab.id },
-//         files: ['main.js']
-//     });
-// Background script ends here
-
-// console.log("I am the background script");
-// console.log("find me");
 
 let fidoutilsConfig = {};
 
