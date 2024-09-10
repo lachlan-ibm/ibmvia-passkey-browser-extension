@@ -8,14 +8,15 @@ let myCredentials = {
   get: navigator.credentials.get.bind(navigator.credentials),
 };
 
+alert("main.js injected!")
 // function to dispatch a request to the middle script for the fidoutilsConfig
 function requestFidoUtilsConfig() {
   return new Promise((resolve, reject) => {
     // Listen for the response from the middle script
     function handleConfigResponse(e) {
-      console.log("eee", e)
-      if (e.detail && e.detail.obj) {
-        resolve(e.detail.obj);
+      console.log("eee", e.detail.response.result);
+      if (e.detail && e.detail.response.result) {
+        resolve(e.detail.response.result);
         console.log("resolved find me");
       } else {
         reject("Failed to retrieve fidoutilsConfig");
@@ -32,7 +33,12 @@ function requestFidoUtilsConfig() {
     );
   });
 }
-
+// unsafeWindow.myObj = cloneInto(myObj, unsafeWindow, { cloneFunctions: true });
+// console.log("myObj", myObj)
+// window.wrappedJSObject.requestFidoUtilsConfig = cloneInto(requestFidoUtilsConfig, window, {
+// 	cloneFunctions: true,
+// });
+// exportFunction(requestFidoUtilsConfig, window, { defineAs: "requestFidoUtilsConfig" })
 // let test = null;
 
 // async function requestUserPresence() {
@@ -289,8 +295,7 @@ async function myCreateMethod(options) {
 
         console.log("Public Cred:", publicCred);
         //   console.log("Result", result);
-        // showSuccessModal("Custom create method successful. Creating new credential.");
-
+        showSuccessModal("Custom create method successful. Creating new credential.");
         await new Promise(resolve => setTimeout(resolve, 3000));
         return await publicCred;
 

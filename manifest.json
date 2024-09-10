@@ -9,18 +9,23 @@
 		"48": "icons/icon_fido_48.png"
 	},
 
-	"permissions": ["activeTab", "storage", "sidePanel", "notifications"],
-	"side_panel": {
-		"default_path": "side_panel.html"
+	"permissions": ["activeTab", "storage", "notifications", "scripting", "tabs"],
+	"sidebar_action": {
+		"default_icon": {
+			"16": "icons/icon_fido_48.png",
+			"32": "icons/icon_fido_48.png"
+		},
+		"default_title": "My sidebar",
+		"default_panel": "side_panel.html",
+		"open_at_install": true
 	},
 
 	"action": {
-		"default_icon": "icons/icon_fido_36.png",
-		"default_title": "FIDO2",
-		"default_popup": "popup.html"
+		"default_icon": "icons/icon_fido_48.png",
+		"default_title": "Open Sidebar"
 	},
 	"background": {
-		"service_worker": "background_script.js"
+		"scripts": ["background_script.js"]
 	},
 
 	"content_scripts": [
@@ -28,7 +33,8 @@
 			"matches": ["https://fidointerop.securitypoc.com/*"],
 			"js": ["main.js"],
 			"world": "MAIN",
-			"run_at": "document_start"
+			"run_at": "document_start",
+			"all_frames": true
 		},
 		{
 			"matches": ["https://fidointerop.securitypoc.com/*"],
@@ -36,7 +42,17 @@
 			"run_at": "document_start"
 		}
 	],
-	"externally_connectable": {
-		"matches": ["https://fidointerop.securitypoc.com/*"]
-	}
+	"content_security_policy": {
+		"extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+	  },
+
+	  "host_permissions": ["https://*/*", "http://*/*"],
+	  "web_accessible_resources": [
+		{
+		  "resources": [
+			"main.js"
+		  ],
+		  "matches": ["<all_urls>"]
+		}
+	]
 }

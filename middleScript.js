@@ -15,17 +15,27 @@ console.log("fido:", fido);
 // console.log("fido.BrowserApi:", fido ? fido.BrowserApi : 'fido is undefined');
 
 // fido.BrowserApi.runtime.sendMessage({
-//     message: "injectScript"
+// 	message: "injectScript"
 // });
 
+const port = fido.BrowserApi.runtime.connect({ name: "middleScript" });
+
+port.postMessage({ greeting: "hello" });
+
+port.onMessage.addListener(function (message) {
+
+    console.log(message.farewell);
+
+});
+
 // if (fido.BrowserApi.isFirefoxApi) {
-//   injectMainScript();
+// 	injectMainScript();
 // }
 
 // function injectMainScript() {
-//   const script = document.createElement('script');
-//   script.src = fido.BrowserApi.runtime.getURL('main.js');
-//   document.documentElement.appendChild(script);
+// 	const script = document.createElement('script');
+// 	script.src = fido.BrowserApi.runtime.getURL('main.js');
+// 	document.documentElement.appendChild(script);
 // };
 
 console.log("middle script here", fido.BrowserApi)
@@ -33,25 +43,35 @@ console.log("dsdas")
 
 document.addEventListener("requestFidoUtilsConfig", async function (e) {
     let data = e.detail;
-    console.log("sskdkf")
+    console.log("e.detail", data);
     // await retrieveFidoUtilsConfigFromBackgroundScript();
     const response = await fido.BrowserApi.runtime.sendMessage({
         message: "Retrieve fidoutilsConfig variable",
     });
-    console.log("response in midddsadasle script", response);
-    // document.dispatchEvent(new CustomEvent(""))
-    document.dispatchEvent(
-        new CustomEvent("setFidoUtilsConfig", {
-            detail: {
-                title: "Response",
-                message: "Sending fidoutilsConfig to main.js",
-                obj: response.result,
-            },
-        })
-    );
+
+    console.log("response in middle script", response);
+    if (fido.BrowserApi.isFirefoxApi) {
+        var clonedDetail = cloneInto({ response: response }, document.defaultView);
+        var event = new CustomEvent("setFidoUtilsConfig", { detail: clonedDetail })
+        document.dispatchEvent(event);
+    } else {
+        document.dispatchEvent(
+            new CustomEvent("setFidoUtilsConfig", {
+                detail: {
+                    title: "Response",
+                    message: "Sending fidoutilsConfig to main.js",
+                    response: response,
+                },
+            })
+        );
+    }
+
+
     const backgroundResult = response.result;
     console.log("middle script fidoutils is", backgroundResult);
     return await backgroundResult;
+    // tester();
+    // exportFunction(tester, window, { defineAs: "tester" })
 });
 
 document.addEventListener("requestUserPresence", async function (e) {
@@ -102,8 +122,9 @@ async function retrieveUserPresence() {
 }
 
 const browserapi = fido.BrowserApi;
-
+console.log("find me browse api", browserapi)
 async function retrieveFidoUtilsConfigFromBackgroundScript() {
+    console.log("find me browse api", browserapi)
     const response = await browserapi.runtime.sendMessage({
         message: "Retrieve fidoutilsConfig variable",
     });
@@ -122,6 +143,8 @@ async function retrieveFidoUtilsConfigFromBackgroundScript() {
     console.log("middle script fidoutils is", backgroundResult);
     return await backgroundResult;
 }
+
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
