@@ -34,6 +34,15 @@ echo "Installing node modules for browser extension!"
 npm install
 # Store exit status in variable
 status=$?
+
+# Make build directory which will be used as the extensions entry point when loading unpacked
+mkdir build
+
+# Copy the relevent files into build directory
+cp side_panel.html ./build
+cp side_panel.css ./build
+cp side_panel.css ./build
+
 # Shane's fido2 client git repository url
 REPO_URL="https://github.com/sbweeden/fido2-node-clients.git"
 REPO_DIR="./fido2-node-clients"
@@ -59,8 +68,9 @@ fi
 # Bundle Shane's fido2 node client
 browserify -s fido fidoutils.js -o bundle.js
 
+
 # Concant the contents of bundle.js and content.js into new file main.js
-cat bundle.js ../content.js >> ../main.js
+cat bundle.js ../content.js >> ../build/main.js
 
 # Find the fidoutilsConfig variable and replace with hardcoded object
 # FIDO_UTILS_CONFIG='let fidoutilsConfig = null;'
@@ -70,7 +80,7 @@ cat bundle.js ../content.js >> ../main.js
 # sed -i -e '' "/let fidoutilsConfig =.*/,+5d =$FIDO_UTILS_CONFIG/" ../main.js
 
 # sed -i -e '/let fidoutilsConfig =.*/,+4d' ../main.js
-sed -i -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../main.js
+sed -i "" -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js
 # sed -i '' "6145,6148d" ../main.js
 
 # Create a copy in the certs directory of the copied version of generate_attestation_certs.js
@@ -92,8 +102,8 @@ cd ..
 cd ..
 
 # Concant the contents of bundle.js and background.js into new file background_script.js
-cat $REPO_DIR/certs/bundle.js background.js >> background_script.js
-cat $REPO_DIR/certs/bundle.js middleScript.js >> middle.js
+cat $REPO_DIR/certs/bundle.js background.js >> ./build/background_script.js
+cat $REPO_DIR/certs/bundle.js middleScript.js >> ./build/middle.js
 chmod -R +w $REPO_DIR
 rm -r $REPO_DIR
 
@@ -111,16 +121,19 @@ while getopts "b:" opt; do
             echo "Option -b was triggered, Argument: ${OPTARG}"
             if [[ "$OPTARG" == "chrome" ]]; then
                 echo "Creating chrome manifest.json configuration"
-                cat manifest.chrome.json >> manifest.json
+                cat manifest.chrome.json >> ./build/manifest.json
+                cd build
                 # chrome.exe --pack-extension
+                # chrome --pack-extension="ibm-security-passkey"
 
             elif [[ "$OPTARG" == "firefox" ]]; then
                 echo "Creating firefox manifest.json configuration"
-                cat manifest.firefox.json >> manifest.json
-                web-ext build
+                cat manifest.firefox.json >> ./build/manifest.json
+                cd build
+                web-ext -a ../dist build
             else 
                 echo "Defaulting to chrome manifest.json configuration"
-                cat manifest.chrome.json >> manifest.json
+                cat manifest.chrome.json >> ./build/manifest.json
             fi
             ;;
 

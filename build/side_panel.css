@@ -1,0 +1,122 @@
+/* General styling */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 10px;
+	width: 350px;
+	margin: auto;
+}
+#header {
+	text-align: center;
+}
+
+h1 {
+	font-size: 18px;
+	margin-bottom: 10px;
+}
+
+p {
+	font-size: 14px;
+	margin-bottom: 15px;
+}
+.user-presence-modal {
+	background-color: #ccc;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	text-align : center;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+}
+#noBtn{
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: red;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+#yesBtn{
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	background-color: green;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+}
+input[type="file"] {
+	display: none;
+  }
+#test {
+	padding: 10px;
+	width:relative;
+	margin-bottom: 15px;
+	display:block;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 14px;
+	text-align: center;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+
+/* Form styling */
+#fidoutilsForm {
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-group label {
+	font-size: 14px;
+	margin-bottom: 5px;
+	display: block;
+}
+
+.form-group input,
+.form-group textarea {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+textarea {
+	resize: vertical;
+	height: 80px;
+}
+
+#saveBtn {
+	background-color: #28a745;
+}
+
+#saveBtn:hover {
+	background-color: #218838;
+}

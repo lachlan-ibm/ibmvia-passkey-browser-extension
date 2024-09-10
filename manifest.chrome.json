@@ -16,8 +16,7 @@
 
 	"action": {
 		"default_icon": "icons/icon_fido_36.png",
-		"default_title": "FIDO2",
-		"default_popup": "popup.html"
+		"default_title": "FIDO2"
 	},
 	"background": {
 		"service_worker": "background_script.js"
