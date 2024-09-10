@@ -94,3 +94,42 @@ cd ..
 # Concant the contents of bundle.js and background.js into new file background_script.js
 cat $REPO_DIR/certs/bundle.js background.js >> background_script.js
 cat $REPO_DIR/certs/bundle.js middleScript.js >> middle.js
+chmod -R +w $REPO_DIR
+rm -r $REPO_DIR
+
+# if [["$1" == "chrome"]]; then
+#     echo "Hello"
+# else
+#     echo "Please specify the browser you intend to build for"
+# fi
+# output_file = "manifest.json"
+# long_options=("short-option:" "long-option:")
+# browser = ""
+while getopts "b:" opt; do
+    case ${opt} in
+        b) 
+            echo "Option -b was triggered, Argument: ${OPTARG}"
+            if [[ "$OPTARG" == "chrome" ]]; then
+                echo "Creating chrome manifest.json configuration"
+                cat manifest.chrome.json >> manifest.json
+                # chrome.exe --pack-extension
+
+            elif [[ "$OPTARG" == "firefox" ]]; then
+                echo "Creating firefox manifest.json configuration"
+                cat manifest.firefox.json >> manifest.json
+                web-ext build
+            else 
+                echo "Defaulting to chrome manifest.json configuration"
+                cat manifest.chrome.json >> manifest.json
+            fi
+            ;;
+
+        :)
+            echo "Option -${OPTARG} requires an argument."
+            ;;
+        ?)
+            echo "No option: -${OPTARG}"
+            exit 1
+            ;;
+    esac
+done
