@@ -42,6 +42,7 @@ mkdir build
 cp side_panel.html ./build
 cp side_panel.css ./build
 cp side_panel.css ./build
+cp -r icons/ ./build/icons
 
 # Shane's fido2 client git repository url
 REPO_URL="https://github.com/sbweeden/fido2-node-clients.git"
@@ -123,6 +124,7 @@ while getopts "b:" opt; do
                 echo "Creating chrome manifest.json configuration"
                 cat manifest.chrome.json >> ./build/manifest.json
                 cd build
+                web-ext -a ../dist build
                 # chrome.exe --pack-extension
                 # chrome --pack-extension="ibm-security-passkey"
 
