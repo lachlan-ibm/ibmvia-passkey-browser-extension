@@ -9,6 +9,7 @@ const assert = require("assert");
         let title = await driver.getTitle();
         assert.equal("WebAuthn.io", title)
         await driver.manage().setTimeouts({ implicit: 500 });
+
         let inputBox = await driver.findElement(By.id("input-email"));
         let registerBtn = await driver.findElement(By.id("register-button"));
 
@@ -16,8 +17,10 @@ const assert = require("assert");
         await inputBox.sendKeys("SeleniumTest");
         await registerBtn.click();
 
+        let message = await driver.findElement(By.className("alert"))
         // Request element information
-        // let value = await message.getText();
+        let value = await message.getText();
+        assert.equal("Received!", value)
     } catch (e) {
         console.log(e);
     } finally {
