@@ -2,7 +2,6 @@ main.js
 background_script.js
 fido2-node-clients/
 node_modules/
-middle.js
 manifest.json
 build/
 dist/

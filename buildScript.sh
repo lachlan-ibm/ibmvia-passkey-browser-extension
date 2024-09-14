@@ -42,6 +42,7 @@ mkdir build
 cp side_panel.html ./build
 cp side_panel.css ./build
 cp side_panel.css ./build
+cp middle.js ./build
 cp -r icons/ ./build/icons
 
 # Shane's fido2 client git repository url
@@ -104,7 +105,7 @@ cd ..
 
 # Concant the contents of bundle.js and background.js into new file background_script.js
 cat $REPO_DIR/certs/bundle.js background.js >> ./build/background_script.js
-cat $REPO_DIR/certs/bundle.js middleScript.js >> ./build/middle.js
+# cat $REPO_DIR/certs/bundle.js middleScript.js >> ./build/middle.js
 chmod -R +w $REPO_DIR
 rm -r $REPO_DIR
 
