@@ -1,6 +1,6 @@
 {
 	"manifest_version": 3,
-	"name": "FIDO2 Authenticator",
+	"name": "FIDOVerse",
 	"version": "1.0",
 
 	"description": "Performs FIDO2 registration and authentication ceremonies",
@@ -44,15 +44,13 @@
 	],
 	"content_security_policy": {
 		"extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
-	  },
+	},
 
-	  "host_permissions": ["https://*/*", "http://*/*"],
-	  "web_accessible_resources": [
+	"host_permissions": ["https://*/*", "http://*/*"],
+	"web_accessible_resources": [
 		{
-		  "resources": [
-			"main.js"
-		  ],
-		  "matches": ["<all_urls>"]
+			"resources": ["main.js"],
+			"matches": ["<all_urls>"]
 		}
 	]
 }

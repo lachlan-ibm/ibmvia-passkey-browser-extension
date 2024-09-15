@@ -7,76 +7,132 @@
 		<link rel="stylesheet" href="side_panel.css" />
 	</head>
 	<body>
-		<!-- <div id="user-presence" style="display: none;">
-			<div id="user-presence-modal">
-				<h1>FIDO2 Browser Extension</h1>
-				<p>Would you like to create a credential with the FIDO2 browser extension?</p>
-				<div class="user-presence-buttons">
-					<button id="yesBtn">Yes</button>
-					<button id="noBtn">No</button>
-				</div>
-			</div>
-		</div> -->
-		<div id="main-content" >
+		<!-- Sidebar content here if needed -->
+		<div id="main-content">
 			<div id="header">
-				<h1>FIDO2 Extension side panel</h1>
-				<p>This side panel is enabled on fidointerop.com</p>
-				<button id="triggerBtn">Generate fidoutilsConfig</button>
-				<label for="file-selector" id="test">Import</label>
-				<input type="file" id="file-selector">
+				<button id="triggerBtn">Edit fidoutilsConfig</button>
+				<label for="file-selector" id="importBtn">Import</label>
+				<input type="file" id="file-selector" />
 			</div>
 			<!-- Form to display properties of fidoUtilsConfig -->
 			<form id="fidoutilsForm" style="display: none">
-				<div class="form-group">
-					<label for="encryption">Encryption Passphrase:</label>
+				<div class="form-group" style="margin-bottom: 0; padding: 0">
+					<label for=""><code>{</code></label>
+				</div>
+				<div class="form-group nested-group">
+					<label for="encryption"
+						><code style="color: #3b82f6">encryptionPassphrase</code>:</label
+					>
 					<input type="text" id="encryption" name="encryptionPassphrase" />
 				</div>
-				<div class="form-group">
-					<label for="cert">FIDO-U2F Cert:</label>
-					<textarea id="cert" name="cert"></textarea>
+				<div class="form-group nested-group">
+					<label for=""
+						><code style="color: #3b82f6">fido-u2f</code><code>: {</code></label
+					>
+					<div class="nested-content">
+						<label for="cert"
+							><code style="color: #3b82f6">cert</code><code>:</code></label
+						>
+						<textarea id="cert" name="cert"></textarea>
+						<label for="privateKeyHex"
+							><code style="color: #3b82f6">privateKeyHex</code
+							><code>:</code></label
+						>
+						<textarea id="privateKeyHex" name="privateKeyHex"></textarea>
+						<label for="publicKeyHex"
+							><code style="color: #3b82f6">publicKeyHex</code
+							><code>:</code></label
+						>
+						<textarea id="publicKeyHex" name="publicKeyHex"></textarea>
+					</div>
+					<label for=""><code>}</code></label>
+				</div>
+				<div class="form-group nested-group">
+					<label for=""
+						><code style="color: #3b82f6">packed</code><code>: {</code></label
+					>
+					<div class="nested-content">
+						<label for="packed-aaguid"
+							><code style="color: #3b82f6">aaguid</code><code>:</code></label
+						>
+						<textarea id="packed-aaguid" name="aaguid"></textarea>
+						<label for="packed-cert"
+							><code style="color: #3b82f6">cert</code><code>:</code></label
+						>
+						<textarea id="packed-cert" name="cert"></textarea>
+						<label for="packed-privateKeyHex"
+							><code style="color: #3b82f6">privateKeyHex</code
+							><code>:</code></label
+						>
+						<textarea id="packed-privateKeyHex" name="privateKeyHex"></textarea>
+						<label for="packed-publicKeyHex"
+							><code style="color: #3b82f6">publicKeyHex</code
+							><code>:</code></label
+						>
+						<textarea id="packed-publicKeyHex" name="publicKeyHex"></textarea>
+					</div>
+					<label for=""><code>}</code></label>
+				</div>
+				<div class="form-group nested-group">
+					<label for=""
+						><code style="color: #3b82f6">tpm</code><code>: {</code></label
+					>
+					<div class="nested-content">
+						<label for="tpm-aaguid"
+							><code style="color: #3b82f6">aaguid</code><code>:</code></label
+						>
+						<textarea id="tpm-aaguid" name="aaguid"></textarea>
+						<label for="tpm-privateKeyPEM"
+							><code style="color: #3b82f6">privateKeyPEM</code
+							><code>:</code></label
+						>
+						<textarea id="tpm-privateKeyPEM" name="publicKeyPEM"></textarea>
+						<label for="tpm-publicKeyPEM"
+							><code style="color: #3b82f6">publicKeyPEM</code
+							><code>:</code></label
+						>
+						<textarea id="tpm-publicKeyPEM" name="publicKeyPEM"></textarea>
+						<label for="tpm-cert"
+							><code style="color: #3b82f6">cert</code><code>:</code></label
+						>
+						<textarea id="tpm-cert" name="cert"></textarea>
+						<label for="tpm-interCertInput"
+							><code style="color: #3b82f6">tpmInterCertInput</code
+							><code>:</code></label
+						>
+						<textarea
+							id="tpm-interCertInput"
+							name="tpm-interCertInput"
+						></textarea>
+					</div>
+					<label for=""><code>}</code></label>
+				</div>
+				<div class="form-group nested-group">
+					<label for=""
+						><code style="color: #3b82f6">packed-self</code
+						><code>: {</code></label
+					>
+					<div class="nested-content">
+						<label for="packed-self-aaguid"
+							><code style="color: #3b82f6">aaguid</code><code>:</code></label
+						>
+						<textarea id="packed-self-aaguid" name="aaguid"></textarea>
+					</div>
+					<label for=""><code>}</code></label>
 				</div>
 				<div class="form-group">
-					<label for="privateKeyHex">Private Key Hex:</label>
-					<textarea id="privateKeyHex" name="privateKeyHex"></textarea>
+					<label for=""><code>}</code></label>
 				</div>
-				<div class="form-group">
-					<label for="publicKeyHex">Public Key Hex:</label>
-					<textarea id="publicKeyHex" name="publicKeyHex"></textarea>
+				<div id="bottom-buttons">
+					<button id="saveBtn" type="submit">Update fidoutilsConfig</button>
+					<button id="file-saver" style="display: none">Export</button>
 				</div>
-				<div class="form-group">
-					<label for="packed-aaguid">Packed AAGUID:</label>
-					<textarea id="packed-aaguid" name="aaguid"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="packed-cert">Packed Cert:</label>
-					<textarea id="packed-cert" name="cert"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="packed-privateKeyHex">Packed Private Key Hex:</label>
-					<textarea id="packed-privateKeyHex" name="privateKeyHex"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="packed-publicKeyHex">Packed Public Key Hex:</label>
-					<textarea id="packed-publicKeyHex" name="publicKeyHex"></textarea>
-				</div>
-				<div class="form-group">
-					<label for="packed-self-aaguid">Packed-self AAGUID:</label>
-					<textarea id="packed-self-aaguid" name="aaguid"></textarea>
-				</div>
-				<button id="saveBtn" type="submit">Update fidoutilsConfig</button>
-				<button id="file-saver">Export</button>
-				<!-- <button id="downloadBtn" ></button> -->
-				 <!-- <p id="status"></p>
-				 <div><p id="output"></p></div> -->
 			</form>
-			<!-- <button id="file-selector">Import</button> -->
-			
+
 			<div id="successMessage" style="display: none; color: green">
 				fidoutilsConfig updated successfully
 			</div>
 		</div>
-
-
+		<script src="middle.js"></script>
 	</body>
-	<script src="middle.js"></script>
 </html>

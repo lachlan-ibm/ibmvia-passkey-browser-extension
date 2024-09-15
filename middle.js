@@ -169,13 +169,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let button = document.getElementById("triggerBtn");
     let form = document.getElementById("fidoutilsForm");
-
     if (button) {
         button.addEventListener("click", async function () {
             console.log("Clicked button");
 
             // Show the form
             form.style.display = "block";
+
 
             // Fetch and display FIDO utils config data
             let data = await retrieveFidoUtilsConfigFromBackgroundScript();
@@ -299,7 +299,58 @@ async function showUserPresenceModal() {
 //     displayPackedSelfAaguid.innerHTML = `<h4> Packed-self aaguid: </h4> ${o["packed-self"].aaguid}`;
 //   }
 // }
+// async function displayFidoUtilsConfigObject(o) {
+//     // Populate the encryption passphrase
+//     let encryptionPassphraseInput = document.getElementById("encryption");
+//     if (encryptionPassphraseInput) {
+//         encryptionPassphraseInput.value = o["encryptionPassphrase"];
+//     }
+
+//     // Populate the FIDO-U2F data
+//     let certInput = document.getElementById("cert");
+//     if (certInput) {
+//         certInput.value = o["fido-u2f"].cert;
+//     }
+
+//     let privateKeyHexInput = document.getElementById("privateKeyHex");
+//     if (privateKeyHexInput) {
+//         privateKeyHexInput.value = o["fido-u2f"].privateKeyHex;
+//     }
+
+//     let publicKeyHexInput = document.getElementById("publicKeyHex");
+//     if (publicKeyHexInput) {
+//         publicKeyHexInput.value = o["fido-u2f"].publicKeyHex;
+//     }
+
+//     // Populate the packed data
+//     let packedAaguidInput = document.getElementById("packed-aaguid");
+//     if (packedAaguidInput) {
+//         packedAaguidInput.value = o["packed"].aaguid;
+//     }
+
+//     let packedCertInput = document.getElementById("packed-cert");
+//     if (packedCertInput) {
+//         packedCertInput.value = o["packed"].cert;
+//     }
+
+//     let packedPrivateKeyHexInput = document.getElementById("packed-privateKeyHex");
+//     if (packedPrivateKeyHexInput) {
+//         packedPrivateKeyHexInput.value = o["packed"].privateKeyHex;
+//     }
+
+//     let packedPublicKeyHexInput = document.getElementById("packed-publicKeyHex");
+//     if (packedPublicKeyHexInput) {
+//         packedPublicKeyHexInput.value = o["packed"].publicKeyHex;
+//     }
+
+//     let packedSelfAaguidInput = document.getElementById("packed-self-aaguid");
+//     if (packedSelfAaguidInput) {
+//         packedSelfAaguidInput.value = o["packed-self"].aaguid;
+//     }
+// }
 async function displayFidoUtilsConfigObject(o) {
+    let exportButton = document.getElementById("file-saver");
+    exportButton.style.display = "block";
     // Populate the encryption passphrase
     let encryptionPassphraseInput = document.getElementById("encryption");
     if (encryptionPassphraseInput) {
@@ -347,60 +398,34 @@ async function displayFidoUtilsConfigObject(o) {
     if (packedSelfAaguidInput) {
         packedSelfAaguidInput.value = o["packed-self"].aaguid;
     }
-}
-async function displayFidoUtilsConfigObject(o) {
-    // Populate the encryption passphrase
-    let encryptionPassphraseInput = document.getElementById("encryption");
-    if (encryptionPassphraseInput) {
-        encryptionPassphraseInput.value = o["encryptionPassphrase"];
+    let tpmAaguidInput = document.getElementById("tpm-aaguid");
+    if (tpmAaguidInput) {
+        tpmAaguidInput.value = o["tpm"].aaguid;
     }
 
-    // Populate the FIDO-U2F data
-    let certInput = document.getElementById("cert");
-    if (certInput) {
-        certInput.value = o["fido-u2f"].cert;
+    let tpmCertInput = document.getElementById("tpm-cert");
+    if (tpmCertInput) {
+        tpmCertInput.value = o["tpm"].cert;
     }
 
-    let privateKeyHexInput = document.getElementById("privateKeyHex");
-    if (privateKeyHexInput) {
-        privateKeyHexInput.value = o["fido-u2f"].privateKeyHex;
+    let tpmPrivateKeyPEMInput = document.getElementById("tpm-privateKeyPEM");
+    if (tpmPrivateKeyPEMInput) {
+        tpmPrivateKeyPEMInput.value = o["tpm"].privateKeyPEM;
     }
 
-    let publicKeyHexInput = document.getElementById("publicKeyHex");
-    if (publicKeyHexInput) {
-        publicKeyHexInput.value = o["fido-u2f"].publicKeyHex;
+    let tpmPublicKeyPEMInput = document.getElementById("tpm-publicKeyPEM");
+    if (tpmPublicKeyPEMInput) {
+        tpmPublicKeyPEMInput.value = o["tpm"].publicKeyPEM;
     }
 
-    // Populate the packed data
-    let packedAaguidInput = document.getElementById("packed-aaguid");
-    if (packedAaguidInput) {
-        packedAaguidInput.value = o["packed"].aaguid;
-    }
-
-    let packedCertInput = document.getElementById("packed-cert");
-    if (packedCertInput) {
-        packedCertInput.value = o["packed"].cert;
-    }
-
-    let packedPrivateKeyHexInput = document.getElementById("packed-privateKeyHex");
-    if (packedPrivateKeyHexInput) {
-        packedPrivateKeyHexInput.value = o["packed"].privateKeyHex;
-    }
-
-    let packedPublicKeyHexInput = document.getElementById("packed-publicKeyHex");
-    if (packedPublicKeyHexInput) {
-        packedPublicKeyHexInput.value = o["packed"].publicKeyHex;
-    }
-
-    let packedSelfAaguidInput = document.getElementById("packed-self-aaguid");
-    if (packedSelfAaguidInput) {
-        packedSelfAaguidInput.value = o["packed-self"].aaguid;
+    let tpmIntercertInput = document.getElementById("tpm-interCertInput");
+    if (tpmIntercertInput) {
+        tpmIntercertInput.value = o["tpm"].tpmIntercert;
     }
 }
 
 const fidoUtilsForm = document.getElementById("fidoutilsForm");
 const successMessage = document.getElementById("successMessage");
-
 // const saveButton = document.getElementById("saveBtn");
 
 // console.log("find me Save button listener")
@@ -434,6 +459,13 @@ if (fidoUtilsForm) {
             "packed-self": {
                 aaguid: document.getElementById("packed-self-aaguid").value,
             },
+            "tpm": {
+                aaguid: document.getElementById("tpm-aaguid").value,
+                cert: document.getElementById("tpm-cert").value,
+                privateKeyPEM: document.getElementById("tpm-privateKeyPEM").value,
+                publicKeyPEM: document.getElementById("tpm-publicKeyPEM").value,
+                tpmIntercert: document.getElementById("tpm-interCertInput").value,
+            }
         };
 
         console.log("Updated FIDO Utils Config:", updatedFidoUtilsConfig);

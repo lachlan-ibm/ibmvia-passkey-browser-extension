@@ -3,9 +3,10 @@ body {
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 10px;
-	width: 350px;
+	width: 425px;
 	margin: auto;
 }
+
 #header {
 	text-align: center;
 }
@@ -19,98 +20,119 @@ p {
 	font-size: 14px;
 	margin-bottom: 15px;
 }
+
 .user-presence-modal {
 	background-color: #ccc;
 	padding: 20px;
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-	text-align : center;
+	text-align: center;
 }
 
 button {
-	width: 100%;
+	width: 90%;
 	padding: 10px;
 	margin-bottom: 15px;
-	background-color: #007bff;
+	background-color: #1d4ed8;
 	color: #fff;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 14px;
-}
-#noBtn{
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 15px;
-	background-color: red;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	font-size: 14px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-#yesBtn{
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 15px;
-	background-color: green;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	font-size: 14px;
+#noBtn {
+	background-color: red;
 }
+
+#yesBtn {
+	background-color: green;
+}
+
 input[type="file"] {
-	display: none;
-  }
-#test {
+	display: none; /* Hide the default file input */
+}
+
+#test,
+#importBtn {
 	padding: 10px;
-	width:relative;
+	width: 85%;
 	margin-bottom: 15px;
-	display:block;
-	background-color: #007bff;
+	background-color: #1d4ed8;
 	color: #fff;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 14px;
 	text-align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 button:hover {
 	background-color: #0056b3;
 }
 
-/* Form styling */
 #fidoutilsForm {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 	margin: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: #f5f5f5;
+	padding: 10px;
+	font-family: "Courier New", Courier, monospace;
 }
 
 .form-group {
-	margin-bottom: 15px;
+	margin-bottom: 5px;
+	padding: 10px;
+	/* border: 1px solid #ccc;
+	border-radius: 4px; */
+	background-color: #f5f5f5;
+	position: relative;
 }
 
 .form-group label {
 	font-size: 14px;
 	margin-bottom: 5px;
 	display: block;
+	color: #333;
 }
 
 .form-group input,
 .form-group textarea {
-	width: 100%;
+	width: 90%;
 	padding: 8px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	font-size: 14px;
+	background-color: #fafafa;
+	color: #333;
 }
 
 textarea {
 	resize: vertical;
 	height: 80px;
+}
+
+.nested-group {
+	margin-left: 20px;
+}
+
+.nested-content {
+	margin-left: 20px;
+	border-left: 1px solid #ddd;
+	padding-left: 10px;
+}
+
+#variable {
+	margin-left: -10px;
 }
 
 #saveBtn {
@@ -119,4 +141,13 @@ textarea {
 
 #saveBtn:hover {
 	background-color: #218838;
+}
+
+#header button {
+	display: block;
+	margin: 10px auto;
+	width: 90%;
+}
+#bottom-buttons {
+	margin-top: 15px;
 }
