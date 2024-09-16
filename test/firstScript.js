@@ -1,10 +1,22 @@
 const { Builder, Browser, By } = require("selenium-webdriver");
 const assert = require("assert");
+const chrome = require('selenium-webdriver/chrome');
+const path = require('path');
 
 (async function firstTest() {
     let driver;
     try {
-        driver = await new Builder().forBrowser(Browser.CHROME).build();
+        const extensionPath = path.resolve('../build/');
+        let options = new chrome.Options();
+        options.addArguments(`--load-extension=${extensionPath}`);
+
+
+
+        driver = await new Builder()
+            .forBrowser(Browser.CHROME)
+            .setChromeOptions(options)
+            .build();
+
         await driver.get("https://webauthn.io/");
         let title = await driver.getTitle();
         assert.equal("WebAuthn.io", title)
