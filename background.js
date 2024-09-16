@@ -135,11 +135,13 @@ fido.BrowserApi.runtime.onMessage.addListener(function (request, sender, sendRes
     const config = getFidoUtilsConfig();
     console.log("config is ", config)
     sendResponse({ result: config });
+    return true;
   } else if (request.message === "Update fidoutilsConfig variable") {
     console.log("Received request to update the fidoutilsConfig object");
     const config = updateFidoUtilsConfig(request.config);
     console.log("this is a test", fidoutilsConfig);
     sendResponse({ status: "success", message: "Config updated successfully", result: config });
+    return true;
   }
   return true;
 });
