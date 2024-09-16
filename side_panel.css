@@ -31,7 +31,7 @@ p {
 }
 
 button {
-	width: 90%;
+	width: 60%;
 	padding: 10px;
 	margin-bottom: 15px;
 	background-color: #1d4ed8;
@@ -59,7 +59,7 @@ input[type="file"] {
 #test,
 #importBtn {
 	padding: 10px;
-	width: 85%;
+	width: 55%;
 	margin-bottom: 15px;
 	background-color: #1d4ed8;
 	color: #fff;
@@ -76,11 +76,13 @@ input[type="file"] {
 button:hover {
 	background-color: #0056b3;
 }
+#importBtn:hover {
+	background-color: #0056b3;
+}
 
 #fidoutilsForm {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
 	margin: auto;
 	border: 1px solid #ddd;
 	border-radius: 4px;
@@ -145,13 +147,32 @@ textarea {
 
 #header button {
 	display: block;
-	margin: 10px auto;
-	width: 90%;
+	/* margin: 10px auto; */
+	width: 60%;
+	margin-right: 5px;
 }
 #bottom-buttons {
 	margin-top: 15px;
 }
 #successMessage {
 	text-align: center;
-	margin-top: 5px;
+	margin-top: 2px;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+#header {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+	align-items: baseline;
+	flex-direction: row;
+}
+#logo {
+	display: flex;
+	justify-content: center;
+}
+#activity-indicator {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

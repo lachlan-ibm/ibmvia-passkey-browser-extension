@@ -9,15 +9,21 @@
 	<body>
 		<!-- Sidebar content here if needed -->
 		<div id="main-content">
-			<!-- <div>
-				<img src="icons/FV_logo.png" alt="" width="100" height="150" />
-			</div> -->
+			<div id="logo">
+				<img src="icons/FV_logo.png" alt="" width="150" height="50" />
+			</div>
 			<div id="header">
-				<button id="triggerBtn">Edit fidoutilsConfig</button>
+				<button id="triggerBtn">FIDO2 Config</button>
 				<label for="file-selector" id="importBtn">Import</label>
 				<input type="file" id="file-selector" />
 			</div>
 			<!-- Form to display properties of fidoUtilsConfig -->
+			<div id="activity-indicator">
+				<div id="loading-indicator" style="display: none">
+					<div id="spinner" class="spinner"></div>
+					Loading...
+				</div>
+			</div>
 			<form id="fidoutilsForm" style="display: none">
 				<div class="form-group" style="margin-bottom: 0; padding: 0">
 					<label for=""><code>{</code></label>
@@ -128,12 +134,12 @@
 				</div>
 				<div id="bottom-buttons">
 					<button id="saveBtn" type="submit">Update fidoutilsConfig</button>
+					<div id="successMessage" style="display: none; color: green">
+						fidoutilsConfig updated successfully
+					</div>
 					<button id="file-saver" style="display: none">Export</button>
 				</div>
 			</form>
-			<div id="successMessage" style="display: none; color: green">
-				fidoutilsConfig updated successfully
-			</div>
 		</div>
 		<script src="middle.js"></script>
 	</body>

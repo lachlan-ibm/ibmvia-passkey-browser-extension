@@ -169,17 +169,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let button = document.getElementById("triggerBtn");
     let form = document.getElementById("fidoutilsForm");
+    let loadingIndicator = document.getElementById("loading-indicator");
+    let spinner = document.getElementById('spinner');
+    // spinner.classList.add('spinner');
+
+    const style = document.createElement('style');
+    style.textContent = `
+      .spinner {
+        border: 8px solid #60a5fa;
+        
+        border-top: 8px solid #2563eb;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-bottom:5px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+
+    // loadingIndicator.appendChild(spinner);
+    document.head.appendChild(style);
     if (button) {
         button.addEventListener("click", async function () {
             console.log("Clicked button");
 
-            // Show the form
-            form.style.display = "block";
+            // Show the loading indicator first
+            loadingIndicator.style.display = "block";
+            form.style.display = "none";
 
-
+            // Show the form after the delay
             // Fetch and display FIDO utils config data
             let data = await retrieveFidoUtilsConfigFromBackgroundScript();
             await displayFidoUtilsConfigObject(data);
+            loadingIndicator.style.display = "none";
+            form.style.display = "block";
         });
     }
 
@@ -556,6 +584,7 @@ function confirmDownloadModal() {
         const modal = document.createElement("div");
         const modalContent = document.createElement("div");
         const buttonContainer = document.createElement("div");
+        const logo = document.createElement("img")
         const yesBtn = document.createElement("button");
         const noBtn = document.createElement("button");
 
@@ -572,8 +601,7 @@ function confirmDownloadModal() {
         modal.style.boxShadow = "0 4px 15px rgba(0, 0, 0, 0.2)";
         modal.style.textAlign = "center";
         modal.style.width = "300px";
-        modal.style.fontFamily = "Arial, sans-serif";
-        modal.style.border = "1px solid #ddd";
+        modal.style.border = "1px solid #c3e6cb";
 
         // Set modal content styles
         modalContent.innerText = "Are you sure you want to download your credential?";
@@ -582,12 +610,17 @@ function confirmDownloadModal() {
         modalContent.style.fontSize = "16px";
         modalContent.style.lineHeight = "1.4";
 
+        // logo
+        logo.src = "icons/FV_logo.png";
+        logo.style.width = "100px";
+        logo.style.height = "40px";
+
         // Set button container styles
         buttonContainer.style.display = "flex";
         buttonContainer.style.justifyContent = "space-between";
 
         // Set yes button styles
-        yesBtn.style.backgroundColor = "#28a745";
+        yesBtn.style.backgroundColor = "#1d4ed8";
         yesBtn.style.color = "#fff";
         yesBtn.style.border = "none";
         yesBtn.style.padding = "10px 20px";
@@ -599,7 +632,7 @@ function confirmDownloadModal() {
         yesBtn.innerText = "Yes";
 
         // Set no button styles
-        noBtn.style.backgroundColor = "#dc3545";
+        noBtn.style.backgroundColor = "#94a3b8";
         noBtn.style.color = "#fff";
         noBtn.style.border = "none";
         noBtn.style.padding = "10px 20px";
@@ -610,6 +643,7 @@ function confirmDownloadModal() {
         noBtn.innerText = "No";
 
         // Append elements
+        modal.appendChild(logo);
         buttonContainer.appendChild(yesBtn);
         buttonContainer.appendChild(noBtn);
         modal.appendChild(modalContent);

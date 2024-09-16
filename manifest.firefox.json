@@ -1,19 +1,20 @@
 {
 	"manifest_version": 3,
-	"name": "FIDOVerse",
+	"name": "fido-verse",
 	"version": "1.0",
 
 	"description": "Performs FIDO2 registration and authentication ceremonies",
 	"homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
 	"icons": {
-		"48": "icons/icon_fido_48.png"
+		"48": "icons/FV_48.png",
+		"96": "icons/FV_96.png"
 	},
 
 	"permissions": ["activeTab", "storage", "notifications", "scripting", "tabs"],
 	"sidebar_action": {
 		"default_icon": {
-			"16": "icons/icon_fido_48.png",
-			"32": "icons/icon_fido_48.png"
+			"48": "icons/FV_48.png",
+			"96": "icons/FV_96.png"
 		},
 		"default_title": "My sidebar",
 		"default_panel": "side_panel.html",
