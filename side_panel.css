@@ -5,6 +5,7 @@ body {
 	padding: 10px;
 	width: 425px;
 	margin: auto;
+	/* scrollbar-color: #1d4ed8 white; */
 }
 
 #header {
@@ -43,7 +44,6 @@ button {
 	margin-left: auto;
 	margin-right: auto;
 }
-
 #noBtn {
 	background-color: red;
 }
@@ -150,4 +150,8 @@ textarea {
 }
 #bottom-buttons {
 	margin-top: 15px;
+}
+#successMessage {
+	text-align: center;
+	margin-top: 5px;
 }
