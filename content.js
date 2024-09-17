@@ -104,7 +104,7 @@ function showSuccessModal(message) {
   setTimeout(() => {
     document.body.removeChild(modal);
     document.body.removeChild(overlay);
-  }, 3000);
+  }, 2750);
 }
 
 // User presence modal
@@ -118,6 +118,7 @@ function userPresenceModal() {
     const noBtn = document.createElement("button");
     const logo = document.createElement("img")
 
+    modal.classList.add("userPresenceModal");
 
     // Set modal styles
     modal.style.position = "fixed";
@@ -136,6 +137,8 @@ function userPresenceModal() {
     modal.style.border = "1px solid #ddd";
 
     // Set modal content styles
+    modalContent.classList.add("userPresenceModalBody");
+
     modalContent.innerText = "Would you like to create a new FIDO2 credential?";
     modalContent.style.marginBottom = "20px";
     modalContent.style.fontWeight = "bold";
@@ -148,6 +151,7 @@ function userPresenceModal() {
     logo.style.height = "40px";
 
     // Set button container styles
+
     buttonContainer.style.display = "flex";
     buttonContainer.style.justifyContent = "space-between";
 

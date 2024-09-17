@@ -15,23 +15,23 @@ fido.BrowserApi.runtime.onInstalled.addListener(() => {
   console.log("Extension installed");
 });
 
-fido.BrowserApi.runtime.onConnect.addListener(function (port) {
+// fido.BrowserApi.runtime.onConnect.addListener(function (port) {
 
-  if (port.name === "middleScript") {
+//   if (port.name === "middleScript") {
 
-    console.log("middle.js script connected");
+//     console.log("middle.js script connected");
 
-    port.postMessage({ farewell: "goodbye" });
+//     port.postMessage({ farewell: "goodbye" });
 
-    port.onMessage.addListener(function (message) {
+//     port.onMessage.addListener(function (message) {
 
-      console.log(message.greeting);
+//       console.log(message.greeting);
 
-    });
+//     });
 
-  }
+//   }
 
-});
+// });
 
 
 // fido.BrowserApi.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
