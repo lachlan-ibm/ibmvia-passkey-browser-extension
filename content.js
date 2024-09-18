@@ -356,17 +356,23 @@ async function myGetMethod(options, authRecords) {
       fidoutilsConfigVariable["origin"] = window.location.origin;
       fido.setFidoUtilsConfig(fidoutilsConfigVariable);
       console.log("options in myGetMethod", options)
+
       if (options.publicKey.challenge instanceof ArrayBuffer) {
         console.log("find me array buffer");
         options.publicKey.challenge = new Uint8Array(options.publicKey.challenge);
         console.log("new normalised challenge is", options.publicKey.challenge);
       }
-      for (let i = 0; i < options.publicKey.allowCredentials.length; i++) {
-        // Convert to Uint8Array if id is of type ArrayBuffer
-        if (options.publicKey.allowCredentials[i].id instanceof ArrayBuffer) {
-          console.log("moved here now")
-          options.publicKey.allowCredentials[i].id = new Uint8Array(options.publicKey.allowCredentials[i].id)
+      if (options.publicKey.allowCredentials instanceof Array) {
+        console.log("options.publicKey.allowCredentials is instanceof Array")
+        for (let i = 0; i < options.publicKey.allowCredentials.length; i++) {
+          // Convert to Uint8Array if id is of type ArrayBuffer
+          if (options.publicKey.allowCredentials[i].id instanceof ArrayBuffer) {
+            console.log("moved here now")
+            options.publicKey.allowCredentials[i].id = new Uint8Array(options.publicKey.allowCredentials[i].id)
+          }
         }
+      } else {
+        console.log("error detected in allowedCred data type")
       }
       if (fido.canAuthenticateWithCredId(options)) {
         // console.log("options", options);
