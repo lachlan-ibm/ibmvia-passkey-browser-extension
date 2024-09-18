@@ -36,7 +36,7 @@ npm install
 status=$?
 
 # Make build directory which will be used as the extensions entry point when loading unpacked
-mkdir build
+mkdir -p build
 
 # Copy the relevent files into build directory
 cp side_panel.html ./build
@@ -49,8 +49,15 @@ cp -r icons/ ./build/icons
 REPO_URL="https://github.com/sbweeden/fido2-node-clients.git"
 REPO_DIR="./fido2-node-clients"
 # Clone the Git repository
-echo "Cloning repository..."
-git clone $REPO_URL
+# echo "Cloning repository..."
+
+if test -d ./$REPO_DIR; then
+    echo "fido2-node-client directory already exists"
+else
+    echo "cloning fido2-node-client"
+    git clone $REPO_URL
+fi
+
 cd $REPO_DIR
 
 # Install the node modules
@@ -70,19 +77,39 @@ fi
 # Bundle Shane's fido2 node client
 browserify -s fido fidoutils.js -o bundle.js
 
-
 # Concant the contents of bundle.js and content.js into new file main.js
-cat bundle.js ../content.js >> ../build/main.js
+cat bundle.js ../content.js > ../build/main.js
+
+
+# Different OS types
+# case "$OSTYPE" in
+#   solaris*) echo "SOLARIS" ;;
+#   darwin*)  echo "OSX" ;; 
+#   linux*)   echo "LINUX" ;;
+#   bsd*)     echo "BSD" ;;
+#   msys*)    echo "WINDOWS" ;;
+#   cygwin*)  echo "ALSO WINDOWS" ;;
+#   *)        echo "unknown: $OSTYPE" ;;
+# esac
+
 
 # Find the fidoutilsConfig variable and replace with hardcoded object
-# FIDO_UTILS_CONFIG='let fidoutilsConfig = null;'
-
 # sed -i -e '/let fidoutilsConfig =.*/,+5d' main.js
 
 # sed -i -e '' "/let fidoutilsConfig =.*/,+5d =$FIDO_UTILS_CONFIG/" ../main.js
 
 # sed -i -e '/let fidoutilsConfig =.*/,+4d' ../main.js
-sed -i "" -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js
+# sed -i "" -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js
+
+
+SED_CMD="sed -i -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js"
+echo $OSTYPE
+if [[ "$OSTYPE" == 'darwin'* ]]; then
+    echo "macOS"
+    SED_CMD="sed -i \"\" -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js"
+fi
+eval $SED_CMD
+
 # sed -i '' "6145,6148d" ../main.js
 
 # Create a copy in the certs directory of the copied version of generate_attestation_certs.js
@@ -104,7 +131,7 @@ cd ..
 cd ..
 
 # Concant the contents of bundle.js and background.js into new file background_script.js
-cat $REPO_DIR/certs/bundle.js background.js >> ./build/background_script.js
+cat $REPO_DIR/certs/bundle.js background.js > ./build/background_script.js
 # cat $REPO_DIR/certs/bundle.js middleScript.js >> ./build/middle.js
 chmod -R +w $REPO_DIR
 rm -r $REPO_DIR
@@ -117,26 +144,34 @@ rm -r $REPO_DIR
 # output_file = "manifest.json"
 # long_options=("short-option:" "long-option:")
 # browser = ""
+browser="chrome"
+mainfest_json="manifest.chrome.json"
+
 while getopts "b:" opt; do
     case ${opt} in
         b) 
             echo "Option -b was triggered, Argument: ${OPTARG}"
             if [[ "$OPTARG" == "chrome" ]]; then
-                echo "Creating chrome manifest.json configuration"
-                cat manifest.chrome.json >> ./build/manifest.json
-                cd build
-                web-ext -a ../dist build
+                # echo "Creating chrome manifest.json configuration"
+                # cat manifest.chrome.json >> ./build/manifest.json
+                # cd build
+                # web-ext -a ../dist build
                 # chrome.exe --pack-extension
                 # chrome --pack-extension="ibm-security-passkey"
+                echo "Defaulting to chrome"
+                break;
 
             elif [[ "$OPTARG" == "firefox" ]]; then
                 echo "Creating firefox manifest.json configuration"
-                cat manifest.firefox.json >> ./build/manifest.json
-                cd build
-                web-ext -a ../dist build
+                # cat manifest.firefox.json >> ./build/manifest.json
+                # cd build
+                # web-ext -a ../dist build
+                browser="firefox"
+                mainfest_json="manifest.firefox.json"
+                break;
             else 
                 echo "Defaulting to chrome manifest.json configuration"
-                cat manifest.chrome.json >> ./build/manifest.json
+                # cat manifest.chrome.json >> ./build/manifest.json
             fi
             ;;
 
@@ -149,3 +184,10 @@ while getopts "b:" opt; do
             ;;
     esac
 done
+echo "Creating $browser manifest.json configuration"
+cat $mainfest_json > ./build/manifest.json
+cd build
+mkdir -p ../dist
+
+build_arg="zip ../dist/fido-verse.zip * icons/*"
+eval $build_arg
