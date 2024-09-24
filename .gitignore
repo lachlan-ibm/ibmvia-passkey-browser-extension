@@ -5,3 +5,7 @@ node_modules/
 manifest.json
 build/
 dist/
+
+# mkdocs documentation
+/site
+venv/
