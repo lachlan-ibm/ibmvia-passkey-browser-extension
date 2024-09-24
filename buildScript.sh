@@ -102,13 +102,32 @@ cat bundle.js ../content.js > ../build/main.js
 # sed -i "" -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js
 
 
-SED_CMD="sed -i -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js"
-echo $OSTYPE
-if [[ "$OSTYPE" == 'darwin'* ]]; then
-    echo "macOS"
-    SED_CMD="sed -i \"\" -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js"
-fi
-eval $SED_CMD
+# SED_CMD="sed -i -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js"
+# echo $OSTYPE
+# if [[ "$OSTYPE" == 'darwin'* ]]; then
+#     echo "macOS"
+#     SED_CMD="sed -i \"\" -e '/let fidoutilsConfig =.*/{n;N;N;N;d;}' ../build/main.js"
+# fi
+# eval $SED_CMD
+
+python << EOL
+input_file_name = "../build/main.js"
+input_file = open(input_file_name, 'r')
+lines = input_file.readlines()
+i = 0
+out = []
+while i < len(lines):
+    l = lines[i]
+    if l.startswith('let fidoutilsConfig ='):
+        out.append(l)
+        i += 1
+        i += 4
+    else:
+        out.append(l)
+        i += 1
+output_file = open(input_file_name, 'w')
+output_file.writelines(out)
+EOL
 
 # sed -i '' "6145,6148d" ../main.js
 
