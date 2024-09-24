@@ -1,29 +1,39 @@
 site_name: fido-verse docs
+repo_url: https://github.com/lachlan-ibm/ibm-security-passkey-extension
+nav:
+
 theme:
   name: material
+  logo: FV_logo_logo.png
   features:
-    - navigation.tabs
-    - navigation.sections
-    - toc.integrate
-    - navigation.top
-    - search.suggest
-    - search.highlight
-    - content.tabs.link
-    - content.code.annotation
-    - content.code.copy
+  features:
+  - announce.dismiss
+  - content.code.annotate
+  - content.code.copy
+  - content.tooltips
+  - navigation.footer
+  - navigation.indexes
+  - navigation.sections
+  - navigation.expand
+  - navigation.top
+  - navigation.path
+  - search.highlight
+  - search.suggest
+  - toc.follow
+  - toc.integrate
   language: en
   palette:
     - scheme: default
       toggle:
         icon: material/toggle-switch-off-outline
         name: Switch to dark mode
-      primary: teal
-      accent: purple
+      primary: black
+      accent: lime
     - scheme: slate
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode
-      primary: teal
+      primary: black
       accent: lime
 markdown_extensions:
   - pymdownx.highlight:
