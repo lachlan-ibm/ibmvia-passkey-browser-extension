@@ -1,13 +1,13 @@
 {
 	"manifest_version": 3,
-	"name": "fido-verse",
+	"name": "IBM Passkey Extension",
 	"version": "1.0",
 
 	"description": "Performs FIDO2 registration and authentication ceremonies",
 	"homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
 	"icons": {
-		"48": "icons/FV_48.png",
-		"96": "icons/FV_96.png"
+		"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+		"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
 	},
 
 	"permissions": ["activeTab", "storage", "sidePanel", "notifications"],
@@ -16,7 +16,7 @@
 	},
 
 	"action": {
-		"default_icon": "icons/FV_48.png",
+		"default_icon": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
 		"default_title": "FIDO2"
 	},
 	"background": {

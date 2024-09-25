@@ -110,7 +110,7 @@ cat bundle.js ../content.js > ../build/main.js
 # fi
 # eval $SED_CMD
 
-python << EOL
+python3 << EOL
 input_file_name = "../build/main.js"
 input_file = open(input_file_name, 'r')
 lines = input_file.readlines()
@@ -166,6 +166,7 @@ rm -r $REPO_DIR
 browser="chrome"
 mainfest_json="manifest.chrome.json"
 
+
 while getopts "b:" opt; do
     case ${opt} in
         b) 
@@ -203,6 +204,8 @@ while getopts "b:" opt; do
             ;;
     esac
 done
+# shift $((OPTIND-1))
+
 echo "Creating $browser manifest.json configuration"
 cat $mainfest_json > ./build/manifest.json
 cd build
@@ -210,3 +213,22 @@ mkdir -p ../dist
 
 build_arg="zip ../dist/fido-verse.zip * icons/*"
 eval $build_arg
+
+# Call getopts to trigger cleanup and delete build, dist and node_modules directories
+# optspec="-:"
+# while getopts "$optspec" optchar; do
+#     case "${optchar}" in
+#         -)
+#             case "${OPTARG}" in
+#                 cleanup)
+#                     echo "Cleaning up project"
+#                     rmdir -rf build
+#                     rmdir -rf dist
+#                     rmdir -rf node_modules
+#                     ;;
+#             esac;;
+#     esac
+# done
+
+
+

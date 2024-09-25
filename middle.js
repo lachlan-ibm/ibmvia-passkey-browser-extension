@@ -36,15 +36,15 @@ class BrowserApi {
 // 	message: "injectScript"
 // });
 
-const port = BrowserApi.runtime.connect({ name: "middleScript" });
+// const port = BrowserApi.runtime.connect({ name: "middleScript" });
 
-port.postMessage({ greeting: "hello" });
+// port.postMessage({ greeting: "hello" });
 
-port.onMessage.addListener(function (message) {
+// port.onMessage.addListener(function (message) {
 
-    console.log(message.farewell);
+//     console.log(message.farewell);
 
-});
+// });
 
 // if (fido.BrowserApi.isFirefoxApi) {
 // 	injectMainScript();

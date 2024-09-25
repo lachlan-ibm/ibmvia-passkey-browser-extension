@@ -1,10 +1,10 @@
-site_name: fido-verse docs
+site_name: ibm passkey extension docs
 repo_url: https://github.com/lachlan-ibm/ibm-security-passkey-extension
 nav:
 
 theme:
   name: material
-  logo: FV_logo_logo.png
+  logo: ibm-cloud--hyper-protect-crypto-services-96x96.png
   features:
   features:
   - announce.dismiss

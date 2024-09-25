@@ -6,8 +6,8 @@
 	"description": "Performs FIDO2 registration and authentication ceremonies",
 	"homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
 	"icons": {
-		"48": "icons/FV_48.png",
-		"96": "icons/FV_96.png"
+		"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+		"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
 	},
 
 	"permissions": ["activeTab", "storage", "notifications", "scripting", "tabs"],

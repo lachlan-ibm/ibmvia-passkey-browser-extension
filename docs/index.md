@@ -22,8 +22,6 @@ For chrome, there are several installation methods. Ideally, the extension shoul
 
 However, as this tool is still in development, it can be tested by loading an unpacked version. In this case, see [Chrome Tutorial](https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world) for instructions on how to load an unpacked extension. Choose the build directory as the extension directory.
 
-After you have installed fido-verse, try the [Quickstart Guide](quickstart.md).
-
 #### Firefox Installation
 
 ```bash
@@ -32,10 +30,4 @@ bash buildScript.sh -b firefox
 
 See the [Firefox Tutorial](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension) and refer to the install section for steps on how to install on firefox, or use the [web-ext](https://github.com/mozilla/web-ext) tool to run the extension from the command line. Furtermore, firefox provides the ability to load a zipped version of the extension as well, which is located the dist directory which is one of the artefacts generated after running the build command.
 
-After you have installed fido-verse, try the [Quickstart Guide](quickstart.md).
-
-```javascript title="main.js"
-function helloWorld(name) {
-    return `hello there, ${name}`
-}
-```
+After you have installed the ibm passkey extension, try the [Quickstart Guide](quickstart.md).

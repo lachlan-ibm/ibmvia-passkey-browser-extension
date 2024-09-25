@@ -413,7 +413,7 @@ if (!store[PACKED_ATTESTATION_CERT]) {
 let selfAttestationAAGUID = null;
 if (!store[SELF_ATTESTATION_AAGUID]) {
     console.log("Creating Self attestation AAGUID: " + SELF_ATTESTATION_AAGUID);
-    selfAttestationAAGUID = uuidv4();
+    selfAttestationAAGUID = "F6F4EF86-F04E-4FD3-8B01-C2EBD9E56492";
     store[SELF_ATTESTATION_AAGUID] = selfAttestationAAGUID;
 } else {
     selfAttestationAAGUID = store[SELF_ATTESTATION_AAGUID];
