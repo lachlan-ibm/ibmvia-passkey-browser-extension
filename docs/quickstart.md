@@ -17,3 +17,5 @@ Next, navigate to a webpage that supports WebAuthn registration and authenticati
 - [token2](https://www.token2.com/tools/fido2-demo)
 
 Additionally, if you have access to w3id on IBM Security Verify, you can test the extension against a [demonstration site](https://fidointerop.securitypoc.com/) managed by Shane Weeden.
+
+Open the side panel to view
