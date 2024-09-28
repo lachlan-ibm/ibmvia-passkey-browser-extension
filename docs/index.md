@@ -1,3 +1,5 @@
+# ibm passkey extension documentation
+
 Welcome to the docs for the ibm passkey extension. This is an open-source project which aims to provide passkey support to major vendors such as chromium, firefox and webkit. This browser extension also aims to provide developers/technical sales a tool for demonstrating passkey functionality without using hardware based security keys.
 
 To get started, you are encouraged to install from source:

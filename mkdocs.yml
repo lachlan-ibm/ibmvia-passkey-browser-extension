@@ -1,6 +1,10 @@
 site_name: ibm passkey extension docs
 repo_url: https://github.com/lachlan-ibm/ibm-security-passkey-extension
 nav:
+- Home:
+    - index.md
+    - Quickstart: quickstart.md
+    - Developer: developers.md
 
 theme:
   name: material
@@ -48,6 +52,3 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.mark
   - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg

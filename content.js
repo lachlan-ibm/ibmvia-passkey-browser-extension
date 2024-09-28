@@ -138,7 +138,7 @@ function showSuccessModal(message) {
 }
 
 // User presence modal
-function userPresenceModal() {
+function userPresenceModal(message) {
   return new Promise((resolve) => {
     // Create modal elements
     const modal = document.createElement("div");
@@ -192,7 +192,7 @@ function userPresenceModal() {
 
     // Set modal content styles
     modalContent.classList.add("userPresenceModalBody");
-    modalContent.innerText = "Would you like to create a new passkey?";
+    modalContent.innerText = message;
     modalContent.style.marginTop = "10px";
     modalContent.style.marginBottom = "20px"
 
@@ -266,7 +266,7 @@ function userPresenceModal() {
 async function myCreateMethod(options) {
 
   try {
-    const userPresence = await userPresenceModal();
+    const userPresence = await userPresenceModal("Would you like to create a new passkey?");
     console.log("user presence", userPresence);
     let oldFidoUtilsConfig = fido.getFidoUtilsConfig();
     // console.log("old fido utils", oldFidoUtilsConfig);
@@ -445,6 +445,7 @@ function showFailModal(message) {
 
 async function myGetMethod(options, authRecords) {
   try {
+    const userPresence = await userPresenceModal("Would you like to authenticate using the ibm passkey extension?");
     if ("credentials" in navigator) {
       console.log("navigator.credentials", navigator.credentials)
       let fidoutilsConfigVariable = await requestFidoUtilsConfig();
@@ -470,39 +471,44 @@ async function myGetMethod(options, authRecords) {
       } else {
         console.log("error detected in allowedCred data type")
       }
-      if (fido.canAuthenticateWithCredId(options)) {
-        // console.log("options", options);
-        const result = await fido.processCredentialRequestOptions(
-          options
-        );
-        let serverPublicKeyCredential = result;
-        serverPublicKeyCredential["getClientExtensionResults"] = function () {
-          return {};
-        };
-        console.log("serverPublicKeyCredential", serverPublicKeyCredential);
+      if (userPresence) {
 
-        serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
-          fido.base64utobase64(
-            serverPublicKeyCredential.response.authenticatorData
-          )
-        );
-        serverPublicKeyCredential.response.clientDataJSON = fido.base64toBA(
-          fido.base64utobase64(
-            serverPublicKeyCredential.response.clientDataJSON
-          )
-        );
-        serverPublicKeyCredential.response.signature = fido.base64toBA(
-          fido.base64utobase64(serverPublicKeyCredential.response.signature)
-        );
-        serverPublicKeyCredential.rawId = fido.base64toBA(fido.base64utobase64(serverPublicKeyCredential.rawId));
+        if (fido.canAuthenticateWithCredId(options)) {
+          // console.log("options", options);
+          const result = await fido.processCredentialRequestOptions(
+            options
+          );
+          let serverPublicKeyCredential = result;
+          serverPublicKeyCredential["getClientExtensionResults"] = function () {
+            return {};
+          };
+          console.log("serverPublicKeyCredential", serverPublicKeyCredential);
 
-        console.log("myGetMethod result is", serverPublicKeyCredential);
-        showSuccessModal("Custom get method called. Authenticating credential.");
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        return await serverPublicKeyCredential;
+          serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
+            fido.base64utobase64(
+              serverPublicKeyCredential.response.authenticatorData
+            )
+          );
+          serverPublicKeyCredential.response.clientDataJSON = fido.base64toBA(
+            fido.base64utobase64(
+              serverPublicKeyCredential.response.clientDataJSON
+            )
+          );
+          serverPublicKeyCredential.response.signature = fido.base64toBA(
+            fido.base64utobase64(serverPublicKeyCredential.response.signature)
+          );
+          serverPublicKeyCredential.rawId = fido.base64toBA(fido.base64utobase64(serverPublicKeyCredential.rawId));
+
+          console.log("myGetMethod result is", serverPublicKeyCredential);
+          showSuccessModal("Custom get method called. Authenticating credential.");
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          return await serverPublicKeyCredential;
+        } else {
+          showFailModal("Custom authentication failed. Falling back to default method.");
+          await new Promise(resolve => setTimeout(resolve, 3000));
+          return await myCredentials.get(options);
+        }
       } else {
-        showFailModal("Custom authentication failed. Falling back to default method.");
-        await new Promise(resolve => setTimeout(resolve, 3000));
         return await myCredentials.get(options);
       }
     }
