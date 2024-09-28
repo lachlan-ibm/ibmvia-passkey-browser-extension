@@ -211,12 +211,12 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    const registerBtn = document.getElementById("registerAuthenticatorButton");
-    if (registerBtn) {
-        registerBtn.addEventListener("click", function () {
-            BrowserApi.runtime.sendMessage({ action: "registerClicked" })
-        })
-    }
+    // const registerBtn = document.getElementById("registerAuthenticatorButton");
+    // if (registerBtn) {
+    //     registerBtn.addEventListener("click", function () {
+    //         BrowserApi.runtime.sendMessage({ action: "registerClicked" })
+    //     })
+    // }
 });
 // let userPresence;
 
@@ -239,41 +239,41 @@ document.addEventListener("DOMContentLoaded", function () {
 // })
 
 
-async function showUserPresenceModal() {
-    return new Promise((resolve, reject) => {
-        const userPresenceModal = document.getElementById("user-presence");
-        const mainContent = document.getElementById("main-content");
-        if (!userPresenceModal) {
-            return reject("User presence modal not found");
-        }
-        userPresenceModal.style.display = "block";
-        const yesBtn = document.getElementById("yesBtn");
-        const noBtn = document.getElementById("noBtn");
-        const handleClick = (result) => {
-            userPresenceModal.style.display = "none";
-            if (mainContent) {
-                mainContent.style.display = "block";
-            }
-            resolve(result);
-            console.log("Yesss clicked")
-            document.dispatchEvent(
-                new CustomEvent("setUserPresence", {
-                    detail: {
-                        title: "Response",
-                        message: "Sending user presence to main.js",
-                        userPresence: true,
-                    },
-                })
-            );
-        };
-        if (yesBtn) {
-            yesBtn.onclick = () => handleClick(true);
-        }
-        if (noBtn) {
-            noBtn.onclick = () => handleClick(false);
-        }
-    });
-}
+// async function showUserPresenceModal() {
+//     return new Promise((resolve, reject) => {
+//         const userPresenceModal = document.getElementById("user-presence");
+//         const mainContent = document.getElementById("main-content");
+//         if (!userPresenceModal) {
+//             return reject("User presence modal not found");
+//         }
+//         userPresenceModal.style.display = "block";
+//         const yesBtn = document.getElementById("yesBtn");
+//         const noBtn = document.getElementById("noBtn");
+//         const handleClick = (result) => {
+//             userPresenceModal.style.display = "none";
+//             if (mainContent) {
+//                 mainContent.style.display = "block";
+//             }
+//             resolve(result);
+//             console.log("Yesss clicked")
+//             document.dispatchEvent(
+//                 new CustomEvent("setUserPresence", {
+//                     detail: {
+//                         title: "Response",
+//                         message: "Sending user presence to main.js",
+//                         userPresence: true,
+//                     },
+//                 })
+//             );
+//         };
+//         if (yesBtn) {
+//             yesBtn.onclick = () => handleClick(true);
+//         }
+//         if (noBtn) {
+//             noBtn.onclick = () => handleClick(false);
+//         }
+//     });
+// }
 // async function displayFidoUtilsConfigObject(o) {
 //   // console.log("this is the displayFidoUtilsConfigObject function", o);
 
@@ -587,6 +587,20 @@ function confirmDownloadModal() {
         const logo = document.createElement("img")
         const yesBtn = document.createElement("button");
         const noBtn = document.createElement("button");
+        const title = document.createElement("h6")
+        const logoDiv = document.createElement("div");
+
+        const link = document.createElement("link");
+        link.href = "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap";
+        link.rel = "stylesheet";
+        document.head.appendChild(link);
+
+
+        logoDiv.style.display = "flex";
+        logoDiv.style.justifyContent = "center";
+        logoDiv.style.alignItems = "center";
+
+        modal.classList.add("confirmDownloadModal");
 
         // Set modal styles
         modal.style.position = "fixed";
@@ -603,23 +617,34 @@ function confirmDownloadModal() {
         modal.style.width = "300px";
         modal.style.border = "1px solid #c3e6cb";
 
+        modal.style.fontFamily = "'IBM Plex Sans', sans-serif";
+        modalContent.style.fontFamily = "'IBM Plex Sans', sans-serif";
+
         // Set modal content styles
-        modalContent.innerText = "Are you sure you want to download your credential?";
+        modalContent.innerText = "Are you sure you want to export your credential?";
         modalContent.style.marginBottom = "20px";
-        modalContent.style.fontWeight = "bold";
-        modalContent.style.fontSize = "16px";
         modalContent.style.lineHeight = "1.4";
+        modalContent.style.marginTop = "10px";
 
         // logo
-        logo.src = "icons/FV_logo.png";
-        logo.style.width = "100px";
-        logo.style.height = "40px";
+        logo.src = "data:image/png;base64,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"
+        logo.style.width = "30px";
+        logo.style.height = "30px";
+        title.style.display = "flex";
+        title.style.alignItems = "center";
+        title.style.marginBottom = "0px";
+        title.innerHTML = "IBM Passkey Extension";
+        title.style.fontFamily = "IBM Plex Sans, sans-serif";
+        title.style.fontSize = "larger";
+        title.style.marginLeft = "10px"
+        title.style.marginTop = "10px"
 
         // Set button container styles
         buttonContainer.style.display = "flex";
         buttonContainer.style.justifyContent = "space-between";
 
         // Set yes button styles
+        yesBtn.classList.add("confirmDownload");
         yesBtn.style.backgroundColor = "#1d4ed8";
         yesBtn.style.color = "#fff";
         yesBtn.style.border = "none";
@@ -632,6 +657,7 @@ function confirmDownloadModal() {
         yesBtn.innerText = "Yes";
 
         // Set no button styles
+        noBtn.classList.add("cancelDownload");
         noBtn.style.backgroundColor = "#94a3b8";
         noBtn.style.color = "#fff";
         noBtn.style.border = "none";
@@ -643,9 +669,11 @@ function confirmDownloadModal() {
         noBtn.innerText = "No";
 
         // Append elements
-        modal.appendChild(logo);
         buttonContainer.appendChild(yesBtn);
         buttonContainer.appendChild(noBtn);
+        logoDiv.appendChild(logo);
+        logoDiv.appendChild(title);
+        modal.appendChild(logoDiv);
         modal.appendChild(modalContent);
         modal.appendChild(buttonContainer);
         document.body.appendChild(modal);

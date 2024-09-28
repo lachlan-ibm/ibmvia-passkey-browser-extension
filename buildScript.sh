@@ -27,6 +27,25 @@ else
     exit 1
 fi
 
+# Clean up options
+while getopts ":c" opt; do
+    case ${opt} in
+        c)
+            echo "Cleaning up project"
+            rm -rf build dist node_modules
+            exit 0
+            ;;
+        \?)
+            echo "Invalid option: -${OPTARG}" >&2
+            exit 1
+            ;;
+        :)
+            echo "Option -${OPTARG} requires an argument." >&2
+            exit 1
+            ;;
+    esac
+done
+
 # This script automates the build process for the fido2 browser extension
 echo "Hello, time to automate the build process!"
 echo "Installing node modules for browser extension!"

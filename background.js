@@ -82,31 +82,31 @@ if (fido.BrowserApi.isChromeApi) {
 }
 
 
-fido.BrowserApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  (async () => {
-    console.log("hello")
-    if (message.action === 'registerClicked') {
-      const sidePanelApi = fido.BrowserApi.sidePanel;
-      if (sidePanelApi) {
-        try {
-          if (fido.BrowserApi.isChromeApi) {
-            await sidePanelApi.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
-          }
-        } catch (error) {
-          console.error("Error opening side panel:", error);
-        }
-      } else {
-        console.error("Side panel API not supported in this browser.");
-      }
-    }
-  })();
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ response: "async response from background script" });
-    }, 1000);
-  });
+// fido.BrowserApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
+//   (async () => {
+//     console.log("hello")
+//     if (message.action === 'registerClicked') {
+//       const sidePanelApi = fido.BrowserApi.sidePanel;
+//       if (sidePanelApi) {
+//         try {
+//           if (fido.BrowserApi.isChromeApi) {
+//             await sidePanelApi.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
+//           }
+//         } catch (error) {
+//           console.error("Error opening side panel:", error);
+//         }
+//       } else {
+//         console.error("Side panel API not supported in this browser.");
+//       }
+//     }
+//   })();
+//   return new Promise((resolve) => {
+//     setTimeout(() => {
+//       resolve({ response: "async response from background script" });
+//     }, 1000);
+//   });
 
-});
+// });
 
 let fidoutilsConfig = {};
 
