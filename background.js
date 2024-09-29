@@ -79,7 +79,22 @@ if (fido.BrowserApi.isChromeApi) {
   chrome.sidePanel
     .setPanelBehavior({ openPanelOnActionClick: true })
     .catch((error) => console.error(error));
+} else {
+  browser.sidebarAction
+    .setPanel({ panel: "side_panel.html" })
+    .catch((error) => console.error(error));
+
+
+  browser.windows.getCurrent({ populate: true }).then((windowInfo) => {
+    myWindowId = windowInfo.id;
+  });
+
+  browser.action.onClicked.addListener(() => {
+    browser.sidebarAction.open();
+  });
 }
+
+
 
 
 // fido.BrowserApi.runtime.onMessage.addListener((message, sender, sendResponse) => {

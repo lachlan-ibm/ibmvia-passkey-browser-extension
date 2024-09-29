@@ -7,24 +7,24 @@ let myCredentials = {
   get: navigator.credentials.get.bind(navigator.credentials),
 };
 
-// alert("main.js injected!")
 // function to dispatch a request to the middle script for the fidoutilsConfig
 function requestFidoUtilsConfig() {
   return new Promise((resolve, reject) => {
     // Listen for the response from the middle script
     function handleConfigResponse(e) {
-      // console.log("eee", e.detail.response.result);
+      // Check if the event contains the fidoutilsConfig in its response
       if (e.detail && e.detail.response.result) {
+        // If the response exists, resolve the promise with the fidoutilsConfig result
         resolve(e.detail.response.result);
-        // console.log("resolved find me");
       } else {
         reject("Failed to retrieve fidoutilsConfig");
       }
       // remove the event listener after handling the response
       document.removeEventListener("setFidoUtilsConfig", handleConfigResponse);
     }
+    // Add an event listener for the response from the middle script
     document.addEventListener("setFidoUtilsConfig", handleConfigResponse);
-    // dispatch event to request fidoutilsConfig from middle script
+    // Dispatch a custom event to request the fidoutilsConfig from the middle script
     document.dispatchEvent(
       new CustomEvent("requestFidoUtilsConfig", {
         detail: { title: "getFidoUtils", message: "Retrieve fidoutilsConfig variable" },
@@ -269,15 +269,14 @@ async function myCreateMethod(options) {
     const userPresence = await userPresenceModal("Would you like to create a new passkey?");
     console.log("user presence", userPresence);
     let oldFidoUtilsConfig = fido.getFidoUtilsConfig();
-    // console.log("old fido utils", oldFidoUtilsConfig);
     let newFidoutilsConfig = await requestFidoUtilsConfig();
-
     // Set the origin in the config
     newFidoutilsConfig["origin"] = window.location.origin;
-    // Set the fidoUtilsConfig object with the new one retrieved from the background script then middle script
+    // Set the fidoUtilsConfig object with the new one retrieved from the background script
     fido.setFidoUtilsConfig(newFidoutilsConfig);
-    // console.log("new fido utils", newFidoutilsConfig);
+
     if ("publicKey" in options) {
+      // Normalise the challenge field of the input to Uint8Array
       if (options.publicKey.challenge instanceof ArrayBuffer) {
         console.log("find me array buffer");
         options.publicKey.challenge = new Uint8Array(options.publicKey.challenge);
@@ -298,32 +297,24 @@ async function myCreateMethod(options) {
 
         publicCred.rawId = fido.base64toBA(fido.base64utobase64(publicCred.rawId));
 
-
         publicCred.response.attestationObject = fido.base64toBA(
           fido.base64utobase64(publicCred.response.attestationObject)
         );
-
 
         publicCred.response.clientDataJSON = fido.base64toBA(
           fido.base64utobase64(publicCred.response.clientDataJSON)
         );
 
-
-        // console.log("Public Cred:", publicCred);
-        //   console.log("Result", result);
         showSuccessModal("Custom create method successful. Creating new credential.");
         await new Promise(resolve => setTimeout(resolve, 3000));
         return await publicCred;
-
       } else {
         return await myCredentials.create(options);
       }
-
-      // else fallback to original create method return myCredntials.create(options)
+      // else fallback to original create method
     } else {
       return await myCredentials.create(options);
     }
-
   } catch (error) {
     console.error("Error creating credential:", error);
     throw error;
@@ -504,7 +495,7 @@ async function myGetMethod(options, authRecords) {
           await new Promise(resolve => setTimeout(resolve, 3000));
           return await serverPublicKeyCredential;
         } else {
-          showFailModal("Custom authentication failed. Falling back to default method.");
+          showFailModal("Custom authentication failed. Falling back to original method.");
           await new Promise(resolve => setTimeout(resolve, 3000));
           return await myCredentials.get(options);
         }

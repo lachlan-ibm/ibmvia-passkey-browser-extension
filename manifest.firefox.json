@@ -13,16 +13,16 @@
 	"permissions": ["activeTab", "storage", "notifications", "scripting", "tabs"],
 	"sidebar_action": {
 		"default_icon": {
-			"48": "icons/FV_48.png",
-			"96": "icons/FV_96.png"
+			"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+			"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
 		},
-		"default_title": "My sidebar",
+		"default_title": "IBM Passkey Extension",
 		"default_panel": "side_panel.html",
-		"open_at_install": true
+		"open_at_install": false
 	},
 
 	"action": {
-		"default_icon": "icons/icon_fido_48.png",
+		"default_icon": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
 		"default_title": "Open Sidebar"
 	},
 	"background": {
