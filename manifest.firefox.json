@@ -1,6 +1,6 @@
 {
 	"manifest_version": 3,
-	"name": "fido-verse",
+	"name": "IBM Passkey Extension",
 	"version": "1.0",
 
 	"description": "Performs FIDO2 registration and authentication ceremonies",

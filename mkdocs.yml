@@ -25,6 +25,7 @@ theme:
   - search.suggest
   - toc.follow
   - toc.integrate
+  - content.tabs.link
   language: en
   palette:
     - scheme: default
@@ -40,6 +41,9 @@ theme:
       primary: black
       accent: lime
 markdown_extensions:
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite

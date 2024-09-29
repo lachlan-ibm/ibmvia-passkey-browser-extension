@@ -10,116 +10,109 @@ As shown in the diagram, the service worker handles background tasks, while the 
 
 The initial step in building a browser extension is defining its configuration through the manifest.json file. Every extension requires this file in its root directory, which outlines key details about the extension’s structure and behavior. It serves as a blueprint, describing the features and capabilities the extension can support.
 
-#### manifest.chrome.json
+=== "Chrome"
 
-```json title="manifest.json"
-{
-	"manifest_version": 3,
-	"name": "IBM Passkey Extension",
-	"version": "1.0",
+    ``` json
+    "manifest_version": 3,
+    "name": "IBM Passkey Extension",
+    "version": "1.0",
 
-	"description": "Performs FIDO2 registration and authentication ceremonies",
-	"homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
-	"icons": {
-		"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
-		"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
-	},
+    "description": "Performs FIDO2 registration and authentication ceremonies",
+    "homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
+    "icons": {
+    	"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+    	"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
+    },
 
-	"permissions": ["activeTab", "storage", "sidePanel", "notifications"],
-	"side_panel": {
-		"default_path": "side_panel.html"
-	},
+    "permissions": ["activeTab", "storage", "sidePanel", "notifications"],
+    "side_panel": {
+    	"default_path": "side_panel.html"
+    },
 
-	"action": {
-		"default_icon": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
-		"default_title": "FIDO2"
-	},
-	"background": {
-		"service_worker": "background_script.js"
-	},
+    "action": {
+    	"default_icon": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+    	"default_title": "FIDO2"
+    },
+    "background": {
+    	"service_worker": "background_script.js"
+    },
 
-	"content_scripts": [
-		{
-			"matches": ["https://*/*"],
-			"js": ["main.js"],
-			"world": "MAIN",
-			"run_at": "document_start"
-		},
-		{
-			"matches": ["https://*/*"],
-			"js": ["middle.js"],
-			"run_at": "document_start"
-		}
-	],
-	"externally_connectable": {
-		"matches": ["https://*/*"]
-	}
-}
-```
+    "content_scripts": [
+    	{
+    		"matches": ["https://*/*"],
+    		"js": ["main.js"],
+    		"world": "MAIN",
+    		"run_at": "document_start"
+    	},
+    	{
+    		"matches": ["https://*/*"],
+    		"js": ["middle.js"],
+    		"run_at": "document_start"
+    	}
+    ],
+    "externally_connectable": {
+    	"matches": ["https://*/*"]
+    }
+    ```
 
-#### manifest.firefox.json
+=== "Firefox"
 
-There are several key differences between the manifest files for Chrome and Firefox in this extension.
+    ``` json
+    "manifest_version": 3,
+    "name": "IBM Passkey Extension",
+    "version": "1.0",
+    "description": "Performs FIDO2 registration and authentication ceremonies",
+    "homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
+    "icons": {
+    	"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+    	"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
+    },
 
-```json title="manifest.json"
-{
-	"manifest_version": 3,
-	"name": "fido-verse",
-	"version": "1.0",
+    "permissions": ["activeTab", "storage", "notifications", "scripting", "tabs"],
+    "sidebar_action": {
+    	"default_icon": {
+    		"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+    		"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
+    	},
+    	"default_title": "",
+    	"default_panel": "side_panel.html",
+    	"open_at_install": false
+    },
 
-	"description": "Performs FIDO2 registration and authentication ceremonies",
-	"homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
-	"icons": {
-		"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
-		"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
-	},
+    "action": {
+    	"default_icon": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+    	"default_title": "Open Sidebar"
+    },
+    "background": {
+    	"scripts": ["background_script.js"]
+    },
 
-	"permissions": ["activeTab", "storage", "notifications", "scripting", "tabs"],
-	"sidebar_action": {
-		"default_icon": {
-			"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
-			"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
-		},
-		"default_title": "",
-		"default_panel": "side_panel.html",
-		"open_at_install": false
-	},
+    "content_scripts": [
+    	{
+    		"matches": ["<all_urls>"],
+    		"js": ["main.js"],
+    		"world": "MAIN",
+    		"run_at": "document_start",
+    		"all_frames": true
+    	},
+    	{
+    		"matches": ["<all_urls>"],
+    		"js": ["middle.js"],
+    		"run_at": "document_start"
+    	}
+    ],
+    "content_security_policy": {
+    	"extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+    },
 
-	"action": {
-		"default_icon": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
-		"default_title": "Open Sidebar"
-	},
-	"background": {
-		"scripts": ["background_script.js"]
-	},
-
-	"content_scripts": [
-		{
-			"matches": ["<all_urls>"],
-			"js": ["main.js"],
-			"world": "MAIN",
-			"run_at": "document_start",
-			"all_frames": true
-		},
-		{
-			"matches": ["<all_urls>"],
-			"js": ["middle.js"],
-			"run_at": "document_start"
-		}
-	],
-	"content_security_policy": {
-		"extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
-	},
-
-	"host_permissions": ["https://*/*", "http://*/*"],
-	"web_accessible_resources": [
-		{
-			"resources": ["main.js"],
-			"matches": ["<all_urls>"]
-		}
-	]
-}
-```
+    "host_permissions": ["https://*/*", "http://*/*"],
+    "web_accessible_resources": [
+    	{
+    		"resources": ["main.js"],
+    		"matches": ["<all_urls>"]
+    	}
+    ]
+    ```
 
 #### Service Worker
 
