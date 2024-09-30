@@ -9,7 +9,7 @@ IBM Passkey Extension: A cross platform browser extension for creating [FIDO2](h
 
 <h3>
 
-[Documentation](https://lachlan-ibm.github.io/ibmvia-passkey-browser-extension/))
+[Documentation](https://lachlan-ibm.github.io/ibmvia-passkey-browser-extension/)
 
 </h3>
 </div>
