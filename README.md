@@ -32,7 +32,7 @@ Additionally, if you have access to w3id on IBM Security Verify, you can test th
 
 ### Authenticate
 
-Once resgistration ahas finished, you can then perform an assertion flow and [authenticate](https://webauthn.guide/#authentication) using the extension.
+Once resgistration has finished, you can then perform an assertion flow and [authenticate](https://webauthn.guide/#authentication) using the extension.
 
 ## Installation
 
