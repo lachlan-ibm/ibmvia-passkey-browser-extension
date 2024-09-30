@@ -31,14 +31,14 @@
 
 	"content_scripts": [
 		{
-			"matches": ["<all_urls>"],
+			"matches": ["https://fidointerop.securitypoc.com/*", "https://webauthn.io/*","https://webauthn.dodo.dev/passwordless/*","https://www.token2.com/tools/fido2-demo/*" ],
 			"js": ["main.js"],
 			"world": "MAIN",
 			"run_at": "document_start",
 			"all_frames": true
 		},
 		{
-			"matches": ["<all_urls>"],
+			"matches": ["https://fidointerop.securitypoc.com/*", "https://webauthn.io/*","https://webauthn.dodo.dev/passwordless/*","https://www.token2.com/tools/fido2-demo/*" ],
 			"js": ["middle.js"],
 			"run_at": "document_start"
 		}

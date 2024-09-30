@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/ibm-cloud--hyper-protect-crypto-services-96x96.png">
-  <img alt="IBM passkey extension logo" src="docs/ibm-cloud--hyper-protect-crypto-services-96x96.png" width="50%" height="50%">
+  <img alt="IBM passkey extension logo" src="docs/ibm-cloud--hyper-protect-crypto-services-96x96.png" width="15%" height="25%">
 </picture>
 
 IBM Passkey Extension: A cross platform browser extension for creating [FIDO2](https://fidoalliance.org/fido2/) passkey credentials.
@@ -22,7 +22,17 @@ This is an open-source project which aims to provide passkey support to major ve
 
 ### Register
 
+This extension can succesfully [register](https://webauthn.guide/#registration) a FIDO2 credential at the following relying parties:
+
+- [WebAuthn.io](https://webauthn.io/)
+- [webauthn.dodo.dev](https://webauthn.dodo.dev/passwordless)
+- [token2](https://www.token2.com/tools/fido2-demo)
+
+Additionally, if you have access to w3id on IBM Security Verify, you can test the extension against a [demonstration](https://fidointerop.securitypoc.com/) site managed by IBMer, Shane Weeden.
+
 ### Authenticate
+
+Once resgistration ahas finished, you can then perform an assertion flow and [authenticate](https://webauthn.guide/#authentication) using the extension.
 
 ## Installation
 
