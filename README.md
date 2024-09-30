@@ -67,3 +67,4 @@ bash buildScript.sh -c
 Documentation along with a quick start guide can be found on the [docs website](https://lachlan-ibm.github.io/ibmvia-passkey-browser-extension/) built from the [docs/](/docs) directory.
 
 ## Contributing
+Following the guidelines in the [CONTRIBUTING file/](CONTRIBUTING.md) will help your PR get accepted.
