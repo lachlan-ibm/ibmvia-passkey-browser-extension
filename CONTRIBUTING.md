@@ -21,18 +21,6 @@ Pull requests are the best way to propose changes to the codebase. We actively w
 
 In short, when you submit code changes, your submissions are understood to be under the same [Apache License](https://choosealicense.com/licenses/apache-2.0/) that covers the project. Feel free to contact the maintainers if that's a concern.
 
-## Bug Reports
-
-**Great Bug Reports** tend to have:
-
-- A quick summary and/or background
-- Steps to reproduce
-  - Be specific!
-  - Give sample code if you can. [My stackoverflow question](http://stackoverflow.com/q/12488905/180626) includes sample code that _anyone_ with a base R setup can run to reproduce what I was seeing
-- What you expected would happen
-- What actually happens
-- Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
-
 ## License
 
 By contributing, you agree that your contributions will be licensed under its Apache License.
