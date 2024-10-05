@@ -1,0 +1,1104 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../quickstart/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.39">
+    
+    
+      
+        <title>Developer - IBM Passkey Extension Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="lime">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#software-design-architecutre" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="IBM Passkey Extension Docs" class="md-header__button md-logo" aria-label="IBM Passkey Extension Docs" data-md-component="logo">
+      
+  <img src="../ibm-cloud--hyper-protect-crypto-services-96x96.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IBM Passkey Extension Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Developer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/lachlan-ibm/ibm-security-passkey-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="IBM Passkey Extension Docs" class="md-nav__button md-logo" aria-label="IBM Passkey Extension Docs" data-md-component="logo">
+      
+  <img src="../ibm-cloud--hyper-protect-crypto-services-96x96.png" alt="logo">
+
+    </a>
+    IBM Passkey Extension Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/lachlan-ibm/ibm-security-passkey-extension" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href=".." class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_1" id="__nav_1_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quickstart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Developer
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Developer
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#software-design-architecutre" class="md-nav__link">
+    <span class="md-ellipsis">
+      Software Design Architecutre
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#differences-between-chrome-and-firefox-manifest-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Differences Between Chrome and Firefox Manifest Files
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Differences Between Chrome and Firefox Manifest Files">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#service-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      Service Worker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Scripts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#communication-between-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Communication Between Scripts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dispatching-a-custom-event" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dispatching a Custom Event
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dispatching-a-custom-event_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Dispatching a Custom Event
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fido2-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      FIDO2 Config
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#registering-a-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Registering a Credential
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authenticating-with-an-ibm-passkey-extension-credential" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authenticating with an IBM Passkey Extension Credential
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Developer</h1>
+
+<h3 id="software-design-architecutre">Software Design Architecutre</h3>
+<p>The architecture of the extension is structured to handle FIDO2 registration and authentication efficiently across multiple contexts. Below is a visual representation of how the service worker, content scripts, and message-passing mechanisms work together to ensure smooth communication and functionality.</p>
+<p><img alt="alt text" src="../architecture.png" title="Title" /></p>
+<p>As shown in the diagram, the service worker handles background tasks, while the content scripts interact with the webpage's DOM and facilitate data exchange between the extension and the relying party.</p>
+<h3 id="differences-between-chrome-and-firefox-manifest-files">Differences Between Chrome and Firefox Manifest Files</h3>
+<p>The initial step in building a browser extension is defining its configuration through the manifest.json file. Every extension requires this file in its root directory, which outlines key details about the extension’s structure and behavior. It serves as a blueprint, describing the features and capabilities the extension can support.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Chrome</label><label for="__tabbed_1_2">Firefox</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&quot;manifest_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IBM Passkey Extension&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Performs FIDO2 registration and authentication ceremonies&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">&quot;homepage_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://github.com/sramsamy/fido2-browser-extension&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nt">&quot;icons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">&quot;48&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-48x48.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">&quot;96&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-96x96.png&quot;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="p">},</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;activeTab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;storage&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sidePanel&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;notifications&quot;</span><span class="p">],</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nt">&quot;side_panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="nt">&quot;default_path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;side_panel.html&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="p">},</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="nt">&quot;default_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-48x48.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="nt">&quot;default_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FIDO2&quot;</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="p">},</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">    </span><span class="nt">&quot;service_worker&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;background_script.js&quot;</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="p">},</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="nt">&quot;content_scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">        </span><span class="nt">&quot;matches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://*/*&quot;</span><span class="p">],</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">        </span><span class="nt">&quot;js&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;main.js&quot;</span><span class="p">],</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">        </span><span class="nt">&quot;world&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MAIN&quot;</span><span class="p">,</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">        </span><span class="nt">&quot;run_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;document_start&quot;</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">        </span><span class="nt">&quot;matches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://*/*&quot;</span><span class="p">],</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">        </span><span class="nt">&quot;js&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;middle.js&quot;</span><span class="p">],</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="w">        </span><span class="nt">&quot;run_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;document_start&quot;</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="p">],</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="nt">&quot;externally_connectable&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="w">    </span><span class="nt">&quot;matches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://*/*&quot;</span><span class="p">]</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">&quot;manifest_version&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;IBM Passkey Extension&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Performs FIDO2 registration and authentication ceremonies&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nt">&quot;homepage_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://github.com/sramsamy/fido2-browser-extension&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nt">&quot;icons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="nt">&quot;48&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-48x48.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="nt">&quot;96&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-96x96.png&quot;</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="p">},</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="nt">&quot;permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;activeTab&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;storage&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;notifications&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;scripting&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;tabs&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nt">&quot;sidebar_action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="w">    </span><span class="nt">&quot;default_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">        </span><span class="nt">&quot;48&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-48x48.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">        </span><span class="nt">&quot;96&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-96x96.png&quot;</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="w">    </span><span class="nt">&quot;default_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">    </span><span class="nt">&quot;default_panel&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;side_panel.html&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="nt">&quot;open_at_install&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="p">},</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nt">&quot;action&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="w">    </span><span class="nt">&quot;default_icon&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;icons/ibm-cloud--hyper-protect-crypto-services-48x48.png&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="nt">&quot;default_title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Open Sidebar&quot;</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="p">},</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="w">    </span><span class="nt">&quot;scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;background_script.js&quot;</span><span class="p">]</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="p">},</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="nt">&quot;content_scripts&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a><span class="w">        </span><span class="nt">&quot;matches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;&lt;all_urls&gt;&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="w">        </span><span class="nt">&quot;js&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;main.js&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="w">        </span><span class="nt">&quot;world&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MAIN&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="w">        </span><span class="nt">&quot;run_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;document_start&quot;</span><span class="p">,</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="w">        </span><span class="nt">&quot;all_frames&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="w">        </span><span class="nt">&quot;matches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;&lt;all_urls&gt;&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a><span class="w">        </span><span class="nt">&quot;js&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;middle.js&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="w">        </span><span class="nt">&quot;run_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;document_start&quot;</span>
+<a id="__codelineno-1-42" name="__codelineno-1-42" href="#__codelineno-1-42"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-43" name="__codelineno-1-43" href="#__codelineno-1-43"></a><span class="p">],</span>
+<a id="__codelineno-1-44" name="__codelineno-1-44" href="#__codelineno-1-44"></a><span class="nt">&quot;content_security_policy&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-45" name="__codelineno-1-45" href="#__codelineno-1-45"></a><span class="w">    </span><span class="nt">&quot;extension_pages&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;script-src &#39;self&#39; &#39;wasm-unsafe-eval&#39;; object-src &#39;self&#39;&quot;</span>
+<a id="__codelineno-1-46" name="__codelineno-1-46" href="#__codelineno-1-46"></a><span class="p">},</span>
+<a id="__codelineno-1-47" name="__codelineno-1-47" href="#__codelineno-1-47"></a>
+<a id="__codelineno-1-48" name="__codelineno-1-48" href="#__codelineno-1-48"></a><span class="nt">&quot;host_permissions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;https://*/*&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;http://*/*&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-49" name="__codelineno-1-49" href="#__codelineno-1-49"></a><span class="nt">&quot;web_accessible_resources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-1-50" name="__codelineno-1-50" href="#__codelineno-1-50"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-1-51" name="__codelineno-1-51" href="#__codelineno-1-51"></a><span class="w">        </span><span class="nt">&quot;resources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;main.js&quot;</span><span class="p">],</span>
+<a id="__codelineno-1-52" name="__codelineno-1-52" href="#__codelineno-1-52"></a><span class="w">        </span><span class="nt">&quot;matches&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;&lt;all_urls&gt;&quot;</span><span class="p">]</span>
+<a id="__codelineno-1-53" name="__codelineno-1-53" href="#__codelineno-1-53"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="p">]</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h4 id="service-worker">Service Worker</h4>
+<p>The service worker operates in a special context known as the background page, which provides access to a <code>window</code> global object and standard DOM APIs. Additionally, it can access any WebExtension APIs. However, service workers cannot directly interact with web pages. Instead, communication between the service worker and content scripts is done through a message-passing API.</p>
+<p>For more details on service workers, refer to the <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Background_scripts">MDN Web Docs on Background Scripts</a>.</p>
+<p>In this extension, the service worker is crucial as it generates attestation keys for various attestation types. Currently, only the <code>none</code> attestation type is supported. In the future, the extension will support <code>fido-u2f</code>, <code>packed</code>, <code>tpm</code>, and <code>packed-self</code> attestation types. The service worker handles all requests for attestation keys, set in the <code>fidoUtilsConfig</code> object, from content scripts, relying on message-passing for communication.</p>
+<h4 id="content-scripts">Content Scripts</h4>
+<p>Content scripts execute in a special environment known as an <code>isolated world</code>, allowing them to interact with the DOM of the relying party's webpage but preventing direct access to any JavaScript variables or functions created by the webpage.</p>
+<p>To bypass this limitation, the extension uses two content scripts:</p>
+<ol>
+<li><code>main.js</code> runs in the "MAIN" world, meaning it shares the same execution environment as the relying party's JavaScript. This allows it to interact with the page’s JavaScript, but at the cost of losing access to WebExtension APIs such as <code>browser.runtime</code>.</li>
+<li><code>middle.js</code>, on the other hand, remains in the default <code>`"ISOLATED"</code> world, acting as a bridge between <code>main.js</code> and the service worker.</li>
+</ol>
+<h4 id="communication-between-scripts">Communication Between Scripts</h4>
+<p>To facilitate communication between these scripts, the extension uses two message-passing methods:</p>
+<ul>
+<li>
+<p><strong>Custom Events</strong>: Since <code>main.js</code> and <code>middle.js</code> both share the DOM, they communicate via custom events using JavaScript’s <code>CustomEvent</code> interface. For example, when a user clicks the <strong>register</strong> button, it intercepts <code>navigator.credentials.create</code> and triggers a custom method. This method retrieves the <code>fidoUtilsConfig</code> object from the background service, passing it from the service worker to <code>middle.js</code> and finally to <code>main.js</code>.</p>
+</li>
+<li>
+<p><strong>Message Passing</strong>: For communication between <code>middle.js</code> and the service worker, the extension relies on the WebExtension and Chrome message-passing API to relay requests and responses between the scripts.</p>
+</li>
+</ul>
+<p>To manage the differences between the Chrome and Firefox browser APIs, the extension uses an abstraction class called <code>BrowserApi</code>. This class helps streamline the interactions with the distinct APIs provided by Chrome and Firefox, allowing the extension to work across both browsers without duplicating code.</p>
+<div class="highlight"><span class="filename">middle.js</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kd">class</span><span class="w"> </span><span class="nx">BrowserApi</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">isChromeApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;Chrome&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">isFirefoxApi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">userAgent</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s2">&quot;Firefox&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">runtime</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">isChromeApi</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nx">chrome</span><span class="p">.</span><span class="nx">runtime</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="nx">browser</span><span class="p">.</span><span class="nx">runtime</span><span class="p">;</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="nx">get</span><span class="w"> </span><span class="nx">sidePanel</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isChromeApi</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">chrome</span><span class="p">.</span><span class="nx">sidePanel</span><span class="p">;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">isFirefoxApi</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">browser</span><span class="p">.</span><span class="nx">sidebarAction</span><span class="p">;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="p">}</span>
+</code></pre></div>
+<p>This setup ensures efficient communication between all parts of the extension, allowing it to handle FIDO2 registration and authentication operations.</p>
+<h4 id="dispatching-a-custom-event">Dispatching a Custom Event</h4>
+<h3 id="dispatching-a-custom-event_1">Dispatching a Custom Event</h3>
+<p>Since <code>main.js</code> loses access to the Browsers <code>runtime</code> API, Custom events are a handy way to communicate between different components of the extension, especially when dealing with message-passing between content scripts and background scripts. In our extension, we use the <code>CustomEvent</code> interface to dispatch events containing specific messages or data.</p>
+<p>The first step is to dispatch a <code>CustomEvent</code> containing the necessary message. This method is used in several places, including the <code>requestFidoUtilsConfig()</code> function, which requests the FIDO2 configuration from the background script.</p>
+<div class="highlight"><span class="filename">main.js</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="ow">new</span><span class="w"> </span><span class="nx">CustomEvent</span><span class="p">(</span><span class="s2">&quot;requestFidoUtilsConfig&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">        </span><span class="nx">detail</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">            </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;getFidoUtils&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Retrieve fidoutilsConfig variable&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">    </span><span class="p">})</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">);</span>
+</code></pre></div>
+<p><code>middle.js</code> then listens for the event dispatched from main.js and communicates with the background service worker using the browser.runtime API.</p>
+<div class="highlight"><span class="filename">middle.js</span><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&quot;requestFidoUtilsConfig&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">BrowserApi</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">sendMessage</span><span class="p">({</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Retrieve fidoutilsConfig variable&quot;</span><span class="p">,</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">    </span><span class="p">});</span>
+</code></pre></div>
+<p>The background service worker listens for incoming messages from the content scripts. Upon receiving a request, it retrieves the fidoutilsConfig object and sends it back to <code>middle.js</code> through a callback function. The following code snippet demonstrates this process:</p>
+<div class="highlight"><span class="filename">background_script.js</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nx">fido</span><span class="p">.</span><span class="nx">BrowserApi</span><span class="p">.</span><span class="nx">runtime</span><span class="p">.</span><span class="nx">onMessage</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">,</span><span class="w"> </span><span class="nx">sender</span><span class="p">,</span><span class="w"> </span><span class="nx">sendResponse</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">request</span><span class="p">.</span><span class="nx">message</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s2">&quot;Retrieve fidoutilsConfig variable&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Received request for the fidoutilsConfig object&quot;</span><span class="p">);</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">getFidoUtilsConfig</span><span class="p">();</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">            </span><span class="nx">sendResponse</span><span class="p">({</span><span class="w"> </span><span class="nx">result</span><span class="o">:</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="p">});</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="p">);</span>
+</code></pre></div>
+<p>After receiving the response from the background script, middle.js dispatches a custom event to main.js. This custom event contains the fidoutilsConfig object within the CustomEvent.detail property.</p>
+<div class="highlight"><span class="filename">middle.js</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">document</span><span class="p">.</span><span class="nx">dispatchEvent</span><span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="ow">new</span><span class="w"> </span><span class="nx">CustomEvent</span><span class="p">(</span><span class="s2">&quot;setFidoUtilsConfig&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">        </span><span class="nx">detail</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">            </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Response&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">            </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Sending fidoutilsConfig to main.js&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">            </span><span class="nx">response</span><span class="o">:</span><span class="w"> </span><span class="nx">response</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="p">})</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="p">);</span>
+</code></pre></div>
+<p>In the requestFidoUtilsConfig function within main.js, an event listener is set up to listen for responses from middle.js. This function returns a promise that, when fulfilled, sets the fidoutilsConfig variable with the object received from middle.js.</p>
+<div class="highlight"><span class="filename">middle.js</span><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kd">function</span><span class="w"> </span><span class="nx">handleConfigResponse</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">        </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">detail</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="nx">reject</span><span class="p">(</span><span class="s2">&quot;Failed to retrieve fidoutilsConfig&quot;</span><span class="p">);</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">removeEventListener</span><span class="p">(</span><span class="s2">&quot;setFidoUtilsConfig&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">handleConfigResponse</span><span class="p">);</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">}</span>
+</code></pre></div>
+<h3 id="fido2-config">FIDO2 Config</h3>
+<p>Upon installing the extension for this first time, an adaption of Shane Weedens <code>fido2-node-client</code> script, which can be viewed <a href="https://github.com/sbweeden/fido2-node-clients/blob/main/certs/generate_attestation_certs.js">here</a>, generates a set of attestation keys for various attestation types are generated with various cryptographic keys and certificates that are essential for FIDO2 attestation. The extension creates a self-signed Certificate Authority (CA) and signs certificates for different attestation types Additionally, it outputs a JSON configuration parameter that is essential for this extension, enabling it to perform FIDO2 registration and authentication ceremonies.</p>
+<p>The different attestation types include:</p>
+<ul>
+<li><code>U2F</code></li>
+<li><code>Packed</code></li>
+<li><code>Packed-self</code></li>
+<li><code>TPM</code></li>
+</ul>
+<p>This code snippet below checks if a U2F attestation key already exists in the storage. If it doesn't, it creates a new key pair using the <code>jsrasign</code> library and converts the public and private keys to PEM format, storing the private key for future use.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">u2fPublicKeyPEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kd">let</span><span class="w"> </span><span class="nx">u2fPrivateKeyPEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">store</span><span class="p">[</span><span class="nx">U2F_ATTESTATION_KEY</span><span class="p">])</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Creating U2F key: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">U2F_ATTESTATION_KEY</span><span class="p">);</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">kp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">KEYUTIL</span><span class="p">.</span><span class="nx">generateKeypair</span><span class="p">(</span><span class="s2">&quot;EC&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;secp256r1&quot;</span><span class="p">);</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nx">u2fPublicKeyPEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">KEYUTIL</span><span class="p">.</span><span class="nx">getPEM</span><span class="p">(</span><span class="nx">kp</span><span class="p">.</span><span class="nx">pubKeyObj</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PKCS8PUB&quot;</span><span class="p">);</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="nx">u2fPrivateKeyPEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">KEYUTIL</span><span class="p">.</span><span class="nx">getPEM</span><span class="p">(</span><span class="nx">kp</span><span class="p">.</span><span class="nx">prvKeyObj</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;PKCS8PRV&quot;</span><span class="p">);</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="nx">store</span><span class="p">[</span><span class="nx">U2F_ATTESTATION_KEY</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">u2fPrivateKeyPEM</span><span class="p">;</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="c1">// Retrieve the existing U2F private key PEM and extract the public key</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nx">u2fPrivateKeyPEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">store</span><span class="p">[</span><span class="nx">U2F_ATTESTATION_KEY</span><span class="p">];</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">prvKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">KEYUTIL</span><span class="p">.</span><span class="nx">getKey</span><span class="p">(</span><span class="nx">u2fPrivateKeyPEM</span><span class="p">);</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="nx">u2fPublicKeyPEM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fidoutils</span><span class="p">.</span><span class="nx">certToPEM</span><span class="p">(</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">        </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">b64toBA</span><span class="p">(</span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">hextob64</span><span class="p">(</span><span class="nx">prvKey</span><span class="p">.</span><span class="nx">pubKeyHex</span><span class="p">))</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="w">    </span><span class="p">);</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="p">}</span>
+</code></pre></div>
+<p>Attestation is optional in FIDO authentication, and currently this extension is defaulted to <code>packed-self</code> when a user generates a passkey. Future versions of the IBM passkey extension should add support for other formats to meet the FIDO Alliance's Metadata Service (MDS) and provide proof that the authenticator meets the RP's criteria. For more information on FIDO attestation, see this <a href="https://fidoalliance.org/fido-attestation-enhancing-trust-privacy-and-interoperability-in-passwordless-authentication/#fido-attestation-explained">FIDO White Paper</a>.</p>
+<p>An example of the <code>FIDO2_CONFIG</code> object:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">exampleConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nx">encryptionPassphrase</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;MySecret&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://example.ibm.com:9443&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="s2">&quot;fido-u2f&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="nx">privateKeyHex</span><span class="o">:</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">            </span><span class="s2">&quot;00b8464b082d2a77bae48d8ec84694cd4cca7b41948635622a8db1bc87a8894f17&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">        </span><span class="nx">publicKeyHex</span><span class="o">:</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">            </span><span class="s2">&quot;04ffd1d9a70f7c1c83fa8660925dfbfcbb4d1c232e5443f5d9ee4ad72480fec9d20068c05b5d7777cc25fd27d93015c0ea2d72f51d8eae1970729b98609a5013db&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="nx">cert</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;MIIDFjCB/wIJAKiWRVc805iDMA0GCSqGSIb3DQEBCwUAMDExCzAJBgNVBAYTAlVTMQ0wCwYDVQQKDAROSVNUMRMwEQYDVQQDDApVSUNDUm9vdENBMB4XDTE5MDgwNzIwMjgwM1oXDTQ2MTIyMjIwMjgwM1owNTELMAkGA1UEBhMCVVMxDTALBgNVBAoMBE5JU1QxFzAVBgNVBAMMDlVJQ0NVMkYtU0lHTkVSMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/9HZpw98HIP6hmCSXfv8u00cIy5UQ/XZ7krXJID+ydIAaMBbXXd3zCX9J9kwFcDqLXL1HY6uGXBym5hgmlAT2zANBgkqhkiG9w0BAQsFAAOCAgEAKP/Ck24JM+8J7Ns4g5a8XczXPPnYe+FFs7bUQoam2sEEPBzapdIssl9rYkFKvxIW8zgPHJVIQJ3hMmq9tGkhKXT+WzIew+BJRzBYscytaaqMURHuqM1usBFQZSBUYIlDCQqezxG9bZ4cx8gzmL4ldYPGwSAex3K9XOVdyNn+ut8/axcfhDYfr0zW498KOg1L72kjthiNTrJWGaCwkfCsNNtBHWy2HmGzAgMLi7Wn3eNzTyrbzj7GBBsFm6Nv5LKLxCwX8YEd6UWzYLuP/AhAG1+w1rfPmbdi0/hXGUr8h51dlTF2DUrxQfZvECA5Du4TZHHKpTu7opI2BSVabXYp+F25RbkcE1oAqjrZeMdeWXFu5bcD5MvQ6Q3D/M1H1ngahFLzyzPprZ1OO5codyiRwhPtSyeR+FIi7yj9Lirxhv+t1pzm9N6z8DEW3Iman5+x+hGPP01n0RFP1H+Fu0jUCZfcZmx0ecrrd2r3B0YpyUR5n45dweBw+dyQZaPm0eenyMYFNuXWNx+aT7wcYFYhoYEqi0n7bGmvR3ZmFws3rBi2uLOamM1cOSnabOQ7Tvirq39TAbJ3dNZAwoD7pFn4YZHeywPGlENnij1bMnTYyVXRr/coi84bD4S147Ydm6lWpMcolpVlplbXJ3S3BDu/AqJGBqQwKtBUDuL0BbnbE+0=&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">    </span><span class="nx">packed</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">        </span><span class="nx">aaguid</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;37c4c2cf41544c5791039c9bdcca5b2b&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="w">        </span><span class="nx">privateKeyHex</span><span class="o">:</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="w">            </span><span class="s2">&quot;03e158d202854c3bc0cb233a726f4445b41b4ca80b370a2c30d8fe039f820d42&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="w">        </span><span class="nx">publicKeyHex</span><span class="o">:</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a><span class="w">            </span><span class="s2">&quot;045c6c82d6b47e2971a78ebbe8dd910ebbdcecb902019e6b37f743374c5740d9f0533068c562ebd7c11e55258b235efc48aba0d77f6d0ebe6f991321976ea1e072&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a><span class="w">        </span><span class="nx">cert</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;MIIDVTCCAT2gAwIBAgIJAKiWRVc805iEMA0GCSqGSIb3DQEBCwUAMDExCzAJBgNVBAYTAlVTMQ0wCwYDVQQKDAROSVNUMRMwEQYDVQQDDApVSUNDUm9vdENBMB4XDTE5MDgwNzIwMjgwM1oXDTQ2MTIyMjIwMjgwM1owXDELMAkGA1UEBhMCVVMxDTALBgNVBAoMBE5JU1QxIjAgBgNVBAsMGUF1dGhlbnRpY2F0b3IgQXR0ZXN0YXRpb24xGjAYBgNVBAMMEVVJQ0NQQUNLRUQtU0lHTkVSMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXGyC1rR+KXGnjrvo3ZEOu9zsuQIBnms390M3TFdA2fBTMGjFYuvXwR5VJYsjXvxIq6DXf20Ovm+ZEyGXbqHgcqMQMA4wDAYDVR0TAQH/BAIwADANBgkqhkiG9w0BAQsFAAOCAgEAtsJl2cVtuRJqwm0SXhP2vGU3An79GxT1appa9JKLWz7iv5zOVWowKvbEnB6sqjNPZ1p65yEi5UmRNnkE6m6IFSRijz5eeWOHQ0ceQN4BhH9veE4Xe3WiOaahTTJX+hqj+5ByMhgw0dZ6+1iEu20BE0zKAA+VSrpA5O+LPOBDNjCfVzLI566ykNqe2mShm+UGNDYkTxVJmFXY9qyy/zLazynroE6qnIt03UutzifAnNNnBKqk9gK9C6cosDHeyvRGy9um1P21EC85yEZvN8wngzNmc8TJwnkXYHP4METHbjR9bmQP60e19a7so9sz7P5MhkFJ/JOURkbWh6qmzIGQhoNpGw6OQnAxHvkPiw9HuDEfjzIFX1LQi74uMIEG7juCIt2u56dXG7T0NM8MfVlupDJzi4AnwI+NuONrKtC5iK6HHSrRxCQ8QiPTemlymPhC/XMJW70PqDiH7cEmCbsDKg9cTN8mWCNNyb1/WkcfrP2zq+jm1Lp8Viam5kHsd66X9VP/44Aj5G6TGJU7ZitBB/hHqz0jznuZU+fRuGf2taQdCP/DXps/VngXrcvs4sRS3aid0KO5eLkUP8e11r909DMTvV/CsqghqXpS13oUbTs8cD12y93EftSbw6OKR30xcV1PScCOY/CSnCuSQFlgrXW1OotzmWQUKKKUB9Egzb8=&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a><span class="w">    </span><span class="s2">&quot;packed-self&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a><span class="w">        </span><span class="nx">aaguid</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1811ec8b8a91459299f217f35d53242e&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a><span class="p">};</span>
+</code></pre></div>
+<h3 id="registering-a-credential">Registering a Credential</h3>
+<p>The IBM passkey extension works by overriding the relying party's call to navigator.credentials.create(), a method from the WebAuthn API. This API, developed by <a href="https://www.w3.org/TR/webauthn-2/">W3C</a> and <a href="https://fidoalliance.org/fido2-2/fido2-web-authentication-webauthn/">FIDO</a>, enables servers to use public key cryptography for FIDO2 registration and authentication.</p>
+<p>When a user registers an authenticator, the server provides data that binds the user to a credential (a public-private key pair) along with identifying information. The extension intercepts the original navigator.credentials.create method using a reference to the original methods and then calls a custom implementation to handle the registration process.</p>
+<div class="highlight"><span class="filename">main.js</span><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">myCredentials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nx">create</span><span class="o">:</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">credentials</span><span class="p">.</span><span class="nx">create</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">credentials</span><span class="p">),</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nx">get</span><span class="o">:</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">credentials</span><span class="p">.</span><span class="nx">get</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">credentials</span><span class="p">),</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">};</span>
+</code></pre></div>
+<p>The <code>createMethod</code> function is a custom implementation of <code>navigator.credentials.create()</code>, which is used to register new FIDO2 passkeys. When called, this method receives an <code>options</code> object, which contains data provided by the server to create a new credential for the user. This data includes:</p>
+<ul>
+<li>Challenge: A cryptographically random buffer generated by the server.</li>
+<li>Relying Party (rp) Object: Contains information about the server requesting the credential.</li>
+<li>User Object: Identifies the user for whom the credential is being created.</li>
+<li>PubKeyCredParams: Describes the cryptographic algorithms supported by the server.</li>
+<li>Authenticator Selection: Defines requirements for the authenticator type.</li>
+<li>Attestation Data: Optionally includes evidence of the authenticator’s trustworthiness.</li>
+</ul>
+<div class="highlight"><span class="filename">main.js</span><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">createMethod</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;options object: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">);</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">userPresence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">userPresenceModal</span><span class="p">(</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">            </span><span class="s2">&quot;Would you like to create a new passkey?&quot;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;user presence&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userPresence</span><span class="p">);</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">oldFidoUtilsConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">getFidoUtilsConfig</span><span class="p">();</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">newFidoutilsConfig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">requestFidoUtilsConfig</span><span class="p">();</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">        </span><span class="c1">// Set the origin in the config</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">        </span><span class="nx">newFidoutilsConfig</span><span class="p">[</span><span class="s2">&quot;origin&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="w">        </span><span class="c1">// Set the fidoUtilsConfig object with the new one retrieved from the background script</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">        </span><span class="nx">fido</span><span class="p">.</span><span class="nx">setFidoUtilsConfig</span><span class="p">(</span><span class="nx">newFidoutilsConfig</span><span class="p">);</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;publicKey&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">options</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a><span class="w">            </span><span class="c1">// Normalise the challenge field of the input to Uint8Array</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">challenge</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">ArrayBuffer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a><span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;find me array buffer&quot;</span><span class="p">);</span>
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a><span class="w">                </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Uint8Array</span><span class="p">(</span>
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a><span class="w">                    </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">challenge</span>
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a><span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;new normalised challenge is&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">challenge</span><span class="p">);</span>
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">userPresence</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a><span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">processCredentialCreationOptions</span><span class="p">(</span>
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a><span class="w">                    </span><span class="nx">options</span><span class="p">,</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a><span class="w">                    </span><span class="s2">&quot;packed-self&quot;</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a><span class="w">                </span><span class="kd">let</span><span class="w"> </span><span class="nx">publicCred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">spkc</span><span class="p">;</span>
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a><span class="w">                </span><span class="nx">publicCred</span><span class="p">[</span><span class="s2">&quot;getClientExtensionResults&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-11-33" name="__codelineno-11-33" href="#__codelineno-11-33"></a><span class="w">                </span><span class="p">};</span>
+<a id="__codelineno-11-34" name="__codelineno-11-34" href="#__codelineno-11-34"></a><span class="w">                </span><span class="nx">publicCred</span><span class="p">[</span><span class="s2">&quot;toJSON&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-35" name="__codelineno-11-35" href="#__codelineno-11-35"></a><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
+<a id="__codelineno-11-36" name="__codelineno-11-36" href="#__codelineno-11-36"></a><span class="w">                </span><span class="p">};</span>
+<a id="__codelineno-11-37" name="__codelineno-11-37" href="#__codelineno-11-37"></a>
+<a id="__codelineno-11-38" name="__codelineno-11-38" href="#__codelineno-11-38"></a><span class="w">                </span><span class="nx">publicCred</span><span class="p">.</span><span class="nx">rawId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64toBA</span><span class="p">(</span>
+<a id="__codelineno-11-39" name="__codelineno-11-39" href="#__codelineno-11-39"></a><span class="w">                    </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64utobase64</span><span class="p">(</span><span class="nx">publicCred</span><span class="p">.</span><span class="nx">rawId</span><span class="p">)</span>
+<a id="__codelineno-11-40" name="__codelineno-11-40" href="#__codelineno-11-40"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-11-41" name="__codelineno-11-41" href="#__codelineno-11-41"></a>
+<a id="__codelineno-11-42" name="__codelineno-11-42" href="#__codelineno-11-42"></a><span class="w">                </span><span class="nx">publicCred</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">attestationObject</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64toBA</span><span class="p">(</span>
+<a id="__codelineno-11-43" name="__codelineno-11-43" href="#__codelineno-11-43"></a><span class="w">                    </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64utobase64</span><span class="p">(</span><span class="nx">publicCred</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">attestationObject</span><span class="p">)</span>
+<a id="__codelineno-11-44" name="__codelineno-11-44" href="#__codelineno-11-44"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-11-45" name="__codelineno-11-45" href="#__codelineno-11-45"></a>
+<a id="__codelineno-11-46" name="__codelineno-11-46" href="#__codelineno-11-46"></a><span class="w">                </span><span class="nx">publicCred</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">clientDataJSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64toBA</span><span class="p">(</span>
+<a id="__codelineno-11-47" name="__codelineno-11-47" href="#__codelineno-11-47"></a><span class="w">                    </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64utobase64</span><span class="p">(</span><span class="nx">publicCred</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">clientDataJSON</span><span class="p">)</span>
+<a id="__codelineno-11-48" name="__codelineno-11-48" href="#__codelineno-11-48"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-11-49" name="__codelineno-11-49" href="#__codelineno-11-49"></a>
+<a id="__codelineno-11-50" name="__codelineno-11-50" href="#__codelineno-11-50"></a><span class="w">                </span><span class="nx">showSuccessModal</span><span class="p">(</span>
+<a id="__codelineno-11-51" name="__codelineno-11-51" href="#__codelineno-11-51"></a><span class="w">                    </span><span class="s2">&quot;Custom create method successful. Creating new credential.&quot;</span>
+<a id="__codelineno-11-52" name="__codelineno-11-52" href="#__codelineno-11-52"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-11-53" name="__codelineno-11-53" href="#__codelineno-11-53"></a><span class="w">                </span><span class="k">await</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="mf">3000</span><span class="p">));</span>
+<a id="__codelineno-11-54" name="__codelineno-11-54" href="#__codelineno-11-54"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">publicCred</span><span class="p">;</span>
+<a id="__codelineno-11-55" name="__codelineno-11-55" href="#__codelineno-11-55"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-56" name="__codelineno-11-56" href="#__codelineno-11-56"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">myCredentials</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+<a id="__codelineno-11-57" name="__codelineno-11-57" href="#__codelineno-11-57"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-11-58" name="__codelineno-11-58" href="#__codelineno-11-58"></a><span class="w">            </span><span class="c1">// else fallback to original create method</span>
+<a id="__codelineno-11-59" name="__codelineno-11-59" href="#__codelineno-11-59"></a><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-60" name="__codelineno-11-60" href="#__codelineno-11-60"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">myCredentials</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+<a id="__codelineno-11-61" name="__codelineno-11-61" href="#__codelineno-11-61"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-11-62" name="__codelineno-11-62" href="#__codelineno-11-62"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-63" name="__codelineno-11-63" href="#__codelineno-11-63"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;Error creating credential:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<a id="__codelineno-11-64" name="__codelineno-11-64" href="#__codelineno-11-64"></a><span class="w">        </span><span class="k">throw</span><span class="w"> </span><span class="nx">error</span><span class="p">;</span>
+<a id="__codelineno-11-65" name="__codelineno-11-65" href="#__codelineno-11-65"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-66" name="__codelineno-11-66" href="#__codelineno-11-66"></a><span class="p">}</span>
+</code></pre></div>
+<p>The method starts by checking whether the <code>challenge</code> in the <code>options</code> object is in the correct format. If the <code>challenge</code> is an <code>ArrayBuffer</code>, it is normalised into a <code>Uint8Array</code> to ensure proper handling during the credential creation process. The function then presents a user presence modal to request consent from the user to create a passkey. Once consent is granted, the function processes the credential creation options by invoking <code>fido.processCredentialCreationOptions</code>, which prepares a FIDO2 server public key credential. The resulting object contains the <code>publicKey</code>, which is used in future authentication, as well as other fields such as the <code>rawID</code>, <code>attestationObject</code>, and <code>clientDataJSON</code>. These fields provide cryptographic evidence of the registration.</p>
+<div class="highlight"><span class="filename">publicKeyCredentialCreationOptions object</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="nt">&quot;publicKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">        </span><span class="nt">&quot;rp&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fidointerop.securitypoc.com&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fidointerop.securitypoc.com&quot;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">            </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">                </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">185</span><span class="w"> </span><span class="err">...</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">            </span><span class="p">},</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sachin Ramsamy&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">            </span><span class="nt">&quot;displayName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Sachin Ramsamy&quot;</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="w">        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="w">        </span><span class="nt">&quot;challenge&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">54</span><span class="w"> </span><span class="err">...</span>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a><span class="w">        </span><span class="nt">&quot;excludeCredentials&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="w">                </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a><span class="w">                    </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">197</span><span class="w"> </span><span class="err">...</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a><span class="w">                </span><span class="p">},</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public-key&quot;</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a><span class="w">        </span><span class="p">],</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a><span class="w">        </span><span class="nt">&quot;extensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="w">        </span><span class="nt">&quot;authenticatorSelection&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a><span class="w">            </span><span class="nt">&quot;requireResidentKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="w">            </span><span class="nt">&quot;userVerification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;preferred&quot;</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="w">        </span><span class="p">},</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="w">        </span><span class="nt">&quot;attestation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;direct&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="w">        </span><span class="nt">&quot;pubKeyCredParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a><span class="w">            </span><span class="p">{</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a><span class="w">                </span><span class="nt">&quot;alg&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-7</span><span class="p">,</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public-key&quot;</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a><span class="w">        </span><span class="p">]</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="p">}</span>
+</code></pre></div>
+<p>Finally, the credential object is returned, with the necessary attributes for validating the registration, including methods to convert the object into a JSON format or retrieve client extension results. The server will then validate the credential by parsing the attestation object, client data JSON, and authenticator data. It will also ensure that the challenge matches the one originally sent and that the origin set in the extension matches the expected origin. This process ensures the integrity of the FIDO2 registration ceremony and verifies the authenticity of the newly created credential.</p>
+<p>The publicKeyObject retrieved at the end is encoded using COSE, a compact format that describes the credential's public key and its associated metadata.</p>
+<div class="highlight"><span class="filename">main.js | Weeden, S (2024) fido2-node-client [Source code] https://github.com/sbweeden/fido2-node-clients/blob/main/fidoutils.js</span><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kd">let</span><span class="w"> </span><span class="nx">credPublicKeyCOSE</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="mf">1</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="c1">// kty</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="mf">3</span><span class="o">:</span><span class="w"> </span><span class="o">-</span><span class="mf">7</span><span class="p">,</span><span class="w"> </span><span class="c1">// alg</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="s2">&quot;-1&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// crv</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="s2">&quot;-2&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">b64toBA</span><span class="p">(</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">        </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">hextob64</span><span class="p">(</span><span class="nx">keypair</span><span class="p">.</span><span class="nx">pubKeyObj</span><span class="p">.</span><span class="nx">getPublicKeyXYHex</span><span class="p">()[</span><span class="s2">&quot;x&quot;</span><span class="p">])</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="w">    </span><span class="p">),</span><span class="w"> </span><span class="c1">// xCoordinate</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="w">    </span><span class="s2">&quot;-3&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">b64toBA</span><span class="p">(</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">        </span><span class="nx">jsrsasign</span><span class="p">.</span><span class="nx">hextob64</span><span class="p">(</span><span class="nx">keypair</span><span class="p">.</span><span class="nx">pubKeyObj</span><span class="p">.</span><span class="nx">getPublicKeyXYHex</span><span class="p">()[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="w">    </span><span class="p">),</span><span class="w"> </span><span class="c1">// yCoordinate</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="p">};</span>
+</code></pre></div>
+<p>If the validation process is successful, the server stores the publicKeyBytes and credentialId in a database, linking them to the user's account. If the custom create implemention fails, then the extension will fall back to the original <code>navigator.credentials.create()</code> method.</p>
+<h3 id="authenticating-with-an-ibm-passkey-extension-credential">Authenticating with an IBM Passkey Extension Credential</h3>
+<p>After completing the registration step, the credential can be used to authenticate the user. During authentication, an assertion is created to prove that the user owns the private key associated with their registered credential. The extension overrides the original <code>navigator.credentials.get()</code> method, preparing a FIDO2 <a href="https://fidoalliance.org/specs/fido-v2.0-rd-20180702/fido-server-v2.0-rd-20180702.html#serverauthenticatorassertionresponse"><code>ServerAuthenticatorAssertionResponse</code></a> to serve as the parameters for the WebAuthn call. This custom method works by utlising one of Shane's <a href="https://github.com/sbweeden/fido2-node-clients/blob/main/fidoutils.js"><code>fido2-node-client</code></a> methods, <code>fido.processCredentialRequestOptions()</code>.</p>
+<div class="highlight"><span class="filename">publicKeyCredential object</span><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="p">{</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="nt">&quot;publicKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">        </span><span class="nt">&quot;rpId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fidointerop.securitypoc.com&quot;</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="nt">&quot;timeout&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300000</span><span class="p">,</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">        </span><span class="nt">&quot;challenge&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w">            </span><span class="nt">&quot;0&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">28</span><span class="w"> </span><span class="err">...</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w">                </span><span class="p">},</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">                </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public-key&quot;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">        </span><span class="p">],</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w">        </span><span class="nt">&quot;extensions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">            </span><span class="nt">&quot;devicePubKey&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">                </span><span class="nt">&quot;attestation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;direct&quot;</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">    </span><span class="p">}</span>
+</code></pre></div>
+<p>The server generates a cryptographically random challenge, while the allowCredentials array specifies which credentials the server wants the user to authenticate with. The assertion object returned by the custom <code>get()</code> method is also a <code>publicKeyCredential</code> object but differs from the registration version. Instead of including the public key, it includes a signature. The <code>id</code> and <code>rawId</code> fields identify the credential used in the authentication, while <code>authenticatorData</code> contains information similar to registration data but without the public key. This data is also used to generate the signature. The <code>clientDataJSON</code> contains data passed from the browser to the authenticator, and this too is used in the signature generation process. The signature itself is generated by the private key tied to the credential, with the <code>fido.processCredentialRequestOptions()</code> method resolving the private key using the credential ID.</p>
+<div class="highlight"><span class="filename">serverPublicKeyCredential object</span><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;U2FsdGVkX1_ymEkaxY69SeqRX1CPyA6abYNyenPDY-UWpmKOyXKx24K7buq-M_o8cfDYgROHcXQ7jEnMFpgCxtyquPjPYiQ3EyQc0aEC-QJVVC7BVYkT89fz9buA3mOe&quot;</span><span class="p">,</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nt">&quot;rawId&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">        </span><span class="mi">83</span><span class="w"> </span><span class="err">..</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="nt">&quot;response&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">        </span><span class="nt">&quot;clientDataJSON&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">            </span><span class="mi">123</span><span class="w"> </span><span class="err">..</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">        </span><span class="p">],</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">        </span><span class="nt">&quot;authenticatorData&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">            </span><span class="mi">246</span><span class="w"> </span><span class="err">..</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">        </span><span class="p">],</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">        </span><span class="nt">&quot;signature&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">            </span><span class="mi">48</span><span class="w"> </span><span class="err">...</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="w">        </span><span class="p">],</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">        </span><span class="nt">&quot;userHandle&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="w">    </span><span class="p">},</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public-key&quot;</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a><span class="p">}</span>
+</code></pre></div>
+<p>In the extensions custom <code>get()</code> method, the server generates a challenge, and the method normalises this and other credential options (like <code>allowCredentials</code>) into <code>Uint8Array</code> format if they are of type <code>ArrayBuffer</code>. If the user consents to authenticate via the IBM passkey extension, the method uses fido.processCredentialRequestOptions() to create a serverPublicKeyCredential. The returned credential is formatted, converting fields like <code>authenticatorData</code>, <code>clientDataJSON</code>, <code>signature</code>, and <code>rawId</code> into binary form using <code>fido.base64toBA()</code>.</p>
+<div class="highlight"><span class="filename">main.js</span><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">myGetMethod</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">userPresence</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">userPresenceModal</span><span class="p">(</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">            </span><span class="s2">&quot;Would you like to authenticate using the ibm passkey extension?&quot;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">        </span><span class="p">);</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="s2">&quot;credentials&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">navigator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">            </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;navigator.credentials&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">navigator</span><span class="p">.</span><span class="nx">credentials</span><span class="p">);</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="nx">fidoutilsConfigVariable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">requestFidoUtilsConfig</span><span class="p">();</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">            </span><span class="nx">fidoutilsConfigVariable</span><span class="p">[</span><span class="s2">&quot;origin&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">origin</span><span class="p">;</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">            </span><span class="nx">fido</span><span class="p">.</span><span class="nx">setFidoUtilsConfig</span><span class="p">(</span><span class="nx">fidoutilsConfigVariable</span><span class="p">);</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">challenge</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">ArrayBuffer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">                </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">challenge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Uint8Array</span><span class="p">(</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">                    </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">challenge</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">                </span><span class="p">);</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">allowCredentials</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Array</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;options.publicKey.allowCredentials is instanceof Array&quot;</span><span class="p">);</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">allowCredentials</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="w">                    </span><span class="c1">// Normalise to Uint8Array if id is of type ArrayBuffer</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">allowCredentials</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">ArrayBuffer</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="w">                        </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">allowCredentials</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Uint8Array</span><span class="p">(</span>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="w">                            </span><span class="nx">options</span><span class="p">.</span><span class="nx">publicKey</span><span class="p">.</span><span class="nx">allowCredentials</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="w">                        </span><span class="p">);</span>
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="w">                    </span><span class="p">}</span>
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-28" name="__codelineno-16-28" href="#__codelineno-16-28"></a><span class="w">                </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;error detected in allowedCred data type&quot;</span><span class="p">);</span>
+<a id="__codelineno-16-29" name="__codelineno-16-29" href="#__codelineno-16-29"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-16-30" name="__codelineno-16-30" href="#__codelineno-16-30"></a><span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">userPresence</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-31" name="__codelineno-16-31" href="#__codelineno-16-31"></a><span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">fido</span><span class="p">.</span><span class="nx">canAuthenticateWithCredId</span><span class="p">(</span><span class="nx">options</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-32" name="__codelineno-16-32" href="#__codelineno-16-32"></a><span class="w">                    </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">processCredentialRequestOptions</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+<a id="__codelineno-16-33" name="__codelineno-16-33" href="#__codelineno-16-33"></a><span class="w">                    </span><span class="kd">let</span><span class="w"> </span><span class="nx">serverPublicKeyCredential</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">result</span><span class="p">;</span>
+<a id="__codelineno-16-34" name="__codelineno-16-34" href="#__codelineno-16-34"></a><span class="w">                    </span><span class="nx">serverPublicKeyCredential</span><span class="p">[</span><span class="s2">&quot;getClientExtensionResults&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-35" name="__codelineno-16-35" href="#__codelineno-16-35"></a><span class="w">                        </span><span class="k">return</span><span class="w"> </span><span class="p">{};</span>
+<a id="__codelineno-16-36" name="__codelineno-16-36" href="#__codelineno-16-36"></a><span class="w">                    </span><span class="p">};</span>
+<a id="__codelineno-16-37" name="__codelineno-16-37" href="#__codelineno-16-37"></a><span class="w">                    </span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">authenticatorData</span><span class="w"> </span><span class="o">=</span>
+<a id="__codelineno-16-38" name="__codelineno-16-38" href="#__codelineno-16-38"></a><span class="w">                        </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64toBA</span><span class="p">(</span>
+<a id="__codelineno-16-39" name="__codelineno-16-39" href="#__codelineno-16-39"></a><span class="w">                            </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64utobase64</span><span class="p">(</span>
+<a id="__codelineno-16-40" name="__codelineno-16-40" href="#__codelineno-16-40"></a><span class="w">                                </span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">authenticatorData</span>
+<a id="__codelineno-16-41" name="__codelineno-16-41" href="#__codelineno-16-41"></a><span class="w">                            </span><span class="p">)</span>
+<a id="__codelineno-16-42" name="__codelineno-16-42" href="#__codelineno-16-42"></a><span class="w">                        </span><span class="p">);</span>
+<a id="__codelineno-16-43" name="__codelineno-16-43" href="#__codelineno-16-43"></a><span class="w">                    </span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">clientDataJSON</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64toBA</span><span class="p">(</span>
+<a id="__codelineno-16-44" name="__codelineno-16-44" href="#__codelineno-16-44"></a><span class="w">                        </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64utobase64</span><span class="p">(</span>
+<a id="__codelineno-16-45" name="__codelineno-16-45" href="#__codelineno-16-45"></a><span class="w">                            </span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">clientDataJSON</span>
+<a id="__codelineno-16-46" name="__codelineno-16-46" href="#__codelineno-16-46"></a><span class="w">                        </span><span class="p">)</span>
+<a id="__codelineno-16-47" name="__codelineno-16-47" href="#__codelineno-16-47"></a><span class="w">                    </span><span class="p">);</span>
+<a id="__codelineno-16-48" name="__codelineno-16-48" href="#__codelineno-16-48"></a><span class="w">                    </span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64toBA</span><span class="p">(</span>
+<a id="__codelineno-16-49" name="__codelineno-16-49" href="#__codelineno-16-49"></a><span class="w">                        </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64utobase64</span><span class="p">(</span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">signature</span><span class="p">)</span>
+<a id="__codelineno-16-50" name="__codelineno-16-50" href="#__codelineno-16-50"></a><span class="w">                    </span><span class="p">);</span>
+<a id="__codelineno-16-51" name="__codelineno-16-51" href="#__codelineno-16-51"></a><span class="w">                    </span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">rawId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64toBA</span><span class="p">(</span>
+<a id="__codelineno-16-52" name="__codelineno-16-52" href="#__codelineno-16-52"></a><span class="w">                        </span><span class="nx">fido</span><span class="p">.</span><span class="nx">base64utobase64</span><span class="p">(</span><span class="nx">serverPublicKeyCredential</span><span class="p">.</span><span class="nx">rawId</span><span class="p">)</span>
+<a id="__codelineno-16-53" name="__codelineno-16-53" href="#__codelineno-16-53"></a><span class="w">                    </span><span class="p">);</span>
+<a id="__codelineno-16-54" name="__codelineno-16-54" href="#__codelineno-16-54"></a><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">serverPublicKeyCredential</span><span class="p">;</span>
+<a id="__codelineno-16-55" name="__codelineno-16-55" href="#__codelineno-16-55"></a><span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-56" name="__codelineno-16-56" href="#__codelineno-16-56"></a><span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">myCredentials</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+<a id="__codelineno-16-57" name="__codelineno-16-57" href="#__codelineno-16-57"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-16-58" name="__codelineno-16-58" href="#__codelineno-16-58"></a><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-59" name="__codelineno-16-59" href="#__codelineno-16-59"></a><span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">myCredentials</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+<a id="__codelineno-16-60" name="__codelineno-16-60" href="#__codelineno-16-60"></a><span class="w">            </span><span class="p">}</span>
+<a id="__codelineno-16-61" name="__codelineno-16-61" href="#__codelineno-16-61"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-16-62" name="__codelineno-16-62" href="#__codelineno-16-62"></a><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="nx">error</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-16-63" name="__codelineno-16-63" href="#__codelineno-16-63"></a><span class="w">        </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">&quot;IBM Passkey Extension error&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">error</span><span class="p">);</span>
+<a id="__codelineno-16-64" name="__codelineno-16-64" href="#__codelineno-16-64"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">myCredentials</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span>
+<a id="__codelineno-16-65" name="__codelineno-16-65" href="#__codelineno-16-65"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-16-66" name="__codelineno-16-66" href="#__codelineno-16-66"></a><span class="p">}</span>
+</code></pre></div>
+<p>If authentication succeeds, a success modal is displayed, and the processed credential is returned. If authentication fails or the user presence check is not met, the function falls back to the original <code>navigator.credentials.get()</code> method to attempt standard authentication.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../quickstart/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Quickstart">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Quickstart
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["announce.dismiss", "content.code.annotate", "content.code.copy", "content.tooltips", "navigation.footer", "navigation.indexes", "navigation.sections", "navigation.expand", "navigation.top", "navigation.path", "search.highlight", "search.suggest", "toc.follow", "toc.integrate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+    
+  </body>
+</html>
