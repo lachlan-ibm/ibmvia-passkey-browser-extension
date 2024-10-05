@@ -1,0 +1,57 @@
+{
+	"manifest_version": 3,
+	"name": "IBM Passkey Extension",
+	"version": "1.0",
+
+	"description": "Performs FIDO2 registration and authentication ceremonies",
+	"homepage_url": "https://github.com/sramsamy/fido2-browser-extension",
+	"icons": {
+		"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+		"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
+	},
+
+	"permissions": ["activeTab", "storage", "notifications", "scripting", "tabs"],
+	"sidebar_action": {
+		"default_icon": {
+			"48": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+			"96": "icons/ibm-cloud--hyper-protect-crypto-services-96x96.png"
+		},
+		"default_title": "IBM Passkey Extension",
+		"default_panel": "side_panel.html",
+		"open_at_install": false
+	},
+
+	"action": {
+		"default_icon": "icons/ibm-cloud--hyper-protect-crypto-services-48x48.png",
+		"default_title": "Open Sidebar"
+	},
+	"background": {
+		"scripts": ["background_script.js"]
+	},
+
+	"content_scripts": [
+		{
+			"matches": ["https://fidointerop.securitypoc.com/*", "https://webauthn.io/*","https://webauthn.dodo.dev/passwordless/*","https://www.token2.com/tools/fido2-demo/*" ],
+			"js": ["main.js"],
+			"world": "MAIN",
+			"run_at": "document_start",
+			"all_frames": true
+		},
+		{
+			"matches": ["https://fidointerop.securitypoc.com/*", "https://webauthn.io/*","https://webauthn.dodo.dev/passwordless/*","https://www.token2.com/tools/fido2-demo/*" ],
+			"js": ["middle.js"],
+			"run_at": "document_start"
+		}
+	],
+	"content_security_policy": {
+		"extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+	},
+
+	"host_permissions": ["https://*/*", "http://*/*"],
+	"web_accessible_resources": [
+		{
+			"resources": ["main.js"],
+			"matches": ["<all_urls>"]
+		}
+	]
+}
