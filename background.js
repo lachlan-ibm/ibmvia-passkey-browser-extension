@@ -1,38 +1,10 @@
 // Background script starts here
-
-console.log("I am background script");
-console.log("find me", fido.BrowserApi);
-console.log("gsdgdsgsd")
+console.log("Background Script");
 fido.BrowserApi.runtime.onInstalled.addListener(() => {
-  // if (fido.BrowserApi.isChromeApi) {
-  // 	chrome.action.onClicked.addListener((tab) => {
-  // 		chrome.scripting.executeScript({
-  // 			target: { tabId: tab.id },
-  // 			files: ["content-script.js"]
-  // 		});
-  // 	});
-  // }
   console.log("Extension installed");
 });
 
-// fido.BrowserApi.runtime.onConnect.addListener(function (port) {
-
-//   if (port.name === "middleScript") {
-
-//     console.log("middle.js script connected");
-
-//     port.postMessage({ farewell: "goodbye" });
-
-//     port.onMessage.addListener(function (message) {
-
-//       console.log(message.greeting);
-
-//     });
-
-//   }
-
-// });
-
+// Programtically inject main.js
 
 // fido.BrowserApi.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 // 	console.log("Received message:", request);
@@ -74,16 +46,16 @@ fido.BrowserApi.runtime.onInstalled.addListener(() => {
 // 	}
 // });
 
-// Set side panel to specific site only
+// Set side panel
 if (fido.BrowserApi.isChromeApi) {
   chrome.sidePanel
     .setPanelBehavior({ openPanelOnActionClick: true })
     .catch((error) => console.error(error));
 } else {
+  // Set for firefox
   browser.sidebarAction
     .setPanel({ panel: "side_panel.html" })
     .catch((error) => console.error(error));
-
 
   browser.windows.getCurrent({ populate: true }).then((windowInfo) => {
     myWindowId = windowInfo.id;
@@ -94,55 +66,23 @@ if (fido.BrowserApi.isChromeApi) {
   });
 }
 
-
-
-
-// fido.BrowserApi.runtime.onMessage.addListener((message, sender, sendResponse) => {
-//   (async () => {
-//     console.log("hello")
-//     if (message.action === 'registerClicked') {
-//       const sidePanelApi = fido.BrowserApi.sidePanel;
-//       if (sidePanelApi) {
-//         try {
-//           if (fido.BrowserApi.isChromeApi) {
-//             await sidePanelApi.open({ tabId: sender.tab.id, windowId: sender.tab.windowId });
-//           }
-//         } catch (error) {
-//           console.error("Error opening side panel:", error);
-//         }
-//       } else {
-//         console.error("Side panel API not supported in this browser.");
-//       }
-//     }
-//   })();
-//   return new Promise((resolve) => {
-//     setTimeout(() => {
-//       resolve({ response: "async response from background script" });
-//     }, 1000);
-//   });
-
-// });
-
+// Delcare the fidoutilsConfig which will be populated with different attestation keys
 let fidoutilsConfig = {};
 
-// Function to retrieve the current FIDO utils config
+// Retrieve the current FIDO utils config
 function getFidoUtilsConfig() {
   fidoutilsConfig = fido.getFido2ClientConfigJSON();
-  console.log("Retrieved FIDO utils config:", fidoutilsConfig);
   return fidoutilsConfig;
 }
 
-// function setFidoUtilsConfig(newConfig) {
-// 	fidoutilsConfig = newConfig;
-// }
-
-// Function to update the FIDO utils config
+// Update the FIDO utils config
 function updateFidoUtilsConfig(newConfig) {
   fidoutilsConfig = newConfig;
   console.log("Updated FIDO utils config:", fidoutilsConfig);
   fido.setFido2ClientConfigJSON(newConfig);
 }
 
+// Listen for message sent from middle.js to retrieve or update fido utils config
 fido.BrowserApi.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   console.log("")
   if (request.message === "Retrieve fidoutilsConfig variable") {

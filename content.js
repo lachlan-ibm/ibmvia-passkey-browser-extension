@@ -1,16 +1,18 @@
 // Content Script starts here
-
-console.log("I am content script!!!");
+console.log("Content Script");
 // Create a wrapper for navigator.credentials. The myCredentials object holds reference to the original WebAuthn methods.
 let myCredentials = {
   create: navigator.credentials.create.bind(navigator.credentials),
   get: navigator.credentials.get.bind(navigator.credentials),
 };
 
-// function to dispatch a request to the middle script for the fidoutilsConfig
+/**
+ * Function to request and retrieve the FIDO utils configuration (fidoutilsConfig) from the middle script.
+ * This function dispatches a custom event to request the configuration and listens for a response.
+ */
 function requestFidoUtilsConfig() {
   return new Promise((resolve, reject) => {
-    // Listen for the response from the middle script
+    // Define a handler function to process the response from the middle script
     function handleConfigResponse(e) {
       // Check if the event contains the fidoutilsConfig in its response
       if (e.detail && e.detail.response.result) {
@@ -263,6 +265,13 @@ function userPresenceModal(message) {
   });
 }
 
+/**
+ * Custom method for creating a new credential (passkey) using the IBM Passkey extension.
+ * Prompts the user for presence confirmation, processes the public key options,
+ * and attempts to create a credential using a custom FIDO flow.
+ * Falls back to the original navigator.credentials.create() method if user denies or fails to create.
+ */
+
 async function myCreateMethod(options) {
 
   try {
@@ -434,22 +443,35 @@ function showFailModal(message) {
 // });
 
 
-async function myGetMethod(options, authRecords) {
+/**
+ * Custom method for retrieving a credential using the IBM Passkey extension.
+ * Prompts the user for presence confirmation, processes the public key options,
+ * and attempts to authenticate using a custom FIDO flow. Falls back to the original
+ * navigator.credentials.get() method if custom authentication fails.
+ */
+
+async function myGetMethod(options) {
+  let fallbackTriggered = false;
   try {
     const userPresence = await userPresenceModal("Would you like to authenticate using the ibm passkey extension?");
+    // Check if the credentials API is available in the browser
+
     if ("credentials" in navigator) {
       console.log("navigator.credentials", navigator.credentials)
+
+      // Request and set up the FIDO configuration
       let fidoutilsConfigVariable = await requestFidoUtilsConfig();
-      // console.log("finnnnnnd me", fidoutilsConfigVariable);
+      // We need to set the origin of the request here
       fidoutilsConfigVariable["origin"] = window.location.origin;
       fido.setFidoUtilsConfig(fidoutilsConfigVariable);
       console.log("options in myGetMethod", options)
 
+      // Normalise the public key challenge if it's an ArrayBuffer
       if (options.publicKey.challenge instanceof ArrayBuffer) {
         options.publicKey.challenge = new Uint8Array(options.publicKey.challenge);
         console.log("new normalised challenge is", options.publicKey.challenge);
       }
-
+      // Normalise allowCredentials array items if they contain id as an ArrayBuffer
       if (options.publicKey.allowCredentials instanceof Array) {
         console.log("options.publicKey.allowCredentials is instanceof Array")
         for (let i = 0; i < options.publicKey.allowCredentials.length; i++) {
@@ -462,8 +484,9 @@ async function myGetMethod(options, authRecords) {
       } else {
         console.log("error detected in allowedCred data type")
       }
+      // If the user confirmed presence, attempt authentication using the extension
       if (userPresence) {
-
+        // Check if authentication can proceed with the provided credential ID
         if (fido.canAuthenticateWithCredId(options)) {
           // console.log("options", options);
           const result = await fido.processCredentialRequestOptions(
@@ -473,8 +496,9 @@ async function myGetMethod(options, authRecords) {
           serverPublicKeyCredential["getClientExtensionResults"] = function () {
             return {};
           };
-          console.log("serverPublicKeyCredential", serverPublicKeyCredential);
+          // console.log("serverPublicKeyCredential", serverPublicKeyCredential);
 
+          // Convert response fields from base64 to byte arrays for authentication
           serverPublicKeyCredential.response.authenticatorData = fido.base64toBA(
             fido.base64utobase64(
               serverPublicKeyCredential.response.authenticatorData
@@ -495,21 +519,25 @@ async function myGetMethod(options, authRecords) {
           await new Promise(resolve => setTimeout(resolve, 3000));
           return await serverPublicKeyCredential;
         } else {
+          fallbackTriggered = true;
           showFailModal("Custom authentication failed. Falling back to original method.");
           await new Promise(resolve => setTimeout(resolve, 3000));
           return await myCredentials.get(options);
         }
       } else {
+        // If user presence is not confirmed, fall back to the default navigator.credentials.get() method
+        fallbackTriggered = true;
         return await myCredentials.get(options);
       }
     }
   } catch (error) {
     console.log("Error getting credential:", error);
     console.log("Falling back to original navigator.credentials.get() method");
-    // alert("Falling back to original get method");
-    // showFailModal("Custom authentication failed. Falling back to default method.");
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    return await myCredentials.get(options);
+    if (!fallbackTriggered) {
+      fallbackTriggered = true;
+      await new Promise(resolve => setTimeout(resolve, 3000));
+      return await myCredentials.get(options);
+    }
   }
 }
 // Override navigator.credentials.get

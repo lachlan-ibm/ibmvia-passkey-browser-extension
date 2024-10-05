@@ -1,4 +1,4 @@
-// browserApi.js
+// Abstraction to handle differences between chrome and firefox
 class BrowserApi {
     static isChromeApi = navigator.userAgent.includes("Chrome");
     static isFirefoxApi = navigator.userAgent.includes("Firefox");
