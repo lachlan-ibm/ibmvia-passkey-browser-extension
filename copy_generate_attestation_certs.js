@@ -1,3 +1,6 @@
+/**
+ * Copyright contributors to the ibm-security-passkey-browser-extension project
+ */
 //
 // generate_attestation_certs.js 
 // 

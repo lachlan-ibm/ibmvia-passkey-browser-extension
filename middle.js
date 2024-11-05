@@ -1,3 +1,6 @@
+/**
+ * Copyright contributors to the ibm-security-passkey-browser-extension project
+ */
 // browserApi.js
 class BrowserApi {
     static isChromeApi = navigator.userAgent.includes("Chrome");

@@ -1,3 +1,6 @@
+/**
+ * Copyright contributors to the ibm-security-passkey-browser-extension project
+ */
 // Content Script starts here
 console.log("Content Script");
 // Create a wrapper for navigator.credentials. The myCredentials object holds reference to the original WebAuthn methods.

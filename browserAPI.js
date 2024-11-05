@@ -1,3 +1,6 @@
+/**
+ * Copyright contributors to the ibm-security-passkey-browser-extension project
+ */
 // Abstraction to handle differences between chrome and firefox
 class BrowserApi {
     static isChromeApi = navigator.userAgent.includes("Chrome");

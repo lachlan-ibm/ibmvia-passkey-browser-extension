@@ -1,3 +1,7 @@
+/**
+ * Copyright contributors to the ibm-security-passkey-browser-extension project
+ */
+
 // Background script starts here
 console.log("Background Script");
 fido.BrowserApi.runtime.onInstalled.addListener(() => {
